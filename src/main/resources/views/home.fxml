@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Separator?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.home.HomeController">
+
+    <left>
+        <VBox prefWidth="220" styleClass="side-menu" spacing="16">
+            <Label text="Qualifica"
+                   styleClass="title"/>
+            <Separator styleClass="menu-divider"/>
+            <Button styleClass="side-button" text="Inscrições"/>
+            <Button styleClass="side-button" text="Pessoas"/>
+            <Button styleClass="side-button" text="Cursos"/>
+            <Button styleClass="side-button" text="Aulas"/>
+            <Button styleClass="side-button" text="Usuários"/>
+            <Label text="Gestão"
+                   styleClass="sub-title"/>
+
+        </VBox>
+    </left>
+    <center>
+        <BorderPane>
+            <top>
+                <HBox prefWidth="220" styleClass="header">
+                    <Label text="Caminho da pagina atual"/>
+                </HBox>
+            </top>
+            <center>
+                <VBox styleClass="content" spacing="20">
+                    <Label text="pagina"/>
+
+                    <Button text="Voltar"
+                            onAction="#onGoBackClick"/>
+                </VBox>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>

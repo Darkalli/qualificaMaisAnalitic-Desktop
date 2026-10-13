@@ -1,0 +1,115 @@
+/* Aparência geral da tela */
+.root {
+    -fx-background-color: #f1f5f9;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+}
+
+/* Textos */
+.label {
+    -fx-text-fill: #334155;
+}
+
+/* Título da tela */
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f172a;
+}
+.sub-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f172a;
+}
+
+/* Campo de entrada */
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 8px;
+
+    -fx-padding: 10px;
+}
+
+/* Campo selecionado para digitação */
+.text-field:focused {
+    -fx-border-color: #2563eb;
+}
+
+/* Botão */
+.button {
+    -fx-background-color: #E67E22;
+    -fx-background-radius: 8px;
+    -fx-text-fill: white;
+
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+/* Mouse sobre o botão */
+.button:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+/* Botão sendo pressionado */
+.button:pressed {
+    -fx-background-color: #E67E22;
+}
+.side-button {
+    -fx-background-color: #293a5a;
+    -fx-background-radius: 8px;
+    -fx-text-fill: white;
+
+    -fx-min-width: 150px;
+    -fx-pref-width: 150px;
+    -fx-max-width: 150px;
+
+    -fx-min-height: 50px;
+    -fx-pref-height: 50px;
+    -fx-max-height: 50px;
+
+    -fx-alignment: center-left;
+
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px 10px 5px;
+    -fx-cursor: hand;
+}
+
+/* Mouse sobre o botão */
+.side-button:hover {
+    -fx-background-color: #E67E22;
+}
+
+/* Botão sendo pressionado */
+.side-button:pressed {
+    -fx-background-color: #8a9bb8;
+}
+
+.side-menu {
+    -fx-background-color: #293a5a;
+    -fx-padding: 20px;
+}
+
+.header {
+    -fx-background-color: #293a5a;
+    -fx-padding: 20px;
+}
+.content {
+    -fx-background-color: #1e2c46;
+    -fx-padding: 24px;
+}
+
+.side-menu .label,
+.header .label,
+.content .label {
+    -fx-text-fill: white;
+}
+
+.menu-divider .line{
+    -fx-border-color: #405170;
+    -fx-border-width: 1px 0 0 0;
+}
+
