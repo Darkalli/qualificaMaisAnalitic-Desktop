@@ -1,0 +1,218 @@
+/* Tabelas: fundo, cabeçalhos, células e estados. */
+
+.registers-table {
+    -fx-background-color: #1f2e49;
+    -fx-border-color: #405170;
+    -fx-border-width: 1px;
+    -fx-padding: 0;
+
+    -fx-table-cell-border-color: transparent;
+}
+
+/* Faixa atrás dos cabeçalhos */
+.table .column-header-background {
+    -fx-background-color: #293a5a;
+}
+
+/* Cabeçalhos e área restante à direita */
+.table .column-header,
+.table .filler {
+    -fx-background-color: #293a5a;
+    -fx-border-color: transparent transparent #405170 transparent;
+    -fx-size: 40px;
+}
+
+/* Texto dos cabeçalhos */
+.table .column-header .label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 12px;
+}
+
+.table .table-row-cell {
+    -fx-background-color: #1f2e49;
+    -fx-cell-size: 62px;
+    -fx-border-color: transparent transparent #35445e transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+/* Conteúdo de cada célula */
+.table .table-cell {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 12px;
+    -fx-border-color: transparent;
+}
+
+/* Mouse sobre uma linha preenchida */
+.table .table-row-cell:filled:hover {
+    -fx-background-color: #293a5a;
+}
+
+/* Linha selecionada */
+.table .table-row-cell:filled:selected {
+    -fx-background-color: #304565;
+}
+
+/* Não desenhar divisórias nas linhas vazias */
+.table .table-row-cell:empty {
+    -fx-border-color: transparent;
+}
+
+/* Mensagem quando não há dados */
+.table .placeholder .label {
+    -fx-text-fill: #94a3b8;
+}
+
+.table-footer {
+    -fx-background-color: #1f2e49;
+    -fx-padding: 12px 16px;
+    -fx-border-color: #405170 transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+.content .table-footer .footer-text {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 12px;
+}
+/* Botões das páginas */
+.table-footer .page-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #405170;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+    -fx-min-width: 32px;
+    -fx-pref-height: 32px;
+    -fx-padding: 0 8px;
+}
+.table-footer .page-button:hover {
+    -fx-background-color: #304565;
+}
+/* Página atual */
+.table-footer .page-button-active,
+.table-footer .page-button-active:hover {
+    -fx-background-color: #E67E22;
+    -fx-border-color: #E67E22;
+    -fx-font-weight: bold;
+}
+
+/* Seletor de quantidade */
+.table-footer .page-size {
+    -fx-background-color: #1f2e49;
+    -fx-border-color: #405170;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.content .table-footer .page-size .list-cell {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 12px;
+}
+
+.table-footer .page-size .arrow {
+    -fx-background-color: #94a3b8;
+}
+
+.search-field,
+.filter-field {
+    -fx-background-color: #1f2e49;
+    -fx-background-radius: 6px;
+
+    -fx-border-color: #405170;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+}
+
+/* Campo de pesquisa */
+.search-field {
+    -fx-text-fill: #f1f5f9;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-padding: 10px 12px;
+}
+
+/* Seletor */
+.filter-field {
+    -fx-padding: 0;
+}
+
+/* Texto exibido no seletor */
+.filter-field > .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f1f5f9;
+    -fx-padding: 10px 12px;
+}
+
+/* Área da seta */
+.filter-field .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 12px;
+}
+
+/* Cor da seta */
+.filter-field .arrow {
+    -fx-background-color: #94a3b8;
+}
+
+/* Destaque ao receber foco */
+.search-field:focused,
+.filter-field:focused,
+.filter-field:showing {
+    -fx-border-color: #E67E22;
+}
+
+/* Fundo, borda e sombra da lista aberta */
+.filter-field .combo-box-popup .list-view {
+    -fx-background-color: #1f2e49;
+    -fx-background-radius: 6px;
+
+    -fx-border-color: #405170;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+
+    -fx-padding: 4px;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.30),
+            12,
+            0.10,
+            0,
+            4
+    );
+}
+
+/* Aparência das opções */
+.filter-field .combo-box-popup .list-cell {
+    -fx-background-color: #1f2e49;
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 13px;
+
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 4px;
+}
+
+/* Opção selecionada */
+.filter-field .combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #304565;
+    -fx-text-fill: #E67E22;
+}
+
+/* Mouse sobre uma opção */
+.filter-field .combo-box-popup .list-cell:filled:hover {
+    -fx-background-color: #405170;
+    -fx-text-fill: white;
+}
+
+/* Áreas sem opção */
+.filter-field .combo-box-popup .list-cell:empty {
+    -fx-background-color: #1f2e49;
+}
+

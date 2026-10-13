@@ -13,11 +13,22 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1100, 750);
-        scene.getStylesheets().add(
-                Objects.requireNonNull(HelloApplication.class
-                                .getResource("/css/application.css"))
-                        .toExternalForm()
-        );
+        String[] stylesheets = {
+                "/css/application.css",
+                "/css/navigation.css",
+                "/css/boxes.css",
+                "/css/tables.css"
+        };
+
+
+        for (String stylesheet : stylesheets) {
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(
+                            HelloApplication.class.getResource(stylesheet),
+                            "CSS não encontrado: " + stylesheet
+                    ).toExternalForm()
+            );
+        }
         stage.setTitle("Qualifica+Ijui!");
         stage.setScene(scene);
         stage.show();

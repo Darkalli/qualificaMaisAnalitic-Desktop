@@ -1,3 +1,5 @@
+/* Estilos gerais: base, textos, campos, botões e área de conteúdo. */
+
 /* Aparência geral da tela */
 .root {
     -fx-background-color: #f1f5f9;
@@ -16,6 +18,7 @@
     -fx-font-weight: bold;
     -fx-text-fill: #0f172a;
 }
+
 .sub-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
@@ -56,60 +59,10 @@
 
 /* Botão sendo pressionado */
 .button:pressed {
-    -fx-background-color: #E67E22;
-}
-.side-button {
-    -fx-background-color: #293a5a;
-    -fx-background-radius: 8px;
-    -fx-text-fill: white;
-
-    -fx-min-width: 150px;
-    -fx-pref-width: 150px;
-    -fx-max-width: 150px;
-
-    -fx-min-height: 50px;
-    -fx-pref-height: 50px;
-    -fx-max-height: 50px;
-
-    -fx-alignment: center-left;
-
-    -fx-font-weight: bold;
-    -fx-padding: 10px 20px 10px 5px;
-    -fx-cursor: hand;
-}
-
-/* Mouse sobre o botão */
-.side-button:hover {
-    -fx-background-color: #E67E22;
-}
-
-/* Botão sendo pressionado */
-.side-button:pressed {
     -fx-background-color: #8a9bb8;
 }
 
-.side-menu {
-    -fx-background-color: #293a5a;
-    -fx-padding: 20px;
-}
-
-.header {
-    -fx-background-color: #293a5a;
-    -fx-padding: 20px;
-}
 .content {
     -fx-background-color: #1e2c46;
     -fx-padding: 24px;
 }
-
-.side-menu .label,
-.header .label,
-.content .label {
-    -fx-text-fill: white;
-}
-
-.menu-divider .line{
-    -fx-border-color: #405170;
-    -fx-border-width: 1px 0 0 0;
-}
-
