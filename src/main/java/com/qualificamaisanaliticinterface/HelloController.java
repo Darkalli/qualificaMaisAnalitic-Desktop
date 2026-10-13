@@ -15,6 +15,6 @@ public class HelloController {
         Node botao = (Node) event.getSource();
         Scene scene = botao.getScene();
 
-        Navigator.mudarTela(scene, "/views/home.fxml");
+        Navigator.changeScreen(scene, "/views/home.fxml");
     }
 }

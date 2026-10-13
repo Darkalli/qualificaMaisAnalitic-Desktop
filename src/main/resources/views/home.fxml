@@ -8,6 +8,8 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import java.lang.String?>
+<?import javafx.scene.layout.Region?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.home.HomeController">
 
@@ -16,29 +18,50 @@
             <Label text="Qualifica"
                    styleClass="title"/>
             <Separator styleClass="menu-divider"/>
-            <Button styleClass="side-button" text="Inscrições"/>
-            <Button styleClass="side-button" text="Pessoas"/>
-            <Button styleClass="side-button" text="Cursos"/>
-            <Button styleClass="side-button" text="Aulas"/>
-            <Button styleClass="side-button" text="Usuários"/>
+            <Button styleClass="side-button" text="Inscrições" onAction="#onPageClick">
+                <userData>
+                    <String fx:value="/views/pages/registers.fxml"/>
+                </userData>
+            </Button>
+            <Button styleClass="side-button" text="Pessoas" onAction="#onPageClick">
+                <userData>
+                    <String fx:value="/views/pages/people.fxml"/>
+                </userData>
+            </Button>
+            <Button styleClass="side-button" text="Cursos" onAction="#onPageClick">
+                <userData>
+                    <String fx:value="/views/pages/courses.fxml"/>
+                </userData>
+            </Button>
+            <Button styleClass="side-button" text="Aulas" onAction="#onPageClick">
+                <userData>
+                    <String fx:value="/views/pages/classes.fxml"/>
+                </userData>
+            </Button>
+            <Button styleClass="side-button" text="Usuários" onAction="#onPageClick">
+                <userData>
+                    <String fx:value="/views/pages/users.fxml"/>
+                </userData>
+            </Button>
             <Label text="Gestão"
                    styleClass="sub-title"/>
 
         </VBox>
     </left>
     <center>
-        <BorderPane>
+        <BorderPane fx:id="workspace">
             <top>
                 <HBox prefWidth="220" styleClass="header">
                     <Label text="Caminho da pagina atual"/>
+
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button text="Voltar"
+                            onAction="#onGoBackClick"/>
                 </HBox>
             </top>
             <center>
                 <VBox styleClass="content" spacing="20">
                     <Label text="pagina"/>
-
-                    <Button text="Voltar"
-                            onAction="#onGoBackClick"/>
                 </VBox>
             </center>
         </BorderPane>
