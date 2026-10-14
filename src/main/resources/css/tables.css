@@ -1,23 +1,26 @@
 /* Tabelas: fundo, cabeçalhos, células e estados. */
 
-.registers-table {
-    -fx-background-color: #1f2e49;
-    -fx-border-color: #405170;
+.table {
+    -fx-background-color: #162238;
+    -fx-border-color: #35445e;
     -fx-border-width: 1px;
     -fx-padding: 0;
 
     -fx-table-cell-border-color: transparent;
 }
+.table .placeholder {
+    -fx-background-color: #162238;
+}
 
 /* Faixa atrás dos cabeçalhos */
 .table .column-header-background {
-    -fx-background-color: #293a5a;
+    -fx-background-color: #1f2e49;
 }
 
 /* Cabeçalhos e área restante à direita */
 .table .column-header,
 .table .filler {
-    -fx-background-color: #293a5a;
+    -fx-background-color: #1f2e49;
     -fx-border-color: transparent transparent #405170 transparent;
     -fx-size: 40px;
 }
@@ -32,7 +35,7 @@
 }
 
 .table .table-row-cell {
-    -fx-background-color: #1f2e49;
+    -fx-background-color: #162238;
     -fx-cell-size: 62px;
     -fx-border-color: transparent transparent #35445e transparent;
     -fx-border-width: 0 0 1px 0;
