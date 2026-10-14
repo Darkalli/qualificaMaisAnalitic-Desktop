@@ -36,6 +36,11 @@
     -fx-font-weight: bold;
     -fx-text-fill: #8a9bb8;
 }
+.content .box-lower-sub-title{
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8a9bb8;
+}
 
 .content .box-info-title{
     -fx-font-size: 22px;

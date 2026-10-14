@@ -13,11 +13,20 @@
           AnchorPane.rightAnchor="0"
           AnchorPane.bottomAnchor="0"
           AnchorPane.leftAnchor="0">
-        <VBox styleClass="box">
-            <Label text="Registros" styleClass="box-title"/>
+        <HBox spacing="12" styleClass="content">
+            <VBox>
+                <Label styleClass="box-title" text="Inscrições"/>
+                <Label styleClass="box-lower-sub-title" text="Encontre aqui os registros das inscrições realizadas"/>
+            </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Label text="aqui aparecera os registros" alignment="TOP_RIGHT" styleClass="box-info-title"/>
-        </VBox>
+            <VBox alignment="CENTER" styleClass="box">
+                <Label styleClass="box-title" alignment="CENTER" text="Total de inscrições"/>
+                <Label styleClass="box-info-title" alignment="CENTER" text="X"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="+ Inscrever pessoa existente"/>
+            <Button text="+  Nova inscrição"/>
+        </HBox>
         <HBox styleClass="box">
             <VBox spacing="12" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT">
@@ -62,7 +71,7 @@
         <VBox styleClass="box" VBox.vgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">
                 <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="30 inscrições"
+                    <Label text="x inscrições"
                            styleClass="box-title"/>
                     <Label text="encontradas"
                            styleClass="box-sub-title"/>
