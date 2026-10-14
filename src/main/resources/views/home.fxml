@@ -14,9 +14,15 @@
             fx:controller="com.qualificamaisanaliticinterface.features.home.HomeController">
 
     <left>
-        <VBox prefWidth="220" styleClass="side-menu" spacing="16">
-            <Label text="Qualifica"
-                   styleClass="title"/>
+        <VBox prefWidth="220" styleClass="side-menu" spacing="20">
+            <HBox alignment="CENTER_LEFT" spacing="2">
+                <Label text="Qualifica"
+                       styleClass="title, brand-name"/>
+                <Label text="+"
+                       styleClass="title, brand-plus"/>
+                <Label text="Ijui"
+                       styleClass="title, brand-city"/>
+            </HBox>
             <Separator styleClass="menu-divider"/>
             <Button styleClass="side-button" text="Inscrições" onAction="#onPageClick">
                 <userData>

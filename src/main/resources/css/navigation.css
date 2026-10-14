@@ -32,7 +32,8 @@
 
 .side-menu {
     -fx-background-color: #293a5a;
-    -fx-padding: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 30px;
 }
 
 .header {
@@ -45,6 +46,19 @@
 .content .label {
     -fx-text-fill: white;
 }
+
+.side-menu .brand-name {
+    -fx-text-fill: #66BB6A;
+}
+
+.side-menu .brand-plus {
+    -fx-text-fill: #E67E22;
+}
+
+.side-menu .brand-city {
+    -fx-text-fill: #12A797;
+}
+
 
 .menu-divider .line{
     -fx-border-color: #405170;
