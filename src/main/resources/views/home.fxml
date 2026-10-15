@@ -52,6 +52,11 @@
             <Label text="Gestão"
                    styleClass="sub-title"/>
 
+            <Button styleClass="side-button" text="Estatísticas" onAction="#onPageClick">
+            <userData>
+                <String fx:value="/views/pages/superset.fxml"/>
+            </userData>
+            </Button>
         </VBox>
     </left>
     <center>
