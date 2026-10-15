@@ -1,20 +1,105 @@
 package com.qualificamaisanaliticinterface;
 
+import com.qualificamaisanaliticinterface.features.login.AuthService;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
-import javafx.event.ActionEvent;
+import com.qualificamaisanaliticinterface.session.UserSession;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.concurrent.CompletionException;
 
 public class HelloController {
 
-    @FXML
-    private void onClick(ActionEvent event) throws IOException {
-        Node botao = (Node) event.getSource();
-        Scene scene = botao.getScene();
+    private final AuthService authService = new AuthService();
 
-        Navigator.changeScreen(scene, "/views/home.fxml");
+    private boolean loginInProgress;
+
+    @FXML
+    private TextField userField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private Label loginErrorLabel;
+
+    @FXML
+    private void onClick() {
+        if (loginInProgress) {
+            return;
+        }
+
+        clearError();
+
+        String username = userField.getText().strip();
+        String password = passwordField.getText();
+
+        if (username.isBlank() || password.isBlank()) {
+            showError("Preencha o usuário e a senha.");
+            return;
+        }
+
+        loginInProgress = true;
+
+        authService.login(username, password)
+                .whenComplete((response, failure) ->
+                        Platform.runLater(() -> {
+                            loginInProgress = false;
+
+                            if (failure != null) {
+                                Throwable cause = failure;
+
+                                while (cause instanceof CompletionException
+                                        && cause.getCause() != null) {
+                                    cause = cause.getCause();
+                                }
+
+                                if (cause instanceof AuthService.LoginException) {
+                                    showError(cause.getMessage());
+                                } else {
+                                    showError(
+                                            "Não foi possível conectar à API. "
+                                                    + "Confira a conexão e tente novamente."
+                                    );
+                                }
+
+                                return;
+                            }
+
+                            UserSession.start(response);
+                            passwordField.clear();
+
+                            try {
+                                Navigator.changeScreen(
+                                        userField.getScene(),
+                                        "/views/home.fxml"
+                                );
+                            } catch (IOException exception) {
+                                UserSession.clear();
+
+                                showError(
+                                        "Login aceito, mas não foi possível "
+                                                + "abrir a tela inicial."
+                                );
+                            }
+                        })
+                );
+    }
+
+    private void showError(String message) {
+        loginErrorLabel.setText(message);
+        loginErrorLabel.setManaged(true);
+        loginErrorLabel.setVisible(true);
+    }
+
+    private void clearError() {
+        loginErrorLabel.setText("");
+        loginErrorLabel.setVisible(false);
+        loginErrorLabel.setManaged(false);
     }
 }

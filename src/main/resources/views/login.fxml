@@ -25,9 +25,9 @@
                        styleClass="title, brand-city"/>
             </HBox>
 
-            <Label text="Email:"/>
-            <TextField fx:id="emailField"
-                       promptText="Digite seu Email"
+            <Label text="Usuário:"/>
+            <TextField fx:id="userField"
+                       promptText="Digite seu nome de usuário"
                        styleClass="search-field"
                        HBox.hgrow="ALWAYS"/>
 
@@ -42,11 +42,22 @@
     <center>
         <BorderPane fx:id="workspace" styleClass="login-content">
             <center>
-            <VBox alignment="CENTER">
+                <VBox alignment="CENTER" spacing="40">
 
-                <Label text="Bem-vindo ao Qualifica"
-                       styleClass="title,giantLogo"/>
-            </VBox>
+                    <Label text="Bem-vindo ao Qualifica"
+                           styleClass="title,giantLogo"/>
+
+                    <Label fx:id="loginErrorLabel"
+                           styleClass="login-error"
+                           visible="false"
+                           managed="false"
+                           wrapText="true"
+                           prefWidth="460"
+                           maxWidth="460"
+                           minHeight="180"
+                           prefHeight="180"
+                           alignment="CENTER"/>
+                </VBox>
             </center>
         </BorderPane>
     </center>
