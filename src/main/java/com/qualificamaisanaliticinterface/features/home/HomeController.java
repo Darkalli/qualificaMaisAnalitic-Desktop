@@ -26,7 +26,7 @@ public class HomeController {
 
         Navigator.changeScreen(
                 scene,
-                "/com/qualificamaisanaliticinterface/hello-view.fxml"
+                "/views/login.fxml"
         );
     }
 

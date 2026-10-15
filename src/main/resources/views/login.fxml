@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.HelloController">
+
+    <left>
+        <VBox prefWidth="400"
+              minWidth="350"
+              styleClass="side-menu"
+              spacing="12">
+            <HBox alignment="CENTER_LEFT" spacing="2" styleClass="login-brand">
+                <Label text="Qualifica"
+                       styleClass="title, brand-name"/>
+                <Label text="+"
+                       styleClass="title, brand-plus"/>
+                <Label text="Ijui"
+                       styleClass="title, brand-city"/>
+            </HBox>
+
+            <Label text="Email:"/>
+            <TextField fx:id="emailField"
+                       promptText="Digite seu Email"
+                       styleClass="search-field"
+                       HBox.hgrow="ALWAYS"/>
+
+            <Label text="Senha:"/>
+            <PasswordField fx:id="passwordField"
+                           promptText="Digite sua senha"
+                           styleClass="search-field"/>
+            <Button styleClass="button" text="Login"
+                    onAction="#onClick"/>
+        </VBox>
+    </left>
+    <center>
+        <BorderPane fx:id="workspace" styleClass="login-content">
+            <center>
+            <VBox alignment="CENTER">
+
+                <Label text="Bem-vindo ao Qualifica"
+                       styleClass="title,giantLogo"/>
+            </VBox>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>

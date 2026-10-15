@@ -64,3 +64,16 @@
     -fx-border-color: #405170;
     -fx-border-width: 1px 0 0 0;
 }
+
+.login-brand .title {
+    -fx-font-size: 50px;
+}
+
+.login-content {
+    -fx-background-color: #405170;
+}
+
+.title.giantLogo {
+    -fx-font-size: 50px;
+    -fx-text-fill: #E67E22;
+}
