@@ -6,7 +6,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.qualificamaisanaliticinterface.features.home.PeopleController">
+            fx:controller="com.qualificamaisanaliticinterface.features.home.UsersController">
 
     <VBox styleClass="content" spacing="16"
           AnchorPane.topAnchor="0"
