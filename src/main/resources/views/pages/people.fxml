@@ -15,13 +15,21 @@
           AnchorPane.leftAnchor="0">
         <HBox styleClass="content">
             <VBox>
-                <Label styleClass="box-title" text="Pessoas"/>
-                <Label styleClass="box-lower-sub-title" text="Encontre aqui as pessoas já registradas"/>
+                <Label styleClass="box-title"
+                       text="Pessoas"/>
+
+                <Label styleClass="box-lower-sub-title"
+                       text="Encontre aqui as pessoas já registradas"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER" styleClass="box">
-                <Label styleClass="box-title" alignment="CENTER" text="Total de inscrições"/>
-                <Label styleClass="box-info-title" alignment="CENTER" text="120"/>
+                <Label styleClass="box-title"
+                       alignment="CENTER"
+                       text="Total de pessoas"/>
+                <Label fx:id="totalPeopleLabel"
+                       styleClass="box-info-title"
+                       alignment="CENTER"
+                       text="—"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <Button text="+  Novo Cadastro"/>
@@ -70,7 +78,8 @@
         <VBox styleClass="box" VBox.vgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">
                 <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="30 Pessoas"
+                    <Label fx:id="peopleCountLabel"
+                           text="Carregando..."
                            styleClass="box-title"/>
                     <Label text="encontradas"
                            styleClass="box-sub-title"/>
@@ -89,39 +98,24 @@
                 <columns>
                     <TableColumn fx:id="cpfsColumn"
                                  text="CPF"
-                                 prefWidth="140"/>
+                                 prefWidth="180"/>
 
                     <TableColumn fx:id="namesColumn"
                                  text="Nome"
-                                 prefWidth="220"/>
-
-                    <TableColumn fx:id="courseColumn"
-                                 text="Curso"
-                                 prefWidth="200"/>
-
-                    <TableColumn fx:id="dateColumn"
-                                 text="Data"
-                                 prefWidth="110"/>
-
-                    <TableColumn fx:id="statusColumn"
-                                 text="Situação"
-                                 prefWidth="130"/>
-
-                    <TableColumn fx:id="ActionsColumn"
-                                 text="Ações"
-                                 prefWidth="200"/>
+                                 prefWidth="400"/>
                 </columns>
             </TableView>
             <HBox styleClass="table-footer"
                   spacing="8"
                   alignment="CENTER_LEFT">
                 <Label fx:id="pageInfoLabel"
-                       text="Exibindo 1–7 de 128"
+                       text="Carregando..."
                        styleClass="footer-text"/>
                 <ComboBox fx:id="pageSizeCombo"
                           promptText="7 por página"
                           prefWidth="120"
-                          styleClass="page-size"/>
+                          styleClass="page-size"
+                          disable="true"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Pagination fx:id="tablePagination"
                             pageCount="1"
