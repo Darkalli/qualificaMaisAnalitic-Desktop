@@ -4,8 +4,10 @@ import com.qualificamaisanaliticinterface.features.login.AuthService;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.session.UserSession;
 
+import com.qualificamaisanaliticinterface.session.WindowsTokenStore;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -29,6 +31,9 @@ public class HelloController {
     private Label loginErrorLabel;
 
     @FXML
+    private CheckBox persistLoginCheckBox;
+
+    @FXML
     private void onClick() {
         if (loginInProgress) {
             return;
@@ -39,8 +44,11 @@ public class HelloController {
         String username = userField.getText().strip();
         String password = passwordField.getText();
 
-        if (username.isBlank() || password.isBlank()) {
-            showError("Preencha o usuário e a senha.");
+        if (username.isBlank()) {
+            showError("Preencha o usuário.");
+            return;
+        } else if (password.isBlank()){
+            showError("Preencha a senha.");
             return;
         }
 
@@ -72,6 +80,15 @@ public class HelloController {
                             }
 
                             UserSession.start(response);
+                            if(persistLoginCheckBox.isSelected()){
+                                WindowsTokenStore store = new WindowsTokenStore();
+
+                                try {
+                                    store.save(response.token());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
                             passwordField.clear();
 
                             try {

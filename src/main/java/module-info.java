@@ -10,11 +10,17 @@ module com.qualificamaisanaliticinterface {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.google.gson;
+    requires com.sun.jna.platform;
 
-    opens com.qualificamaisanaliticinterface to javafx.fxml;
+    opens com.qualificamaisanaliticinterface
+            to javafx.fxml;
     exports com.qualificamaisanaliticinterface;
 
-    opens com.qualificamaisanaliticinterface.features.home to javafx.fxml;
-    opens com.qualificamaisanaliticinterface.features.login.dto to com.google.gson;
+    opens com.qualificamaisanaliticinterface.features.home
+            to javafx.fxml;
+    opens com.qualificamaisanaliticinterface.features.login.dto
+            to com.google.gson;
+    opens com.qualificamaisanaliticinterface.features.people.dto
+            to com.google.gson;
 
 }

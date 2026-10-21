@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.CheckBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.HelloController">
 
@@ -35,6 +36,7 @@
             <PasswordField fx:id="passwordField"
                            promptText="Digite sua senha"
                            styleClass="search-field"/>
+            <CheckBox fx:id="persistLoginCheckBox" text="Manter conectado" selected="true"/>
             <Button styleClass="button" text="Login"
                     onAction="#onClick"/>
         </VBox>
