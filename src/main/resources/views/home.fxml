@@ -66,8 +66,8 @@
                     <Label text="Caminho da pagina atual"/>
 
                     <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Voltar"
-                            onAction="#onGoBackClick"/>
+                    <Button text="Sair"
+                            onAction="#onLogoutClick"/>
                 </HBox>
             </top>
             <center>

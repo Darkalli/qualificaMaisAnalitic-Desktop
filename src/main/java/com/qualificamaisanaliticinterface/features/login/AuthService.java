@@ -2,6 +2,7 @@ package com.qualificamaisanaliticinterface.features.login;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
+import com.qualificamaisanaliticinterface.config.AppConfig;
 import com.qualificamaisanaliticinterface.features.login.dto.LoginRequest;
 import com.qualificamaisanaliticinterface.features.login.dto.LoginResponse;
 
@@ -27,7 +28,7 @@ public class AuthService {
         String json = gson.toJson(new LoginRequest(username, password));
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://192.168.1.83/api/auth/login"))
+                .uri(URI.create(AppConfig.apiBaseUrl() + "/api/auth/login"))
                 .timeout(Duration.ofSeconds(20))
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
@@ -81,6 +82,30 @@ public class AuthService {
         });
     }
 
+    public CompletableFuture<Void> logout(String token){
+        if (token == null || token.isBlank()){
+            return CompletableFuture.completedFuture(null);
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(AppConfig.apiBaseUrl() + "/api/auth/logout"))
+                .timeout(Duration.ofSeconds(20))
+                .header("Authorization", "Bearer " + token)
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.discarding())
+                .thenApply(response ->{
+                    int status = response.statusCode();
+
+                    if (status == 204 || status == 401){
+                        return null;
+                    }
+
+                    throw new LoginException("Não foi possível confirmar o encerramento "
+                            + "da sessão no servidor.");
+                });
+    }
     public static class LoginException extends RuntimeException {
 
         public LoginException(String message) {
