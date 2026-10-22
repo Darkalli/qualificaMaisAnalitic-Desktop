@@ -1,14 +1,17 @@
-package com.qualificamaisanaliticinterface.features.home;
+package com.qualificamaisanaliticinterface.features.people;
 
 import com.qualificamaisanaliticinterface.api.ApiException;
-import com.qualificamaisanaliticinterface.features.people.PersonService;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
 
+import com.qualificamaisanaliticinterface.navigation.Navigator;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletionException;
@@ -150,5 +153,10 @@ public class PeopleController {
         pageInfoLabel.setText(message);
 
         searchField.setDisable(true);
+    }
+
+    @FXML
+    public void onNewPersonClick(ActionEvent actionEvent) throws IOException {
+        Navigator.openForm(peopleTable.getScene(), "/views/pages/forms/person-form.fxml");
     }
 }

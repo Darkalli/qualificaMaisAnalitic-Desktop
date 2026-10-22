@@ -1,9 +1,13 @@
 package com.qualificamaisanaliticinterface.features.people.dto;
 
+import com.qualificamaisanaliticinterface.features.enuns.Disabilities;
+import com.qualificamaisanaliticinterface.features.enuns.Education;
+import com.qualificamaisanaliticinterface.features.enuns.Gender;
+import com.qualificamaisanaliticinterface.features.enuns.WorkState;
+
 import java.util.Set;
 
 public record PersonDto(
-        Long id,
         String fullName,
         String socialName,
         String cpf,
@@ -12,13 +16,12 @@ public record PersonDto(
         Boolean personalPhoneHasWhatsapp,
         String familyPhone,
         AddressDto address,
-        String gender,
-        String education,
-        String workState,
-        Set<String> disabilities
+        Gender gender,
+        Education education,
+        WorkState workState,
+        Set<Disabilities> disabilities
 ){
     public record AddressDto(
-            Long id,
             Integer number,
             String street,
             String neighborhood

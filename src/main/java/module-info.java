@@ -15,6 +15,8 @@ module com.qualificamaisanaliticinterface {
     opens com.qualificamaisanaliticinterface
             to javafx.fxml;
     exports com.qualificamaisanaliticinterface;
+    exports com.qualificamaisanaliticinterface.session;
+    exports com.qualificamaisanaliticinterface.features.login.dto;
 
     opens com.qualificamaisanaliticinterface.features.home
             to javafx.fxml;
@@ -22,5 +24,6 @@ module com.qualificamaisanaliticinterface {
             to com.google.gson;
     opens com.qualificamaisanaliticinterface.features.people.dto
             to com.google.gson;
+    opens com.qualificamaisanaliticinterface.features.people to javafx.fxml;
 
 }

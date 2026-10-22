@@ -6,7 +6,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.qualificamaisanaliticinterface.features.home.PeopleController">
+            fx:controller="com.qualificamaisanaliticinterface.features.people.PeopleController">
 
     <VBox styleClass="content" spacing="16"
           AnchorPane.topAnchor="0"
@@ -32,7 +32,7 @@
                        text="—"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="+  Novo Cadastro"/>
+            <Button text="+  Novo Cadastro" onAction="#onNewPersonClick"/>
         </HBox>
         <HBox styleClass="box">
             <VBox spacing="12" HBox.hgrow="ALWAYS">

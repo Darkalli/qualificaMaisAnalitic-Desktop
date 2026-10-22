@@ -219,3 +219,17 @@
     -fx-background-color: #1f2e49;
 }
 
+.filter-field > .combo-box {
+    -fx-background-color: #1f2e49;
+    -fx-background-radius: 6px;
+}
+
+.filter-field .combo-box-search {
+    -fx-background-color: #1f2e49;
+    -fx-text-fill: #f1f5f9;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-background-radius: 6px;
+    -fx-border-color: #E67E22;
+    -fx-border-radius: 6px;
+}
+

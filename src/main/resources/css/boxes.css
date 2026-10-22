@@ -68,3 +68,89 @@
 .clear-filters:pressed {
     -fx-text-fill: #8a9bb8;
 }
+.checkBox {
+    -fx-text-fill: #cbd5e1;
+}
+
+.checkBox > .box {
+    -fx-background-color: #1e2c46;
+    -fx-background-radius: 4px;
+    -fx-border-color: #405170;
+    -fx-border-radius: 4px;
+    -fx-padding: 4px;
+    -fx-effect: null;
+}
+
+.checkBox:selected > .box{
+    -fx-background-color: #E67E22;
+    -fx-padding: 4px;
+}
+
+.checkBox:selected > .box > .mark {
+    -fx-background-color: #cbd5e1;
+}
+
+#disabilitiesField > .combo-box{
+    -fx-background-color: #1f2e49;
+    -fx-background-radius: 6px;
+
+    -fx-border-color: #405170;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+
+    -fx-padding: 4px;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.30),
+            12,
+            0.10,
+            0,
+            4
+    );
+}
+#disabilitiesField > .combo-box > .list-cell {
+    -fx-background-color: #1f2e49;
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 13px;
+
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 4px;
+}
+
+#disabilitiesField .arrow {
+    -fx-background-color: #94a3b8;
+}
+
+#disabilitiesField .combo-box-popup .list-view{
+    -fx-background-color: #1f2e49;
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 13px;
+
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 4px;
+}
+#disabilitiesField .combo-box-popup .list-cell{
+    -fx-background-color: #1f2e49;
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 13px;
+
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 4px;
+}
+#disabilitiesField .check-box > .box{
+    -fx-background-color: #1f2e49;
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 13px;
+
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 4px;
+}
+#disabilitiesField .check-box:selected > .box > .mark{
+    -fx-background-color: #E67E22;
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 13px;
+
+    -fx-padding: 10px 12px;
+    -fx-background-radius: 4px;
+}
