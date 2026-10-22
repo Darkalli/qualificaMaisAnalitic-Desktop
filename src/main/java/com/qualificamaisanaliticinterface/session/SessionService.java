@@ -27,7 +27,7 @@ public class SessionService {
             .build();
 
     public CompletableFuture<Optional<LoginResponse>> restoreSession() {
-        CompletableFuture<Optional<LoginResponse>> login = CompletableFuture.supplyAsync(() -> {
+        return CompletableFuture.supplyAsync(() -> {
                     Optional<LoginResponse> session;
                     try {
                         session = loadSession();
@@ -67,7 +67,6 @@ public class SessionService {
                     }
                     return Optional.empty();
                 });
-        return login;
     }
 
     public void saveSession(LoginResponse session) throws IOException {

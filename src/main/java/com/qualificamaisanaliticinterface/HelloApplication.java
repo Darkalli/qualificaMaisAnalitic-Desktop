@@ -1,5 +1,6 @@
 package com.qualificamaisanaliticinterface;
 
+import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.session.SessionService;
 import com.qualificamaisanaliticinterface.session.UserSession;
 import javafx.application.Application;
@@ -10,8 +11,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.CompletionException;
 
 public class HelloApplication extends Application {
+
+    private final SessionService sessionService = new SessionService();
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/views/Startup.fxml"));
@@ -36,11 +41,11 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        SessionService.restoreSession()
+        sessionService.restoreSession()
                 .whenComplete((result, erro) ->
                         Platform.runLater(() -> {
                             if (erro != null) {
-                                showErrorAndTryAgain(scene);
+                                showLogin(scene);
                                 return;
                             }
 
@@ -52,5 +57,21 @@ public class HelloApplication extends Application {
                             }
                         })
                 );
+    }
+
+    private void showHome(Scene scene){
+        try {
+            Navigator.changeScreen(scene, "/views/home.fxml");
+        } catch (IOException e) {
+            throw new CompletionException(e);
+        }
+    }
+
+    private void showLogin(Scene scene){
+        try {
+            Navigator.changeScreen(scene, "/views/login.fxml");
+        } catch (IOException e) {
+            throw new CompletionException(e);
+        }
     }
 }

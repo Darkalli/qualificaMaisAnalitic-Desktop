@@ -1,5 +1,6 @@
 package com.qualificamaisanaliticinterface;
 
+import com.google.gson.Gson;
 import com.qualificamaisanaliticinterface.features.login.AuthService;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.session.UserSession;
@@ -32,6 +33,8 @@ public class HelloController {
 
     @FXML
     private CheckBox persistLoginCheckBox;
+
+    private final Gson gson = new Gson();
 
     @FXML
     private void onClick() {
@@ -84,7 +87,7 @@ public class HelloController {
                                 WindowsTokenStore store = new WindowsTokenStore();
 
                                 try {
-                                    store.save(response.token());
+                                    store.save(gson.toJson(response));
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
