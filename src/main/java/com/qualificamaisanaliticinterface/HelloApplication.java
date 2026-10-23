@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/views/Startup.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1100, 750);
+        Scene scene = new Scene(fxmlLoader.load(), 1380, 810);
         String[] stylesheets = {
                 "/css/application.css",
                 "/css/navigation.css",
