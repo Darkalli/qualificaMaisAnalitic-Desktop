@@ -20,6 +20,13 @@ public class PeopleController {
 
     private final PersonService personService = new PersonService();
 
+    @FXML
+    public TableColumn<PersonDto, String> emailsColumn;
+    @FXML
+    public TableColumn<PersonDto, String> cellphoneColumn;
+    @FXML
+    public TableColumn<PersonDto, Void> actionsColumn;
+
     private List<PersonDto> allPeople = List.of();
 
     @FXML
@@ -61,6 +68,13 @@ public class PeopleController {
         namesColumn.setCellValueFactory(cell ->
                 new ReadOnlyStringWrapper(cell.getValue().fullName())
         );
+        emailsColumn.setCellValueFactory(cell ->
+                new ReadOnlyStringWrapper(cell.getValue().email())
+        );
+        cellphoneColumn.setCellValueFactory(cell ->
+                new ReadOnlyStringWrapper(cell.getValue().personalPhone())
+        );
+        actionsColumn.setCellFactory(column -> new PersonActionsCell());
 
         // Esses filtros ainda não estão implementados.
         courseFilter.setDisable(true);

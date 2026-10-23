@@ -11,12 +11,15 @@ module com.qualificamaisanaliticinterface {
     requires eu.hansolo.tilesfx;
     requires com.google.gson;
     requires com.sun.jna.platform;
+    requires com.google.errorprone.annotations;
+    requires org.kordamp.ikonli.fontawesome5;
 
     opens com.qualificamaisanaliticinterface
             to javafx.fxml;
     exports com.qualificamaisanaliticinterface;
     exports com.qualificamaisanaliticinterface.session;
     exports com.qualificamaisanaliticinterface.features.login.dto;
+    exports com.qualificamaisanaliticinterface.features.enuns;
 
     opens com.qualificamaisanaliticinterface.features.home
             to javafx.fxml;
