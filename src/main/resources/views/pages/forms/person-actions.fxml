@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.util.Duration?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" spacing="6" alignment="CENTER">
+
+    <Button fx:id="personInfo" onAction="#onPersonInfoClick" styleClass="action-button">
+        <graphic>
+            <FontIcon iconLiteral="fas-info-circle"
+                      iconSize="16"
+                      iconColor="WHITE"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="Ver detalhes da pessoa">
+                <showDelay>
+                    <Duration fx:value="200ms"/>
+                </showDelay>
+            </Tooltip>
+        </tooltip>
+    </Button>
+    <Button fx:id="personDelete" styleClass="action-button">
+        <graphic>
+            <FontIcon iconLiteral="fas-trash-alt"
+                      iconSize="16"
+                      iconColor="WHITE"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="Excluir pessoa">
+                <showDelay>
+                    <Duration fx:value="200ms"/>
+                </showDelay>
+            </Tooltip>
+        </tooltip>
+    </Button>
+    <Button fx:id="personUpdate" styleClass="action-button">
+        <graphic>
+            <FontIcon iconLiteral="fas-edit"
+                      iconSize="16"
+                      iconColor="WHITE"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="Atualizar pessoa">
+                <showDelay>
+                    <Duration fx:value="200ms"/>
+                </showDelay>
+            </Tooltip>
+        </tooltip>
+    </Button>
+</HBox>

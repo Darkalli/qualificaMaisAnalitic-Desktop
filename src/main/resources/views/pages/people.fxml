@@ -98,11 +98,27 @@
                 <columns>
                     <TableColumn fx:id="cpfsColumn"
                                  text="CPF"
-                                 prefWidth="180"/>
-
+                                 minWidth="130"
+                                 prefWidth="140"
+                                 maxWidth="150"/>
                     <TableColumn fx:id="namesColumn"
                                  text="Nome"
-                                 prefWidth="400"/>
+                                 minWidth="180"
+                                 prefWidth="250"/>
+                    <TableColumn fx:id="emailsColumn"
+                                 text="Email"
+                                 minWidth="180"
+                                 prefWidth="250"/>
+                    <TableColumn fx:id="cellphoneColumn"
+                                 text="Telefone"
+                                 minWidth="130"
+                                 prefWidth="150"
+                                 maxWidth="180"/>
+                    <TableColumn fx:id="actionsColumn"
+                                 text="Ações"
+                                 minWidth="100"
+                                 prefWidth="150"
+                                 maxWidth="170"/>
                 </columns>
             </TableView>
             <HBox styleClass="table-footer"

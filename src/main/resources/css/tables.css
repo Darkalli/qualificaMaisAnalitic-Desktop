@@ -233,3 +233,14 @@
     -fx-border-radius: 6px;
 }
 
+.button.action-button {
+    -fx-padding: 0;
+    -fx-min-width: 35px;
+    -fx-pref-width: 35px;
+    -fx-max-width: 35px;
+    -fx-min-height: 35px;
+    -fx-pref-height: 35px;
+    -fx-max-height: 35px;
+    -fx-background-radius: 6px;
+}
+

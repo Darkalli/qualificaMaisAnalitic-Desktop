@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.people.PersonInfoController"
+            prefHeight="400.0" prefWidth="600.0" styleClass="dialog-pane"
+            fx:id="infoDialogPane"
+            onMousePressed="#onDragPressed"
+            onMouseDragged="#onDragMoved">
+    <content>
+        <VBox spacing="20" styleClass="content">
+            <Label styleClass="title" fx:id="infoName"/>
+            <VBox>
+                <Label text="Identificação"/>
+                <HBox styleClass="box" spacing="4">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="Nome" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="nameField"
+                               text="Nome"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="Nome social" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="socialNameField"
+                               text="Nome social"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="CPF" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="cpfField"
+                               text="Cpf"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="E-mail" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="emailField"
+                               text="Email"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            <VBox>
+                <Label text="Endereço"/>
+                <HBox styleClass="box" spacing="4">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="Número" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="numberField"
+                               text="Numero"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="Rua" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="streetField"
+                               text="Rua"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="Bairro" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="neighborhoodField"
+                               text="Bairro"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            <VBox>
+                <Label text="Contato"/>
+                <HBox styleClass="box" alignment="CENTER" spacing="12">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="Número pessoal" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="personalNumberField"
+                               text="Número pessoal"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="8">
+                        <Label text="Tem WhatsApp?"/>
+                        <CheckBox styleClass="checkBox"
+                                  fx:id="hasWhatsAppCheckBox"
+                                  selected="true"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                        <Label text="Número de familiar" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="familyNumberField"
+                               text="Número de familiar"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            <VBox>
+                <Label text="Informações pessoais"/>
+                <GridPane styleClass="box" hgap="12" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="70"/>
+                        <ColumnConstraints percentWidth="30"/>
+                    </columnConstraints>
+                    <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text="Nível educacional" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="educationField"
+                               text="Nível educacional"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label text="Gênero" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="genderField"
+                               text="Genero"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Label text="Situação de trabalho" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="workstateField"
+                               text="Trabalho"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                    <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label text="Deficiências" styleClass="box-lower-sub-title"/>
+                        <Label fx:id="disabilitiesField"
+                               styleClass="info-value"
+                               maxWidth="Infinity"
+                               minWidth="0"
+                               wrapText="true"/>
+                    </VBox>
+                </GridPane>
+            </VBox>
+            <HBox alignment="CENTER">
+                <Button fx:id="close" text="Voltar"
+                        onAction="#onClickCancel"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>

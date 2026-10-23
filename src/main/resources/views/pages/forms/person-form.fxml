@@ -7,6 +7,8 @@
 <?import org.controlsfx.control.SearchableComboBox?>
 <?import org.controlsfx.control.CheckComboBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <DialogPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.people.PersonFormController"
@@ -76,26 +78,39 @@
             </VBox>
             <VBox>
                 <Label text="Informações pessoais"/>
-                <VBox styleClass="box" spacing="8">
-                    <HBox>
-                        <ComboBox fx:id="genderField"
-                                  promptText="Genero"
-                                  styleClass="filter-field"
-                                  HBox.hgrow="ALWAYS"/>
+                <GridPane styleClass="box" hgap="12" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="70"/>
+                        <ColumnConstraints percentWidth="30"/>
+                    </columnConstraints>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <SearchableComboBox fx:id="educationField"
                                             promptText="Nível educacional"
                                             styleClass="filter-field"
-                                            HBox.hgrow="ALWAYS"/>
-                    </HBox>
-                    <HBox>
+                                            HBox.hgrow="ALWAYS"
+                                            maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <ComboBox fx:id="genderField"
+                                  promptText="Genero"
+                                  styleClass="filter-field"
+                                  HBox.hgrow="ALWAYS"
+                                  maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <SearchableComboBox fx:id="workstateField"
                                             promptText="Trabalho"
-                                            styleClass="filter-field"/>
+                                            styleClass="filter-field"
+                                            maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <CheckComboBox fx:id="disabilitiesField"
                                        styleClass="checkComboBox"
-                                       HBox.hgrow="ALWAYS"/>
-                    </HBox>
-                </VBox>
+                                       title="Deficiências"
+                                       HBox.hgrow="ALWAYS"
+                                       maxWidth="Infinity"/>
+                    </VBox>
+                </GridPane>
             </VBox>
             <HBox>
                 <Button fx:id="close" text="Cancelar"

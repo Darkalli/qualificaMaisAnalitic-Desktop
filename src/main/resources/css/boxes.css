@@ -90,8 +90,45 @@
     -fx-background-color: #cbd5e1;
 }
 
-#disabilitiesField > .combo-box{
+#disabilitiesField {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+#disabilitiesField > .combo-box {
+    -fx-background-insets: 0;
     -fx-background-color: #1f2e49;
+    -fx-background-radius: 6px;
+    -fx-border-color: #405170;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+    -fx-padding: 0;
+    -fx-effect: null;
+}
+#disabilitiesField > .combo-box > .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f1f5f9;
+    -fx-padding: 10px 12px;
+}
+
+#disabilitiesField > .combo-box > .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 12px;
+}
+
+#disabilitiesField > .combo-box:focused,
+#disabilitiesField > .combo-box:showing {
+    -fx-border-color: #E67E22;
+}
+
+#disabilitiesField .combo-box-popup .list-view {
+    -fx-background-color: #1f2e49;
+    -fx-background-insets: 0;
     -fx-background-radius: 6px;
 
     -fx-border-color: #405170;
@@ -99,36 +136,10 @@
     -fx-border-radius: 6px;
 
     -fx-padding: 4px;
-
     -fx-effect: dropshadow(
-            gaussian,
-            rgba(0, 0, 0, 0.30),
-            12,
-            0.10,
-            0,
-            4
+            gaussian, rgba(0, 0, 0, 0.30),
+            12, 0.10, 0, 4
     );
-}
-#disabilitiesField > .combo-box > .list-cell {
-    -fx-background-color: #1f2e49;
-    -fx-text-fill: #f1f5f9;
-    -fx-font-size: 13px;
-
-    -fx-padding: 10px 12px;
-    -fx-background-radius: 4px;
-}
-
-#disabilitiesField .arrow {
-    -fx-background-color: #94a3b8;
-}
-
-#disabilitiesField .combo-box-popup .list-view{
-    -fx-background-color: #1f2e49;
-    -fx-text-fill: #f1f5f9;
-    -fx-font-size: 13px;
-
-    -fx-padding: 10px 12px;
-    -fx-background-radius: 4px;
 }
 #disabilitiesField .combo-box-popup .list-cell{
     -fx-background-color: #1f2e49;
@@ -150,7 +161,16 @@
     -fx-background-color: #E67E22;
     -fx-text-fill: #f1f5f9;
     -fx-font-size: 13px;
-
-    -fx-padding: 10px 12px;
     -fx-background-radius: 4px;
+}
+
+.content .info-value {
+    -fx-background-color: #1f2e49;
+    -fx-text-fill: #f1f5f9;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-background-radius: 6px;
+    -fx-border-color: #E67E22;
+    -fx-border-radius: 6px;
+    -fx-padding: 8px 10px;
+    -fx-alignment: CENTER;
 }
