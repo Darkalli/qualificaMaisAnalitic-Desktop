@@ -104,4 +104,117 @@ public class ApiClient {
             throw new ApiException(status, message);
         });
     }
+
+    public CompletableFuture<String> patch(String path, String json) {
+        if (path == null || !path.startsWith("/api/")) {
+            return CompletableFuture.failedFuture(
+                    new IllegalArgumentException("Informe um caminho iniciado por /api/."));
+        }
+        LoginResponse session = UserSession.current();
+        if (session == null || session.token() == null || session.token().isBlank()) {
+            return CompletableFuture.failedFuture(
+                    new ApiException(401, "Entre novamente para continuar."));
+        }
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .timeout(Duration.ofSeconds(20))
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + session.token())
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(json))
+                .build();
+        return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> {
+                    int status = response.statusCode();
+                    if (status >= 200 && status < 300) {
+                        return response.body();
+                    }
+                    String message = switch (status) {
+                        case 400 -> "Confira os dados enviados para a atualização.";
+                        case 401 -> "Sessão inválida ou expirada. Entre novamente.";
+                        case 403 -> "Você não tem permissão para esta operação.";
+                        case 404 -> "Pessoa não encontrada.";
+                        case 409 -> "A atualização conflita com os dados existentes.";
+                        default -> "Não foi possível atualizar a pessoa.";
+                    };
+                    throw new ApiException(status, message);
+                });
+    }
+
+    public CompletableFuture<String> delete(String path, String json) {
+        if (path == null || !path.startsWith("/api/")) {
+            return CompletableFuture.failedFuture(
+                    new IllegalArgumentException("Informe um caminho iniciado por /api/."));
+        }
+        LoginResponse session = UserSession.current();
+        if (session == null || session.token() == null || session.token().isBlank()) {
+            return CompletableFuture.failedFuture(
+                    new ApiException(401, "Entre novamente para continuar."));
+        }
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .timeout(Duration.ofSeconds(20))
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + session.token())
+                .method("DELETE", HttpRequest.BodyPublishers.ofString(json))
+                .build();
+        return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenApply(response -> {
+            int status = response.statusCode();
+            if (status >= 200 && status < 300) {
+                return response.body();
+            }
+            String message = switch (status) {
+                case 400 -> "Confira os dados enviados para o cancelamento.";
+                case 401 -> "Sessão inválida ou expirada. Entre novamente.";
+                case 403 -> "Você não tem permissão para esta operação.";
+                case 404 -> "Inscrição não encontrada.";
+                case 409 -> "Não foi possível cancelar: a operação conflita com os dados existentes.";
+                default -> "Não foi possível cancelar a inscrição.";
+            };
+            throw new ApiException(status, message);
+        });
+    }
+
+    public CompletableFuture<Object> delete(String path) {
+        if (path == null || !path.startsWith("/api/")) {
+            return CompletableFuture.failedFuture(
+                    new IllegalArgumentException(
+                            "Informe um caminho iniciado por /api/."
+                    )
+            );
+        }
+        LoginResponse session = UserSession.current();
+        if (session == null
+                || session.token() == null
+                || session.token().isBlank()) {
+            return CompletableFuture.failedFuture(
+                    new ApiException(401, "Entre novamente para continuar.")
+            );
+        }
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + path))
+                .timeout(Duration.ofSeconds(20))
+                .header("Authorization", "Bearer " + session.token())
+                .DELETE()
+                .build();
+        return CLIENT.sendAsync(
+                request,
+                HttpResponse.BodyHandlers.ofString()
+        ).thenApply(response -> {
+            int status = response.statusCode();
+            if (status >= 200 && status < 300) {
+                return response.body();
+            }
+            String message = switch (status) {
+                case 400 -> "Confira os dados enviados para a deleção.";
+                case 401 -> "Sessão inválida ou expirada. Entre novamente.";
+                case 403 -> "Você não tem permissão para esta operação.";
+                case 404 -> "Recurso não encontrado.";
+                case 409 -> "A operação conflita com os dados existentes.\nPodem haver dados dependentes deste.";
+                default -> "Não foi possível concluir a deleção.";
+            };
+            throw new ApiException(status, message);
+        });
+    }
 }
