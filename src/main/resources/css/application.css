@@ -74,3 +74,81 @@
     -fx-border-color: #E67E22;
     -fx-border-width: 1px;
 }
+
+.dialog-pane.delete-dialog {
+    -fx-border-color: #405170;
+}
+
+.dialog-pane.delete-dialog .label.delete-heading {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1f5f9;
+}
+
+.dialog-pane.delete-dialog .label.delete-person-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1f5f9;
+}
+
+.dialog-pane.delete-dialog .label.delete-description {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #cbd5e1;
+}
+
+.dialog-pane.delete-dialog .label.delete-warning {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #fca5a5;
+}
+
+.dialog-pane.delete-dialog .label.delete-error {
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #fca5a5;
+}
+
+.dialog-pane.delete-dialog .button.delete-cancel {
+    -fx-background-color: transparent;
+    -fx-border-color: #405170;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #f1f5f9;
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+}
+
+.dialog-pane.delete-dialog .button.delete-cancel:hover {
+    -fx-background-color: #293a5a;
+}
+
+.dialog-pane.delete-dialog .button.delete-cancel:pressed {
+    -fx-background-color: #405170;
+}
+
+.dialog-pane.delete-dialog .button.delection {
+    -fx-background-color: #dc2626;
+    -fx-text-fill: white;
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+}
+
+.dialog-pane.delete-dialog .button.delection:hover {
+    -fx-background-color: #b91c1c;
+}
+
+.dialog-pane.delete-dialog .button.delection:pressed {
+    -fx-background-color: #991b1b;
+}
+.button.delection {
+    -fx-background-color: #FF0000;
+    -fx-text-fill: black;
+}
+
+.button.delection:hover {
+    -fx-background-color: #660000;
+}
+.button.delection:pressed {
+    -fx-background-color: #440000;
+}

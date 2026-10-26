@@ -15,47 +15,56 @@
             onMouseDragged="#onDragMoved">
     <content>
         <VBox spacing="20" styleClass="content">
-            <Label styleClass="title" fx:id="infoName"/>
+            <Label styleClass="title" fx:id="infoName" wrapText="true"
+                   minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
             <VBox>
                 <Label text="Identificação"/>
-                <HBox styleClass="box" spacing="4">
-                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                <GridPane styleClass="box" hgap="12" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <Label text="Nome" styleClass="box-lower-sub-title"/>
                         <Label fx:id="nameField"
                                text="Nome"
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"
-                               wrapText="true"/>
+                               wrapText="true"
+                               minHeight="-Infinity"/>
                     </VBox>
-                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                         <Label text="Nome social" styleClass="box-lower-sub-title"/>
                         <Label fx:id="socialNameField"
                                text="Nome social"
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"
-                               wrapText="true"/>
+                               wrapText="true"
+                               minHeight="-Infinity"/>
                     </VBox>
-                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <Label text="CPF" styleClass="box-lower-sub-title"/>
                         <Label fx:id="cpfField"
                                text="Cpf"
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"
-                               wrapText="true"/>
+                               wrapText="true"
+                               minHeight="-Infinity"/>
                     </VBox>
-                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <Label text="E-mail" styleClass="box-lower-sub-title"/>
                         <Label fx:id="emailField"
                                text="Email"
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"
-                               wrapText="true"/>
+                               wrapText="true"
+                               minHeight="-Infinity"/>
                     </VBox>
-                </HBox>
+                </GridPane>
             </VBox>
             <VBox>
                 <Label text="Endereço"/>
@@ -154,7 +163,7 @@
                     </VBox>
                     <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <Label text="Deficiências" styleClass="box-lower-sub-title"/>
-                        <Label fx:id="disabilitiesField"
+                        <Label fx:id="disabilitiesInfoField"
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"

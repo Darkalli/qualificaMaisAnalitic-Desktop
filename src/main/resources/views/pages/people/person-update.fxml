@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import org.controlsfx.control.SearchableComboBox?>
+<?import org.controlsfx.control.CheckComboBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.people.PersonUpdateController"
+            prefHeight="400.0" prefWidth="600.0" styleClass="dialog-pane"
+            fx:id="formDialogPane"
+            onMousePressed="#onDragPressed"
+            onMouseDragged="#onDragMoved">
+    <content>
+        <VBox spacing="20" styleClass="content">
+            <Label styleClass="title" text="Editar pessoa"/>
+            <VBox>
+                <Label text="Identificação"/>
+                <HBox styleClass="box" spacing="4">
+                    <TextField fx:id="nameField" editable="false"
+                               promptText="Nome"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="socialNameField"
+                               promptText="Nome social"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="cpfField" editable="false"
+                               promptText="Cpf"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="emailField"
+                               promptText="Email"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+            <VBox>
+                <Label text="Endereço"/>
+                <HBox styleClass="box" spacing="4">
+                    <TextField fx:id="numberField"
+                               promptText="Numero"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="streetField"
+                               promptText="Rua"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="neighborhoodField"
+                               promptText="Bairro"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+            <VBox>
+                <Label text="Contato"/>
+                <HBox styleClass="box" alignment="CENTER" spacing="12">
+                    <TextField fx:id="personalNumberField"
+                               promptText="Número pessoal"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                    <VBox alignment="CENTER" spacing="8">
+                        <Label text="Tem WhatsApp?"/>
+                        <CheckBox styleClass="checkBox"
+                                  fx:id="hasWhatsAppCheckBox" disable="true"
+                                  selected="true"/>
+                    </VBox>
+                    <TextField fx:id="familyNumberField"
+                               promptText="Número de familiar"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+            <VBox>
+                <Label text="Informações pessoais"/>
+                <GridPane styleClass="box" hgap="12" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="70"/>
+                        <ColumnConstraints percentWidth="30"/>
+                    </columnConstraints>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <SearchableComboBox fx:id="educationField"
+                                            promptText="Nível educacional"
+                                            styleClass="filter-field"
+                                            HBox.hgrow="ALWAYS"
+                                            maxWidth="Infinity"
+                                            visibleRowCount="4"/>
+                    </VBox>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <ComboBox fx:id="genderField"
+                                  promptText="Genero"
+                                  styleClass="filter-field"
+                                  HBox.hgrow="ALWAYS"
+                                  maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <SearchableComboBox fx:id="workstateField"
+                                            promptText="Trabalho"
+                                            styleClass="filter-field"
+                                            maxWidth="Infinity"
+                                            visibleRowCount="4"/>
+                    </VBox>
+                    <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <CheckComboBox fx:id="disabilitiesField"
+                                       styleClass="checkComboBox"
+                                       title="Deficiências"
+                                       HBox.hgrow="ALWAYS"
+                                       maxWidth="Infinity"/>
+                    </VBox>
+                </GridPane>
+            </VBox>
+            <HBox>
+                <Button fx:id="close" text="Cancelar"
+                        onAction="#onClickCancel"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="save" text="Salvar alterações"
+                        onAction="#onClickSave"/>
+            </HBox>
+            <Label text="Nome, CPF e WhatsApp são somente leitura nesta versão da API." wrapText="true" maxWidth="550" minHeight="-Infinity"/>
+            <Label fx:id="info" wrapText="true" maxWidth="550" minHeight="-Infinity"/>
+        </VBox>
+    </content>
+</DialogPane>

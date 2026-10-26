@@ -39,7 +39,7 @@ public class PersonInfoController {
     @FXML
     public Label workstateField;
     @FXML
-    public Label disabilitiesField;
+    public Label disabilitiesInfoField;
     @FXML
     public Label numberField;
     @FXML
@@ -66,7 +66,7 @@ public class PersonInfoController {
         genderField.setText(dto.gender().toString());
         educationField.setText(dto.education().toString());
         workstateField.setText(dto.workState().toString());
-        disabilitiesField.setText(dto.disabilities().toString());
+        disabilitiesInfoField.setText(dto.disabilities().toString());
         numberField.setText(String.valueOf(dto.address().number()));
         streetField.setText(dto.address().street());
         neighborhoodField.setText(dto.address().neighborhood());

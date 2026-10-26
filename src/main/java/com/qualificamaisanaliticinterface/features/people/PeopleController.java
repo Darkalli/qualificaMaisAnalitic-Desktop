@@ -1,6 +1,7 @@
 package com.qualificamaisanaliticinterface.features.people;
 
 import com.qualificamaisanaliticinterface.api.ApiException;
+import com.qualificamaisanaliticinterface.features.enuns.Period;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
 
 import com.qualificamaisanaliticinterface.navigation.Navigator;
@@ -8,7 +9,6 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -42,9 +42,6 @@ public class PeopleController {
     private Label totalPeopleLabel;
 
     @FXML
-    private Label peopleCountLabel;
-
-    @FXML
     private Label pageInfoLabel;
 
     @FXML
@@ -54,10 +51,7 @@ public class PeopleController {
     private ComboBox<String> courseFilter;
 
     @FXML
-    private ComboBox<String> periodFilter;
-
-    @FXML
-    private Pagination tablePagination;
+    private ComboBox<Period> periodFilter;
 
     @FXML
     private void initialize() {
@@ -74,15 +68,14 @@ public class PeopleController {
         cellphoneColumn.setCellValueFactory(cell ->
                 new ReadOnlyStringWrapper(cell.getValue().personalPhone())
         );
-        actionsColumn.setCellFactory(column -> new PersonActionsCell());
+        actionsColumn.setCellFactory(column ->
+                new PersonActionsCell(this::loadPeople)
+        );
 
-        // Esses filtros ainda não estão implementados.
         courseFilter.setDisable(true);
-        periodFilter.setDisable(true);
 
-        // Nesta etapa, mostramos todos os resultados.
-        tablePagination.setVisible(false);
-        tablePagination.setManaged(false);
+        periodFilter.getItems().setAll(Period.values());
+        configureEmptyText(periodFilter, "Todos os períodos");
 
         loadPeople();
     }
@@ -131,18 +124,12 @@ public class PeopleController {
                         ? "Nenhuma pessoa cadastrada."
                         : "Nenhuma pessoa encontrada para essa busca."
         ));
-
-        peopleCountLabel.setText(filtered.size() + " pessoas");
-
-        pageInfoLabel.setText(
-                "Exibindo " + filtered.size()
-                        + " de " + allPeople.size() + " pessoas"
-        );
     }
 
     @FXML
     private void onClearFiltersClick() {
         searchField.clear();
+        periodFilter.setValue(null);
         onSearchClick();
     }
 
@@ -163,7 +150,6 @@ public class PeopleController {
 
         peopleTable.setPlaceholder(new Label(message));
         totalPeopleLabel.setText("—");
-        peopleCountLabel.setText("Consulta indisponível");
         pageInfoLabel.setText(message);
 
         searchField.setDisable(true);
@@ -171,6 +157,26 @@ public class PeopleController {
 
     @FXML
     public void onNewPersonClick(ActionEvent actionEvent) throws IOException {
-        Navigator.openForm(peopleTable.getScene(), "/views/pages/forms/person-form.fxml");
+        Navigator.openForm(
+                peopleTable.getScene(),
+                "/views/pages/people/person-form.fxml",
+                (PersonFormController controller) ->
+                        controller.setOnAdded(this::loadPeople)
+        );
+    }
+
+    private <T> void configureEmptyText(
+            ComboBox<T> combo,
+            String emptyText
+    ) {
+        combo.setButtonCell(new ListCell<T>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+
+                setText(item == null ? emptyText : item.toString());
+                setGraphic(null);
+            }
+        });
     }
 }

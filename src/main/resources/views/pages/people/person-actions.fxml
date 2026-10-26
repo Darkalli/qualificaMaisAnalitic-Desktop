@@ -25,7 +25,7 @@
             </Tooltip>
         </tooltip>
     </Button>
-    <Button fx:id="personDelete" styleClass="action-button">
+    <Button fx:id="personDelete" onAction="#onDeletePersonClick" styleClass="action-button">
         <graphic>
             <FontIcon iconLiteral="fas-trash-alt"
                       iconSize="16"
@@ -39,7 +39,7 @@
             </Tooltip>
         </tooltip>
     </Button>
-    <Button fx:id="personUpdate" styleClass="action-button">
+    <Button fx:id="personUpdate" onAction="#onUpdatePersonClick" styleClass="action-button">
         <graphic>
             <FontIcon iconLiteral="fas-edit"
                       iconSize="16"

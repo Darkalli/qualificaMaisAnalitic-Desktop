@@ -76,20 +76,6 @@
             </VBox>
         </HBox>
         <VBox styleClass="box" VBox.vgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label fx:id="peopleCountLabel"
-                           text="Carregando..."
-                           styleClass="box-title"/>
-                    <Label text="encontradas"
-                           styleClass="box-sub-title"/>
-                </HBox>
-                <Region HBox.hgrow="ALWAYS"/>
-                <HBox spacing="2" alignment="CENTER_RIGHT">
-                    <Label text="atualizado a"
-                           styleClass="box-border-text"/>
-                </HBox>
-            </HBox>
             <TableView styleClass="table" fx:id="peopleTable"
                        VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
@@ -121,22 +107,6 @@
                                  maxWidth="170"/>
                 </columns>
             </TableView>
-            <HBox styleClass="table-footer"
-                  spacing="8"
-                  alignment="CENTER_LEFT">
-                <Label fx:id="pageInfoLabel"
-                       text="Carregando..."
-                       styleClass="footer-text"/>
-                <ComboBox fx:id="pageSizeCombo"
-                          promptText="7 por página"
-                          prefWidth="120"
-                          styleClass="page-size"
-                          disable="true"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Pagination fx:id="tablePagination"
-                            pageCount="1"
-                            maxPageIndicatorCount="5"/>
-            </HBox>
         </VBox>
     </VBox>
 </AnchorPane>

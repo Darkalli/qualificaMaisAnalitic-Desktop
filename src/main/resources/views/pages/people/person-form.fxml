@@ -88,7 +88,8 @@
                                             promptText="Nível educacional"
                                             styleClass="filter-field"
                                             HBox.hgrow="ALWAYS"
-                                            maxWidth="Infinity"/>
+                                            maxWidth="Infinity"
+                                            visibleRowCount="4"/>
                     </VBox>
                     <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                         <ComboBox fx:id="genderField"
@@ -101,7 +102,8 @@
                         <SearchableComboBox fx:id="workstateField"
                                             promptText="Trabalho"
                                             styleClass="filter-field"
-                                            maxWidth="Infinity"/>
+                                            maxWidth="Infinity"
+                                            visibleRowCount="4"/>
                     </VBox>
                     <VBox spacing="4" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <CheckComboBox fx:id="disabilitiesField"
@@ -119,6 +121,7 @@
                 <Button fx:id="add" text="Adicionar"
                         onAction="#onClickAddPerson"/>
             </HBox>
+            <Label fx:id="info"/>
         </VBox>
     </content>
 </DialogPane>
