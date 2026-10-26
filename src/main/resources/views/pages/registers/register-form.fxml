@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.SearchableComboBox?>
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.registers.RegisterFormController"
+            fx:id="formDialogPane" prefWidth="620" styleClass="dialog-pane"
+            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+    <content>
+        <VBox spacing="20" styleClass="content">
+            <Label text="Nova inscrição" styleClass="title"/>
+            <VBox styleClass="box" spacing="16">
+                <VBox spacing="6">
+                    <Label text="Pessoa" styleClass="box-lower-sub-title"/>
+                    <SearchableComboBox fx:id="personField" promptText="Selecione uma pessoa"
+                                        maxWidth="Infinity" visibleRowCount="6" styleClass="filter-field"/>
+                    <Hyperlink fx:id="newPerson" text="+ Cadastrar uma nova pessoa"
+                               onAction="#onNewPersonClick" styleClass="clear-filters"/>
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="Curso" styleClass="box-lower-sub-title"/>
+                    <SearchableComboBox fx:id="courseField" promptText="Selecione um curso"
+                                        maxWidth="Infinity" visibleRowCount="6" styleClass="filter-field"/>
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="Data da inscrição" styleClass="box-lower-sub-title"/>
+                    <DatePicker fx:id="dateField" maxWidth="Infinity" styleClass="register-date"/>
+                </VBox>
+            </VBox>
+            <Label text="A inscrição será criada como ativa. Em caso de conflito, os dados serão mantidos para correção."
+                   styleClass="register-note" wrapText="true" minHeight="-Infinity" maxWidth="560"/>
+            <Label fx:id="info" styleClass="register-message" wrapText="true"
+                   minHeight="-Infinity" maxWidth="560"/>
+            <HBox spacing="12">
+                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="add" text="Inscrever" onAction="#onClickAddRegister"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.registers.RegisterInfoController"
+            fx:id="infoDialogPane" prefWidth="620" styleClass="dialog-pane"
+            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+    <content>
+        <VBox styleClass="content" spacing="20">
+            <Label text="Detalhes da inscrição" styleClass="title"/>
+            <GridPane styleClass="box" hgap="12" vgap="12">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="65"/>
+                    <ColumnConstraints percentWidth="35"/>
+                </columnConstraints>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Pessoa" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="personName" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="CPF" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="personCpf" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Curso" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="courseName" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Situação" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="statusField" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label text="Data da inscrição" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="dateField" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label text="Número do registro" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="numberField" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+            </GridPane>
+            <VBox styleClass="box" spacing="6">
+                <Label text="Descrição do curso" styleClass="box-lower-sub-title"/>
+                <Label fx:id="courseDescription" wrapText="true" maxWidth="530" minHeight="-Infinity"/>
+            </VBox>
+            <HBox spacing="12">
+                <Button text="Ver pessoa" onAction="#onPersonInfoClick"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="close" text="Voltar" onAction="#onClickCancel"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>
