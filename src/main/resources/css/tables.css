@@ -244,3 +244,38 @@
     -fx-background-radius: 6px;
 }
 
+.combo-box-popup .scroll-bar:vertical {
+    -fx-background-color: #1f2e49;
+    -fx-pref-width: 12px;
+    -fx-padding: 2px;
+}
+
+.combo-box-popup .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+}
+
+.combo-box-popup .scroll-bar:vertical .thumb {
+    -fx-background-color: #405170;
+    -fx-background-insets: 0;
+    -fx-background-radius: 6px;
+}
+
+.combo-box-popup .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #647899;
+}
+
+.combo-box-popup .scroll -bar:vertical .thumb:pressed {
+    -fx-background-color: #E67E22;
+}
+
+.combo-box-popup .scroll-bar:vertical .increment-button,
+.combo-box-popup .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .scroll-bar:vertical .increment-arrow,
+.combo-box-popup .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: #94a3b8;
+}
