@@ -15,7 +15,8 @@
                 <Label text="Total de inscrições" styleClass="box-lower-title"/>
                 <Label fx:id="totalRegistersLabel" text="—" styleClass="box-info-title"/>
             </VBox>
-            <Button fx:id="newRegister" text="+ Nova inscrição" disable="true"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="newRegister" text="+ Nova inscrição" onAction="#onNewRegisterClick"/>
         </HBox>
         <VBox styleClass="box" spacing="12">
             <HBox alignment="CENTER_LEFT">
@@ -36,19 +37,13 @@
                 </VBox>
                 <VBox spacing="6">
                     <Label text="Situação"/>
-                    <ComboBox fx:id="statusFilter" promptText="Todas as situações" minWidth="170"
-                              prefWidth="170" styleClass="filter-field"/>
+                    <ComboBox fx:id="statusFilter" promptText="Todas as situações" minWidth="200"
+                              prefWidth="200" styleClass="filter-field"/>
                 </VBox>
                 <Button text="Buscar" onAction="#onSearchClick"/>
             </HBox>
         </VBox>
         <VBox styleClass="box" spacing="12" VBox.vgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" spacing="12">
-                <Label fx:id="registersCountLabel" text="Carregando inscrições..." styleClass="box-lower-title"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="refresh" text="Atualizar" onAction="#onRefreshClick"/>
-            </HBox>
-            <Label fx:id="loadMessage" wrapText="true"/>
             <TableView fx:id="registersTable" styleClass="table" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS"/>

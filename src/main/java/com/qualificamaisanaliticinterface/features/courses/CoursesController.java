@@ -1,4 +1,4 @@
-package com.qualificamaisanaliticinterface.features.home;
+package com.qualificamaisanaliticinterface.courses;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
