@@ -266,7 +266,7 @@
     -fx-background-color: #647899;
 }
 
-.combo-box-popup .scroll -bar:vertical .thumb:pressed {
+.combo-box-popup .scroll-bar:vertical .thumb:pressed {
     -fx-background-color: #E67E22;
 }
 
@@ -277,5 +277,83 @@
 
 .combo-box-popup .scroll-bar:vertical .increment-arrow,
 .combo-box-popup .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: #94a3b8;
+}
+
+.dialog-pane .label.register-message {
+    -fx-text-fill: #fca5a5;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+.dialog-pane .label.register-note {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+.register-date {
+    -fx-background-color: #1f2e49;
+    -fx-background-radius: 6px;
+    -fx-border-color: #405170;
+    -fx-border-radius: 6px;
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+}
+
+.register-date > .text-field {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-text-fill: #f1f5f9;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-padding: 10px 12px;
+}
+
+.register-date > .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.register-date > .arrow-button > .arrow {
+    -fx-background-color: #94a3b8;
+}
+
+.register-date:focused {
+    -fx-border-color: #E67E22;
+}
+
+.table .scroll-bar {
+    -fx-background-color: #1f2e49;
+    -fx-pref-width: 12px;
+    -fx-padding: 2px;
+}
+
+.table .scroll-bar .track {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+}
+
+.table .scroll-bar .thumb {
+    -fx-background-color: #405170;
+    -fx-background-insets: 0;
+    -fx-background-radius: 6px;
+}
+
+.table .scroll-bar .thumb:hover {
+    -fx-background-color: #647899;
+}
+
+.table .scroll-bar .thumb:pressed {
+    -fx-background-color: #E67E22;
+}
+
+.table .scroll-bar .increment-button,
+.table .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.table .scroll-bar .increment-arrow,
+.table .scroll-bar .decrement-arrow {
     -fx-background-color: #94a3b8;
 }

@@ -8,28 +8,19 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.people.PeopleController">
 
-    <VBox styleClass="content" spacing="16"
-          AnchorPane.topAnchor="0"
-          AnchorPane.rightAnchor="0"
-          AnchorPane.bottomAnchor="0"
-          AnchorPane.leftAnchor="0">
-        <HBox styleClass="content">
-            <VBox>
+    <VBox styleClass="content" spacing="16" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0"
+          AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
+        <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="6">
                 <Label styleClass="box-title"
                        text="Pessoas"/>
-
                 <Label styleClass="box-lower-sub-title"
                        text="Encontre aqui as pessoas já registradas"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER" styleClass="box">
-                <Label styleClass="box-title"
-                       alignment="CENTER"
-                       text="Total de pessoas"/>
-                <Label fx:id="totalPeopleLabel"
-                       styleClass="box-info-title"
-                       alignment="CENTER"
-                       text="—"/>
+                <Label text="Total de pessoas" styleClass="box-lower-title"/>
+                <Label fx:id="totalPeopleLabel" text="—" styleClass="box-info-title"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <Button text="+  Novo Cadastro" onAction="#onNewPersonClick"/>
@@ -37,7 +28,7 @@
         <HBox styleClass="box">
             <VBox spacing="12" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Buscar e filtros"/>
+                    <Label styleClass="title" text="Buscar e filtros"/>
                     <Region HBox.hgrow="ALWAYS"/>
                     <Hyperlink text="Limpar filtros"
                                onAction="#onClearFiltersClick"

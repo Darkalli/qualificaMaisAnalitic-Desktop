@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletionException;
 
+import static com.qualificamaisanaliticinterface.utils.TextUtils.configureEmptyText;
+
 public class PeopleController {
 
     private final PersonService personService = new PersonService();
@@ -163,20 +165,5 @@ public class PeopleController {
                 (PersonFormController controller) ->
                         controller.setOnAdded(this::loadPeople)
         );
-    }
-
-    private <T> void configureEmptyText(
-            ComboBox<T> combo,
-            String emptyText
-    ) {
-        combo.setButtonCell(new ListCell<T>() {
-            @Override
-            protected void updateItem(T item, boolean empty) {
-                super.updateItem(item, empty);
-
-                setText(item == null ? emptyText : item.toString());
-                setGraphic(null);
-            }
-        });
     }
 }
