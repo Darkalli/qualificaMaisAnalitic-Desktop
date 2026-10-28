@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.courses.CourseInfoController"
+            fx:id="infoDialogPane" prefWidth="620" styleClass="dialog-pane"
+            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+    <content>
+        <VBox styleClass="content" spacing="20">
+            <Label text="Detalhes da inscrição" styleClass="title"/>
+            <GridPane styleClass="box" hgap="12" vgap="12">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="65"/>
+                    <ColumnConstraints percentWidth="35"/>
+                </columnConstraints>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Curso" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="name" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Descrição" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="description" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Inicio" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="start" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Final" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="finish" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label text="Status do curso" styleClass="box-lower-sub-title"/>
+                    <Label fx:id="status" styleClass="info-value" wrapText="true"
+                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                </VBox>
+            </GridPane>
+            <HBox alignment="CENTER" spacing="12">
+                <Button fx:id="close" text="Voltar" onAction="#onClickCancel"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>

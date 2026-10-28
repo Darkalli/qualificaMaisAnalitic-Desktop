@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.util.Duration?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" spacing="6" alignment="CENTER">
+    <Button fx:id="courseInfo" styleClass="action-button" onAction="#onCourseInfoClick">
+        <graphic><FontIcon iconLiteral="fas-info-circle" iconSize="16" iconColor="WHITE"/></graphic>
+        <tooltip><Tooltip text="Ver detalhes do curso"><showDelay><Duration fx:value="200ms"/></showDelay></Tooltip></tooltip>
+    </Button>
+    <Button fx:id="courseStatus" styleClass="action-button" onAction="#onCourseStatusClick">
+        <graphic><FontIcon iconLiteral="fas-exchange-alt" iconSize="16" iconColor="WHITE"/></graphic>
+        <tooltip><Tooltip text="Cancelar ou reativar curso"><showDelay><Duration fx:value="200ms"/></showDelay></Tooltip></tooltip>
+    </Button>
+    <Button fx:id="courseUpdate" onAction="#onUpdateCourseClick" styleClass="action-button">
+        <graphic><FontIcon iconLiteral="fas-edit" iconSize="16" iconColor="WHITE"/></graphic>
+        <tooltip><Tooltip text="Atualizar curso"><showDelay><Duration fx:value="200ms"/></showDelay></Tooltip></tooltip>
+    </Button>
+</HBox>

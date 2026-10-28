@@ -1,139 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.qualificamaisanaliticinterface.features.home.CoursesController">
-
-    <VBox styleClass="content" spacing="16"
-          AnchorPane.topAnchor="0"
-          AnchorPane.rightAnchor="0"
-          AnchorPane.bottomAnchor="0"
-          AnchorPane.leftAnchor="0">
-        <HBox spacing="12" styleClass="content">
-            <VBox>
-                <Label styleClass="box-title" text="Cursos"/>
-                <Label styleClass="box-lower-sub-title" text="Encontre aqui os cursos realizados, realizando ou a realizar"/>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.courses.CoursesController">
+    <VBox styleClass="content" spacing="16" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0"
+          AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
+        <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="6">
+                <Label text="Cursos" styleClass="box-title"/>
+                <Label text="Encontre aqui os cursos registrados" styleClass="box-lower-sub-title"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER" styleClass="box">
-                <Label styleClass="box-title" alignment="CENTER" text="Total de Cursos"/>
-                <Label styleClass="box-info-title" alignment="CENTER" text="30"/>
+                <Label text="Total de cursos" styleClass="box-lower-title"/>
+                <Label fx:id="totalCoursesLabel" text="—" styleClass="box-info-title"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="+  Novo Curso"/>
+            <Button fx:id="newCourse" text="+ Novo curso" onAction="#onNewCourseClick"/>
         </HBox>
-        <HBox styleClass="box">
-            <VBox spacing="12" HBox.hgrow="ALWAYS">
-                <HBox alignment="CENTER_LEFT">
-                    <Label text="Buscar e filtros"/>
-                    <Region HBox.hgrow="ALWAYS"/>
-                    <Hyperlink text="Limpar filtros"
-                               onAction="#onClearFiltersClick"
-                               styleClass="clear-filters"/>
-                </HBox>
-                <HBox spacing="12" alignment="BOTTOM_LEFT">
-                    <VBox spacing="6" HBox.hgrow="ALWAYS">
-                        <Label text="Buscar"/>
-                        <TextField fx:id="searchField"
-                                   promptText="Pesquisar por nome..."
-                                   onAction="#onSearchClick"
-                                   styleClass="search-field"
-                                   HBox.hgrow="ALWAYS"/>
-                    </VBox>
-                    <VBox spacing="6">
-                        <Label text="Data de começo"/>
-
-                        <ComboBox fx:id="startFilter"
-                                  promptText="Data de inicio"
-                                  minWidth="180"
-                                  prefWidth="180"
-                                  styleClass="filter-field"/>
-                    </VBox>
-                    <VBox spacing="6">
-                        <Label text="Data de finalização"/>
-                        <ComboBox fx:id="finishFilter"
-                                  promptText="Data de fim"
-                                  minWidth="180"
-                                  prefWidth="180"
-                                  styleClass="filter-field"/>
-                    </VBox>
-                    <VBox spacing="6">
-                        <Label text="Períodos"/>
-                        <ComboBox fx:id="periodFilter"
-                                  promptText="Todos os períodos"
-                                  minWidth="180"
-                                  prefWidth="180"
-                                  styleClass="filter-field"/>
-                    </VBox>
-                    <Button text="Buscar"
-                            onAction="#onSearchClick"/>
-                </HBox>
+        <GridPane styleClass="box" hgap="12" vgap="8">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="40"/>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="10"/>
+            </columnConstraints>
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label styleClass="title" text="Buscar e filtros"/>
             </VBox>
-        </HBox>
-        <VBox styleClass="box" VBox.vgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="X Cursos"
-                           styleClass="box-title"/>
-                    <Label text="encontrados"
-                           styleClass="box-sub-title"/>
-                </HBox>
-                <Region HBox.hgrow="ALWAYS"/>
-                <HBox spacing="2" alignment="CENTER_RIGHT">
-                    <Label text="atualizado a"
-                           styleClass="box-border-text"/>
-                </HBox>
-            </HBox>
-            <TableView styleClass="table" fx:id="coursesTable"
-                       VBox.vgrow="ALWAYS">
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="Buscar"/>
+                <TextField fx:id="searchField" promptText="Pesquisar por nome..."
+                           onAction="#onSearchClick" styleClass="search-field"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="Período"/>
+                <ComboBox fx:id="periodFilter" promptText="Todos os períodos" minWidth="180"
+                          prefWidth="220" maxWidth="280" styleClass="filter-field"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label text="Situação"/>
+                <ComboBox fx:id="statusFilter" promptText="Todas as situações" minWidth="180"
+                          prefWidth="220" maxWidth="280" styleClass="filter-field"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <Label text="Começo do curso"/>
+                <DatePicker fx:id="startFilter" promptText="Começo" minWidth="180"
+                          prefWidth="220" maxWidth="280" styleClass="register-date"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Label text="Final do curso"/>
+                <DatePicker fx:id="finishFilter" promptText="Final" minWidth="180"
+                          prefWidth="220" maxWidth="280" styleClass="register-date"/>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="0">
+            <Hyperlink text="Limpar filtros" onAction="#onClearFiltersClick" styleClass="clear-filters"/>
+            </VBox>
+            <VBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <Button text="Buscar" onAction="#onSearchClick"/>
+            </VBox>
+        </GridPane>
+        <VBox styleClass="box" spacing="12" VBox.vgrow="ALWAYS">
+            <TableView fx:id="coursesTable" styleClass="table" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS"/>
                 </columnResizePolicy>
                 <columns>
-                    <TableColumn fx:id="cpfsColumn"
-                                 text="CPF"
-                                 prefWidth="140"/>
-
-                    <TableColumn fx:id="namesColumn"
-                                 text="Nome"
-                                 prefWidth="220"/>
-
-                    <TableColumn fx:id="courseColumn"
-                                 text="Curso"
-                                 prefWidth="200"/>
-
-                    <TableColumn fx:id="dateColumn"
-                                 text="Data"
-                                 prefWidth="110"/>
-
-                    <TableColumn fx:id="statusColumn"
-                                 text="Situação"
-                                 prefWidth="130"/>
-
-                    <TableColumn fx:id="ActionsColumn"
-                                 text="Ações"
-                                 prefWidth="200"/>
+                    <TableColumn fx:id="namesColumn" text="Nome"
+                                 minWidth="160" prefWidth="220" style="-fx-wrap-text: true;"/>
+                    <TableColumn fx:id="descriptionColumn" text="Descrição"
+                                 minWidth="180" prefWidth="300" style="-fx-wrap-text: true;"/>
+                    <TableColumn fx:id="periodColumn" text="Período"
+                                 minWidth="90" prefWidth="100" maxWidth="110"/>
+                    <TableColumn fx:id="startColumn" text="Início"
+                                 minWidth="105" prefWidth="110" maxWidth="120"/>
+                    <TableColumn fx:id="finishColumn" text="Final"
+                                 minWidth="105" prefWidth="110" maxWidth="120"/>
+                    <TableColumn fx:id="statusColumn" text="Situação"
+                                 minWidth="100" prefWidth="110" maxWidth="125"/>
+                    <TableColumn fx:id="actionsColumn" text="Ações"
+                                 minWidth="145" prefWidth="150" maxWidth="160"/>
                 </columns>
             </TableView>
-            <HBox styleClass="table-footer"
-                  spacing="8"
-                  alignment="CENTER_LEFT">
-                <Label fx:id="pageInfoLabel"
-                       text="Exibindo 1–7 de 128"
-                       styleClass="footer-text"/>
-                <ComboBox fx:id="pageSizeCombo"
-                          promptText="7 por página"
-                          prefWidth="120"
-                          styleClass="page-size"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Pagination fx:id="tablePagination"
-                            pageCount="1"
-                            maxPageIndicatorCount="5"/>
-            </HBox>
         </VBox>
     </VBox>
 </AnchorPane>
