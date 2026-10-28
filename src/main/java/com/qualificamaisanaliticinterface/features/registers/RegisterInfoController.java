@@ -13,15 +13,24 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class RegisterInfoController {
-    @FXML public DialogPane infoDialogPane;
-    @FXML public Label personName;
-    @FXML public Label personCpf;
-    @FXML public Label courseName;
-    @FXML public Label courseDescription;
-    @FXML public Label dateField;
-    @FXML public Label statusField;
-    @FXML public Label numberField;
-    @FXML public Button close;
+    @FXML
+    public DialogPane infoDialogPane;
+    @FXML
+    public Label personName;
+    @FXML
+    public Label personCpf;
+    @FXML
+    public Label courseName;
+    @FXML
+    public Label courseDescription;
+    @FXML
+    public Label dateField;
+    @FXML
+    public Label statusField;
+    @FXML
+    public Label numberField;
+    @FXML
+    public Button close;
     private RegisterDto register;
     private double dragOffsetX;
     private double dragOffsetY;

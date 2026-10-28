@@ -30,5 +30,7 @@ module com.qualificamaisanaliticinterface {
     opens com.qualificamaisanaliticinterface.features.people to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.registers to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.registers.dto to com.google.gson;
+    opens com.qualificamaisanaliticinterface.features.courses to javafx.fxml;
+    opens com.qualificamaisanaliticinterface.features.courses.dto to com.google.gson;
 
 }

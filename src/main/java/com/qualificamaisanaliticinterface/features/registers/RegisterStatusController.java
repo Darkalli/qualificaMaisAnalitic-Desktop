@@ -13,14 +13,22 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
 public class RegisterStatusController {
-    @FXML public DialogPane statusDialogPane;
-    @FXML public Label title;
-    @FXML public Label personName;
-    @FXML public Label courseName;
-    @FXML public Label description;
-    @FXML public Label info;
-    @FXML public Button confirm;
-    @FXML public Button close;
+    @FXML
+    public DialogPane statusDialogPane;
+    @FXML
+    public Label title;
+    @FXML
+    public Label personName;
+    @FXML
+    public Label courseName;
+    @FXML
+    public Label description;
+    @FXML
+    public Label info;
+    @FXML
+    public Button confirm;
+    @FXML
+    public Button close;
 
     private final RegisterService registerService = new RegisterService();
     private RegisterDto register;

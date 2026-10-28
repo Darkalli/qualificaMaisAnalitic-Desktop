@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.qualificamaisanaliticinterface.features.home.RegistersController">
+            fx:controller="com.qualificamaisanaliticinterface.features.registers.RegistersController">
     <VBox styleClass="content" spacing="16" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0"
           AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
         <HBox spacing="16" alignment="CENTER_LEFT">
@@ -20,7 +20,7 @@
         </HBox>
         <VBox styleClass="box" spacing="12">
             <HBox alignment="CENTER_LEFT">
-                <Label text="Buscar e filtros"/>
+                <Label styleClass="title" text="Buscar e filtros"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Hyperlink text="Limpar filtros" onAction="#onClearFiltersClick" styleClass="clear-filters"/>
             </HBox>

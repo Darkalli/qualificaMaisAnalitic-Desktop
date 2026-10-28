@@ -1,5 +1,6 @@
 package com.qualificamaisanaliticinterface.features.registers.dto;
 
+import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.enuns.StatusRegister;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
 

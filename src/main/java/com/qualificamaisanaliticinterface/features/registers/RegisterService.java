@@ -2,7 +2,9 @@ package com.qualificamaisanaliticinterface.features.registers;
 
 import com.google.gson.Gson;
 import com.qualificamaisanaliticinterface.api.ApiClient;
-import com.qualificamaisanaliticinterface.features.registers.dto.CourseDto;
+import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
+import com.qualificamaisanaliticinterface.features.registers.dto.AddRegisterRequest;
+import com.qualificamaisanaliticinterface.features.registers.dto.SearchRegisterRequest;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 
 import java.util.Arrays;
@@ -24,19 +26,19 @@ public class RegisterService {
     }
 
     public CompletableFuture<String> addRegister(String personCpf, Long courseId, String registerDate) {
-        var request = new com.qualificamaisanaliticinterface.features.registers.dto.AddRegisterRequest(
+        AddRegisterRequest request = new AddRegisterRequest(
                 personCpf, courseId, registerDate);
         return apiClient.post("/api/register", gson.toJson(request));
     }
 
     public CompletableFuture<String> cancelRegister(RegisterDto register) {
-        var request = new com.qualificamaisanaliticinterface.features.registers.dto.SearchRegisterRequest(
+        SearchRegisterRequest request = new SearchRegisterRequest(
                 register.person().cpf(), register.courseOfInterest().id());
         return apiClient.delete("/api/register", gson.toJson(request));
     }
 
     public CompletableFuture<String> reactiveRegister(RegisterDto register) {
-        var request = new com.qualificamaisanaliticinterface.features.registers.dto.SearchRegisterRequest(
+        SearchRegisterRequest request = new SearchRegisterRequest(
                 register.person().cpf(), register.courseOfInterest().id());
         return apiClient.patch("/api/register/active", gson.toJson(request));
     }

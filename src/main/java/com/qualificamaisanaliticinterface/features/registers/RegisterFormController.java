@@ -3,7 +3,7 @@ package com.qualificamaisanaliticinterface.features.registers;
 import com.qualificamaisanaliticinterface.features.people.PersonFormController;
 import com.qualificamaisanaliticinterface.features.people.PersonService;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
-import com.qualificamaisanaliticinterface.features.registers.dto.CourseDto;
+import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -19,14 +19,22 @@ import java.time.LocalDate;
 import java.util.concurrent.CompletionException;
 
 public class RegisterFormController {
-    @FXML public DialogPane formDialogPane;
-    @FXML public SearchableComboBox<PersonDto> personField;
-    @FXML public SearchableComboBox<CourseDto> courseField;
-    @FXML public DatePicker dateField;
-    @FXML public Button add;
-    @FXML public Button close;
-    @FXML public Hyperlink newPerson;
-    @FXML public Label info;
+    @FXML
+    public DialogPane formDialogPane;
+    @FXML
+    public SearchableComboBox<PersonDto> personField;
+    @FXML
+    public SearchableComboBox<CourseDto> courseField;
+    @FXML
+    public DatePicker dateField;
+    @FXML
+    public Button add;
+    @FXML
+    public Button close;
+    @FXML
+    public Hyperlink newPerson;
+    @FXML
+    public Label info;
 
     private final PersonService personService = new PersonService();
     private final RegisterService registerService = new RegisterService();

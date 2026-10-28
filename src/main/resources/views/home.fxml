@@ -26,7 +26,7 @@
             <Separator styleClass="menu-divider"/>
             <Button styleClass="side-button" text="Inscrições" onAction="#onPageClick">
                 <userData>
-                    <String fx:value="/views/pages/registers.fxml"/>
+                    <String fx:value="/views/pages/registers/registers.fxml"/>
                 </userData>
             </Button>
             <Button styleClass="side-button" text="Pessoas" onAction="#onPageClick">
@@ -36,7 +36,7 @@
             </Button>
             <Button styleClass="side-button" text="Cursos" onAction="#onPageClick">
                 <userData>
-                    <String fx:value="/views/pages/courses.fxml"/>
+                    <String fx:value="/views/pages/courses/courses.fxml"/>
                 </userData>
             </Button>
             <Button styleClass="side-button" text="Aulas" onAction="#onPageClick">

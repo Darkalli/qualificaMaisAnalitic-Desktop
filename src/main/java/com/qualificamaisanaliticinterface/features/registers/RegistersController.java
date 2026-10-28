@@ -1,12 +1,9 @@
-package com.qualificamaisanaliticinterface.features.home;
+package com.qualificamaisanaliticinterface.features.registers;
 
 import com.qualificamaisanaliticinterface.api.ApiException;
 import com.qualificamaisanaliticinterface.features.enuns.StatusRegister;
-import com.qualificamaisanaliticinterface.features.registers.RegisterService;
-import com.qualificamaisanaliticinterface.features.registers.RegisterActionsCell;
-import com.qualificamaisanaliticinterface.features.registers.RegisterFormController;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
-import com.qualificamaisanaliticinterface.features.registers.dto.CourseDto;
+import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -20,6 +17,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletionException;
+
+import static com.qualificamaisanaliticinterface.utils.TextUtils.configureEmptyText;
 
 public class RegistersController {
     private final RegisterService registerService = new RegisterService();
@@ -42,10 +41,6 @@ public class RegistersController {
     public TableColumn<RegisterDto, Void> actionsColumn;
     @FXML
     public Label totalRegistersLabel;
-    @FXML
-    public Label registersCountLabel;
-    @FXML
-    public Label loadMessage;
     @FXML
     public TextField searchField;
     @FXML
@@ -96,11 +91,6 @@ public class RegistersController {
     }
 
     @FXML
-    public void onRefreshClick() {
-        loadRegisters();
-    }
-
-    @FXML
     public void onSearchClick() {
         if (!loaded) return;
         String search = searchField.getText().strip().toLowerCase(Locale.ROOT);
@@ -141,8 +131,6 @@ public class RegistersController {
         registersTable.getItems().clear();
         allRegisters = List.of();
         totalRegistersLabel.setText("—");
-        registersCountLabel.setText("Consulta indisponível");
-        loadMessage.setText(message);
         registersTable.setPlaceholder(new Label(message));
     }
 
@@ -153,16 +141,5 @@ public class RegistersController {
         } catch (DateTimeParseException invalidDate) {
             return date;
         }
-    }
-
-    private <T> void configureEmptyText(ComboBox<T> combo, String emptyText) {
-        combo.setButtonCell(new ListCell<T>() {
-            @Override
-            protected void updateItem(T item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(item == null ? emptyText : item.toString());
-                setGraphic(null);
-            }
-        });
     }
 }
