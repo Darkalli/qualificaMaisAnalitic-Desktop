@@ -357,3 +357,77 @@
 .table .scroll-bar .decrement-arrow {
     -fx-background-color: #94a3b8;
 }
+.date-picker-popup {
+    -fx-background-color: #162238;
+    -fx-background-insets: 0;
+    -fx-border-color: #405170;
+    -fx-border-width: 1px;
+    -fx-padding: 4px;
+}
+/* Cabeçalho de mês e ano */
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #1f2e49;
+    -fx-background-insets: 0;
+}
+.date-picker-popup > .month-year-pane .label {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-weight: bold;
+}
+/* Setas de navegação: evita os botões laranja grandes */
+.date-picker-popup > .month-year-pane .spinner > .button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+    -fx-min-width: 26px;
+    -fx-pref-width: 26px;
+    -fx-min-height: 26px;
+    -fx-pref-height: 26px;
+    -fx-padding: 4px;
+}
+.date-picker-popup > .month-year-pane .spinner > .button:hover {
+    -fx-background-color: #304565;
+}
+.date-picker-popup > .month-year-pane .spinner > .button > .left-arrow,
+.date-picker-popup > .month-year-pane .spinner > .button > .right-arrow {
+    -fx-background-color: #E67E22;
+    -fx-background-insets: 0;
+    -fx-effect: null;
+}
+/* Grade e nomes dos dias da semana */
+.date-picker-popup > .calendar-grid {
+    -fx-background-color: #162238;
+}
+.date-picker-popup > .calendar-grid > .day-name-cell {
+    -fx-text-fill: #94a3b8;
+    -fx-font-weight: bold;
+}
+/* Dias */
+.date-picker-popup > .calendar-grid > .day-cell {
+    -fx-background-color: #1f2e49;
+    -fx-background-insets: 0;
+    -fx-text-fill: #f1f5f9;
+    -fx-border-color: #162238;
+    -fx-border-width: 1px;
+    -fx-padding: 7px;
+}
+/* Dias de outros meses */
+.date-picker-popup > .calendar-grid > .day-cell.previous-month,
+.date-picker-popup > .calendar-grid > .day-cell.next-month {
+    -fx-background-color: #162238;
+    -fx-text-fill: #647899;
+}
+/* Data de hoje */
+.date-picker-popup > .calendar-grid > .day-cell.today {
+    -fx-border-color: #E67E22;
+}
+/* Mouse e foco do teclado */
+.date-picker-popup > .calendar-grid > .day-cell:hover,
+.date-picker-popup > .calendar-grid > .day-cell:focused {
+    -fx-background-color: #304565;
+    -fx-text-fill: white;
+}
+/* Data selecionada */
+.date-picker-popup > .calendar-grid > .day-cell.selected {
+    -fx-background-color: #E67E22;
+    -fx-text-fill: white;
+}
