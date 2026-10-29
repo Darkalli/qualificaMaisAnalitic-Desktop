@@ -1,10 +1,6 @@
 package com.qualificamaisanaliticinterface.features.courses;
 
 import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
-import com.qualificamaisanaliticinterface.features.registers.RegisterActionsCell;
-import com.qualificamaisanaliticinterface.features.registers.RegisterInfoController;
-import com.qualificamaisanaliticinterface.features.registers.RegisterStatusController;
-import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +16,7 @@ public class CoursesActionsCell  extends TableCell<CourseDto, Void> {
 
     public CoursesActionsCell(Runnable onCoursesChanged) {
         this.onCoursesChanged = onCoursesChanged;
-        FXMLLoader loader = new FXMLLoader(RegisterActionsCell.class.getResource("/views/pages/courses/course-actions.fxml"));
+        FXMLLoader loader = new FXMLLoader(CoursesActionsCell.class.getResource("/views/pages/courses/course-actions.fxml"));
         try {
             loader.setController(this);
             buttons = loader.load();

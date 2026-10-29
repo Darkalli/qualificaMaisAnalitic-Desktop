@@ -2,9 +2,6 @@ package com.qualificamaisanaliticinterface.features.courses;
 
 import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.enuns.StatusCourse;
-import com.qualificamaisanaliticinterface.features.enuns.StatusRegister;
-import com.qualificamaisanaliticinterface.features.registers.RegisterService;
-import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

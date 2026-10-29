@@ -21,7 +21,7 @@ public class CourseService {
         return apiClient.get("/api/course").thenApply(json -> {
             CourseDto[] courses = gson.fromJson(json, CourseDto[].class);
             if (courses == null) {
-                throw new IllegalStateException("A API retornou uma lista de inscrições inválida.");
+                throw new IllegalStateException("A API retornou uma lista de cursos inválida.");
             }
             return List.copyOf(Arrays.asList(courses));
         });
