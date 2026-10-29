@@ -76,19 +76,6 @@
             </VBox>
         </HBox>
         <VBox styleClass="box" VBox.vgrow="ALWAYS">
-            <HBox alignment="CENTER_LEFT" HBox.Hgrow="ALWAYS">
-                <HBox spacing="8" alignment="CENTER_LEFT">
-                    <Label text="X Aulas"
-                           styleClass="box-title"/>
-                    <Label text="encontradas"
-                           styleClass="box-sub-title"/>
-                </HBox>
-                <Region HBox.hgrow="ALWAYS"/>
-                <HBox spacing="2" alignment="CENTER_RIGHT">
-                    <Label text="atualizado a"
-                           styleClass="box-border-text"/>
-                </HBox>
-            </HBox>
             <TableView styleClass="table" fx:id="classesTable"
                        VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
