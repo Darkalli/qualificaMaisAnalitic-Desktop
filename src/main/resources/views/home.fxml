@@ -41,7 +41,7 @@
             </Button>
             <Button styleClass="side-button" text="Aulas" onAction="#onPageClick">
                 <userData>
-                    <String fx:value="/views/pages/classes.fxml"/>
+                    <String fx:value="/views/pages/classes/classes.fxml"/>
                 </userData>
             </Button>
             <Button styleClass="side-button" text="Usuários" onAction="#onPageClick">

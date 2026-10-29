@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.classes.ClassStatusController"
+            fx:id="statusDialogPane" prefWidth="520" styleClass="dialog-pane"
+            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+    <content>
+        <VBox styleClass="content" spacing="16" prefWidth="470">
+            <Label fx:id="title" styleClass="title" wrapText="true" minHeight="-Infinity"/>
+            <VBox styleClass="box" spacing="8">
+                <Label text="Curso" styleClass="box-lower-sub-title"/>
+                <Label fx:id="name" wrapText="true" maxWidth="Infinity" minHeight="-Infinity"/>
+                <Label text="Dia" styleClass="box-lower-sub-title"/>
+                <Label fx:id="day" wrapText="true" maxWidth="Infinity" minHeight="-Infinity"/>
+            </VBox>
+            <Label fx:id="note" styleClass="register-note" wrapText="true"
+                   maxWidth="470" minHeight="-Infinity"/>
+            <Label fx:id="info" styleClass="register-message" wrapText="true"
+                   maxWidth="470" minHeight="-Infinity"/>
+            <HBox spacing="12">
+                <Button fx:id="close" text="Voltar" onAction="#onClickCancel"
+                        minWidth="120" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="confirm" onAction="#onConfirmClick"
+                        minWidth="180" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" spacing="3" alignment="CENTER">
+    <fx:define>
+        <ToggleGroup fx:id="presenceGroup"/>
+    </fx:define>
+    <VBox alignment="CENTER" spacing="3" minWidth="46" prefWidth="46" maxWidth="46">
+        <Label text="Presente" styleClass="presence-caption" wrapText="true"
+               alignment="CENTER" textAlignment="CENTER" minHeight="28" prefHeight="28" maxWidth="46"/>
+        <RadioButton fx:id="present" accessibleText="Presente"
+                     styleClass="presence-radio, presence-present" toggleGroup="$presenceGroup">
+            <tooltip><Tooltip text="Presente"/></tooltip>
+        </RadioButton>
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="3" minWidth="46" prefWidth="46" maxWidth="46">
+        <Label text="Ausente" styleClass="presence-caption" wrapText="true"
+               alignment="CENTER" textAlignment="CENTER" minHeight="28" prefHeight="28" maxWidth="46"/>
+        <RadioButton fx:id="absent" accessibleText="Ausente"
+                     styleClass="presence-radio, presence-absent" toggleGroup="$presenceGroup">
+            <tooltip><Tooltip text="Ausente"/></tooltip>
+        </RadioButton>
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="3" minWidth="64" prefWidth="64" maxWidth="64">
+        <Label text="Justificada" styleClass="presence-caption" wrapText="false"
+               alignment="CENTER" textAlignment="CENTER" minHeight="28" prefHeight="28" minWidth="64" maxWidth="64"/>
+        <RadioButton fx:id="justified" accessibleText="Falta justificada"
+                     styleClass="presence-radio, presence-justified" toggleGroup="$presenceGroup">
+            <tooltip><Tooltip text="Falta justificada"/></tooltip>
+        </RadioButton>
+    </VBox>
+</HBox>

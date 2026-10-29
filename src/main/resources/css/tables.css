@@ -1,5 +1,56 @@
 /* Tabelas: fundo, cabeçalhos, células e estados. */
 
+/* Presença: mantém a seleção exclusiva por RadioButton/ToggleGroup. */
+.presence-radio {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 11px;
+    -fx-font-weight: normal;
+    -fx-label-padding: 0;
+    -fx-padding: 3px 0;
+    -fx-cursor: hand;
+    -presence-color: #60a5fa;
+}
+
+.content .label.presence-caption {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 11px;
+    -fx-font-weight: normal;
+    -fx-padding: 0;
+}
+
+.presence-radio.presence-present { -presence-color: #34d399; }
+.presence-radio.presence-absent { -presence-color: #f87171; }
+.presence-radio.presence-justified { -presence-color: #fbbf24; }
+
+.presence-radio > .radio {
+    -fx-background-color: #162238;
+    -fx-background-insets: 0;
+    -fx-background-radius: 100px;
+    -fx-border-color: #94a3b8;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 100px;
+    -fx-padding: 4px;
+}
+
+.presence-radio > .radio > .dot {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 4px;
+}
+
+.presence-radio:hover > .radio,
+.presence-radio:selected > .radio {
+    -fx-border-color: -presence-color;
+}
+
+.presence-radio:selected > .radio > .dot {
+    -fx-background-color: -presence-color;
+}
+
+.presence-radio:focused > .radio {
+    -fx-effect: dropshadow(gaussian, -presence-color, 4, 0.3, 0, 0);
+}
+
 .table {
     -fx-background-color: #162238;
     -fx-border-color: #35445e;

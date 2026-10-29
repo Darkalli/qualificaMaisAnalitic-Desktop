@@ -4,6 +4,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class TextUtils {
 
     public static <T> void configureEmptyText(
@@ -19,5 +23,13 @@ public class TextUtils {
                 setGraphic(null);
             }
         });
+    }
+    public static String formatDate(String date) {
+        if (date == null) return "";
+        try {
+            return LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeParseException invalidDate) {
+            return date;
+        }
     }
 }

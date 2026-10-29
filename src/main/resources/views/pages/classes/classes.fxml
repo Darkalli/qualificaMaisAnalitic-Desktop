@@ -6,7 +6,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.qualificamaisanaliticinterface.features.home.ClassesController">
+            fx:controller="com.qualificamaisanaliticinterface.features.classes.ClassesController">
 
     <VBox styleClass="content" spacing="16"
           AnchorPane.topAnchor="0"
@@ -16,21 +16,21 @@
         <HBox spacing="12" styleClass="content">
             <VBox>
                 <Label styleClass="box-title" text="Aulas"/>
-                <Label styleClass="box-lower-sub-title" text="Encontre aqui as aulas realizadas, realizando ou a realizar"/>
+                <Label styleClass="box-lower-sub-title"
+                       text="Encontre aqui as aulas realizadas, realizando ou a realizar"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER" styleClass="box">
                 <Label styleClass="box-title" alignment="CENTER" text="Média de presença"/>
-                <Label styleClass="box-info-title" alignment="CENTER" text="70%"/>
+                <Label fx:id="presence" styleClass="box-info-title" alignment="CENTER" text="70%"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="+  Adicionar aulas em lote"/>
-            <Button text="+  Adicionar aula"/>
+            <Button text="+  Adicionar aula" onAction="#onNewClassClick"/>
         </HBox>
         <HBox styleClass="box">
             <VBox spacing="12" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Buscar e filtros"/>
+                    <Label styleClass="title" text="Buscar e filtros"/>
                     <Region HBox.hgrow="ALWAYS"/>
                     <Hyperlink text="Limpar filtros"
                                onAction="#onClearFiltersClick"
@@ -46,21 +46,12 @@
                                    HBox.hgrow="ALWAYS"/>
                     </VBox>
                     <VBox spacing="6">
-                        <Label text="Data de começo"/>
-
-                        <ComboBox fx:id="startFilter"
+                        <Label text="Data"/>
+                        <DatePicker fx:id="dateFilter"
                                   promptText="Data de inicio"
                                   minWidth="180"
                                   prefWidth="180"
-                                  styleClass="filter-field"/>
-                    </VBox>
-                    <VBox spacing="6">
-                        <Label text="Data de finalização"/>
-                        <ComboBox fx:id="finishFilter"
-                                  promptText="Data de fim"
-                                  minWidth="180"
-                                  prefWidth="180"
-                                  styleClass="filter-field"/>
+                                  styleClass="register-date"/>
                     </VBox>
                     <VBox spacing="6">
                         <Label text="Períodos"/>
@@ -82,46 +73,29 @@
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS"/>
                 </columnResizePolicy>
                 <columns>
-                    <TableColumn fx:id="cpfsColumn"
-                                 text="CPF"
-                                 prefWidth="140"/>
-
-                    <TableColumn fx:id="namesColumn"
-                                 text="Nome"
-                                 prefWidth="220"/>
-
                     <TableColumn fx:id="courseColumn"
                                  text="Curso"
                                  prefWidth="200"/>
-
                     <TableColumn fx:id="dateColumn"
                                  text="Data"
                                  prefWidth="110"/>
-
+                    <TableColumn fx:id="periodColumn"
+                                 text="Periodo"
+                                 prefWidth="110"/>
+                    <TableColumn fx:id="startColumn"
+                                 text="Começo"
+                                 prefWidth="110"/>
+                    <TableColumn fx:id="finishColumn"
+                                 text="fim"
+                                 prefWidth="110"/>
                     <TableColumn fx:id="statusColumn"
                                  text="Situação"
                                  prefWidth="130"/>
-
-                    <TableColumn fx:id="ActionsColumn"
+                    <TableColumn fx:id="actionsColumn"
                                  text="Ações"
                                  prefWidth="200"/>
                 </columns>
             </TableView>
-            <HBox styleClass="table-footer"
-                  spacing="8"
-                  alignment="CENTER_LEFT">
-                <Label fx:id="pageInfoLabel"
-                       text="Exibindo 1–7 de 128"
-                       styleClass="footer-text"/>
-                <ComboBox fx:id="pageSizeCombo"
-                          promptText="7 por página"
-                          prefWidth="120"
-                          styleClass="page-size"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Pagination fx:id="tablePagination"
-                            pageCount="1"
-                            maxPageIndicatorCount="5"/>
-            </HBox>
         </VBox>
     </VBox>
 </AnchorPane>
