@@ -69,13 +69,14 @@
             <VBox>
                 <Label text="Endereço"/>
                 <HBox styleClass="box" spacing="4">
-                    <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
+                    <VBox spacing="4" HBox.hgrow="NEVER" minWidth="76" prefWidth="76" maxWidth="76">
                         <Label text="Número" styleClass="box-lower-sub-title"/>
                         <Label fx:id="numberField"
                                text="Numero"
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"
+                               minHeight="-Infinity"
                                wrapText="true"/>
                     </VBox>
                     <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
@@ -85,6 +86,7 @@
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"
+                               minHeight="-Infinity"
                                wrapText="true"/>
                     </VBox>
                     <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
@@ -94,6 +96,7 @@
                                styleClass="info-value"
                                maxWidth="Infinity"
                                minWidth="0"
+                               minHeight="-Infinity"
                                wrapText="true"/>
                     </VBox>
                 </HBox>
