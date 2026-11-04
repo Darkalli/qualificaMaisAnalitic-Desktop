@@ -120,8 +120,9 @@ public class ClassesController {
 
     @FXML
     private void onClearFiltersClick() {
-        searchField.clear();
+        courseField.setValue(null);
         dateFilter.setValue(null);
         periodFilter.setValue(null);
+        onSearchClick();
     }
 }

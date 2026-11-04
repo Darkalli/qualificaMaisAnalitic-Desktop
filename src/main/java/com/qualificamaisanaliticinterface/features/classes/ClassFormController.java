@@ -4,14 +4,18 @@ import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.enuns.Period;
 import com.qualificamaisanaliticinterface.features.enuns.StatusClass;
 import com.qualificamaisanaliticinterface.features.registers.RegisterService;
+import com.qualificamaisanaliticinterface.navigation.Navigator;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.controlsfx.control.SearchableComboBox;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +24,7 @@ import java.time.format.ResolverStyle;
 import java.util.concurrent.CompletionException;
 
 public class ClassFormController {
-    
+
     private final RegisterService registerService = new RegisterService();
     private final ClassService classService = new ClassService();
     @FXML
@@ -86,7 +90,7 @@ public class ClassFormController {
         add.setDisable(true);
         info.setText("Carregando cursos...");
         CourseDto selectedCourse = courseField.getValue();
-        registerService.findCourses().thenApply( courses -> {
+        registerService.findCourses().thenApply(courses -> {
             Platform.runLater(() -> {
                 courseField.getItems().setAll(courses);
                 courseField.setValue(selectedCourse == null ? null : courses.stream()
@@ -124,17 +128,17 @@ public class ClassFormController {
             Period period;
             LocalTime morning = LocalTime.of(12, 0),
                     afternoon = LocalTime.of(18, 0);
-            if(start.isBefore(morning)){
+            if (start.isBefore(morning)) {
                 period = Period.MORNING;
-            }else if(start.isBefore(afternoon)){
+            } else if (start.isBefore(afternoon)) {
                 period = Period.AFTERNOON;
-            }else {
+            } else {
                 period = Period.NIGHT;
             }
 
             info.setText("");
             formDialogPane.getContent().setDisable(true);
-            classService.addClass(date.toString(), period, start.toString(), finish.toString(), StatusClass.ACTIVE,course.id())
+            classService.addClass(date.toString(), period, start.toString(), finish.toString(), StatusClass.ACTIVE, course.id())
                     .whenComplete((response, failure) -> Platform.runLater(() -> {
                         formDialogPane.getContent().setDisable(false);
                         if (failure != null) {
@@ -149,6 +153,20 @@ public class ClassFormController {
         } catch (DateTimeParseException e) {
             showError(new IllegalArgumentException("Informe uma hora válida."));
         }
+    }
+
+    public void onClickAddClassInBatchPage(ActionEvent actionEvent) {
+        Stage currentWindow = (Stage) formDialogPane.getScene().getWindow();
+        Scene ownerScene = currentWindow.getOwner().getScene();
+        currentWindow.close();
+        Platform.runLater(() -> {
+            try {
+                Navigator.openForm(ownerScene, "/views/pages/classes/class-batch-form.fxml",
+                        (ClassBatchFormController controller) -> controller.setOnAdded(this::loadOptions));
+            } catch (IOException e) {
+                throw new CompletionException("Não foi possível carregar a pagina de aulas em lote!", e);
+            }
+        });
     }
 
     @FXML

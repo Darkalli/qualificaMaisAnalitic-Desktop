@@ -8,7 +8,7 @@
             onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
     <content>
         <VBox spacing="20" styleClass="content">
-            <Label text="Nova inscrição" styleClass="title"/>
+            <Label text="Nova aula" styleClass="title"/>
             <VBox styleClass="box" spacing="16">
                 <VBox spacing="6">
                     <Label text="Curso" styleClass="box-lower-sub-title"/>
@@ -27,6 +27,9 @@
                     <Label text="Final da aula" styleClass="box-lower-sub-title"/>
                     <TextField fx:id="finishField" promptText="HH:mm" maxWidth="Infinity" styleClass="search-field"/>
                 </VBox>
+                <HBox alignment="BOTTOM_RIGHT" >
+                <Hyperlink text="Adicionar aulas em lote" onAction="#onClickAddClassInBatchPage" styleClass="clear-filters"/>
+                </HBox>
             </VBox>
             <Label fx:id="info" styleClass="register-message" wrapText="true"
                    minHeight="-Infinity" maxWidth="560"/>

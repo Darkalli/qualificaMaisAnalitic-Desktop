@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.SearchableComboBox?>
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.classes.ClassBatchFormController"
+            fx:id="formDialogPane" prefWidth="620" styleClass="dialog-pane"
+            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+    <content>
+        <VBox spacing="20" styleClass="content">
+            <Label text="Novas aulas em lote" styleClass="title"/>
+            <VBox styleClass="box" spacing="16">
+                <VBox spacing="6">
+                    <Label text="Curso" styleClass="box-lower-sub-title"/>
+                    <SearchableComboBox fx:id="courseField" promptText="Selecione um curso"
+                                        maxWidth="Infinity" visibleRowCount="6" styleClass="filter-field"/>
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="Começo das aulas" styleClass="box-lower-sub-title"/>
+                    <DatePicker fx:id="startDateField" maxWidth="Infinity" styleClass="register-date"/>
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="Final das aulas" styleClass="box-lower-sub-title"/>
+                    <DatePicker fx:id="finishDateField" maxWidth="Infinity" styleClass="register-date"/>
+                </VBox>
+                <HBox>
+                    <VBox alignment="CENTER" spacing="3" minWidth="0" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <Label text="Domingo" styleClass="presence-caption" wrapText="true" alignment="CENTER"
+                               textAlignment="CENTER" minHeight="28" prefHeight="28" maxWidth="64"/>
+                        <RadioButton fx:id="sunday" accessibleText="Domingo"
+                                     styleClass="presence-radio, presence-present">
+                            <tooltip>
+                                <Tooltip text="Domingo"/>
+                            </tooltip>
+                        </RadioButton>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="3" minWidth="0" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <Label text="Segunda" styleClass="presence-caption" wrapText="true" alignment="CENTER"
+                               textAlignment="CENTER" minHeight="28" prefHeight="28" maxWidth="64"/>
+                        <RadioButton fx:id="monday" accessibleText="Segunda"
+                                     styleClass="presence-radio, presence-present">
+                            <tooltip>
+                                <Tooltip text="Segunda"/>
+                            </tooltip>
+                        </RadioButton>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="3" minWidth="0" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <Label text="Terça" styleClass="presence-caption" wrapText="false" alignment="CENTER"
+                               textAlignment="CENTER" minHeight="28" prefHeight="28" minWidth="64" maxWidth="64"/>
+                        <RadioButton fx:id="tuesday" accessibleText="Terça"
+                                     styleClass="presence-radio, presence-present">
+                            <tooltip>
+                                <Tooltip text="Terça"/>
+                            </tooltip>
+                        </RadioButton>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="3" minWidth="0" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <Label text="Quarta" styleClass="presence-caption" wrapText="false" alignment="CENTER"
+                               textAlignment="CENTER" minHeight="28" prefHeight="28" minWidth="64" maxWidth="64"/>
+                        <RadioButton fx:id="wednesday" accessibleText="Quarta"
+                                     styleClass="presence-radio, presence-present">
+                            <tooltip>
+                                <Tooltip text="Quarta"/>
+                            </tooltip>
+                        </RadioButton>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="3" minWidth="0" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <Label text="Quinta" styleClass="presence-caption" wrapText="false" alignment="CENTER"
+                               textAlignment="CENTER" minHeight="28" prefHeight="28" minWidth="64" maxWidth="64"/>
+                        <RadioButton fx:id="thursday" accessibleText="Quinta"
+                                     styleClass="presence-radio, presence-present">
+                            <tooltip>
+                                <Tooltip text="Quinta"/>
+                            </tooltip>
+                        </RadioButton>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="3" minWidth="0" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <Label text="Sexta" styleClass="presence-caption" wrapText="false" alignment="CENTER"
+                               textAlignment="CENTER" minHeight="28" prefHeight="28" minWidth="64" maxWidth="64"/>
+                        <RadioButton fx:id="friday" accessibleText="Sexta"
+                                     styleClass="presence-radio, presence-present">
+                            <tooltip>
+                                <Tooltip text="Sexta"/>
+                            </tooltip>
+                        </RadioButton>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="3" minWidth="0" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <Label text="Sábado" styleClass="presence-caption" wrapText="false" alignment="CENTER"
+                               textAlignment="CENTER" minHeight="28" prefHeight="28" minWidth="64" maxWidth="64"/>
+                        <RadioButton fx:id="saturday" accessibleText="Sábado"
+                                     styleClass="presence-radio, presence-present">
+                            <tooltip>
+                                <Tooltip text="Sábado"/>
+                            </tooltip>
+                        </RadioButton>
+                    </VBox>
+                </HBox>
+                <VBox spacing="6">
+                    <Label text="Começo da aula" styleClass="box-lower-sub-title"/>
+                    <TextField fx:id="startField" promptText="HH:mm" maxWidth="Infinity" styleClass="search-field"/>
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="Final da aula" styleClass="box-lower-sub-title"/>
+                    <TextField fx:id="finishField" promptText="HH:mm" maxWidth="Infinity" styleClass="search-field"/>
+                </VBox>
+                <HBox alignment="BOTTOM_RIGHT">
+                    <Hyperlink text="Adicionar aulas em unidade" onAction="#onClickAddClassPage"
+                               styleClass="clear-filters"/>
+                </HBox>
+                <HBox>
+
+                </HBox>
+            </VBox>
+            <Label fx:id="info" styleClass="register-message" wrapText="true"
+                   minHeight="-Infinity" maxWidth="560"/>
+            <HBox spacing="12">
+                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="add" text="Inscrever" onAction="#onClickAddClassInBatch"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>
