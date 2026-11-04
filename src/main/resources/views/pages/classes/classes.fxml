@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 
+<?import org.controlsfx.control.SearchableComboBox?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.classes.ClassesController">
@@ -39,11 +40,10 @@
                 <HBox spacing="12" alignment="BOTTOM_LEFT">
                     <VBox spacing="6" HBox.hgrow="ALWAYS">
                         <Label text="Buscar"/>
-                        <TextField fx:id="searchField"
-                                   promptText="Pesquisar por curso ou pessoa..."
-                                   onAction="#onSearchClick"
-                                   styleClass="search-field"
-                                   HBox.hgrow="ALWAYS"/>
+                        <SearchableComboBox fx:id="courseField"
+                                            promptText="Selecione um curso"
+                                            styleClass="filter-field"
+                                            HBox.hgrow="ALWAYS"/>
                     </VBox>
                     <VBox spacing="6">
                         <Label text="Data"/>
