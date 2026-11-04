@@ -9,6 +9,7 @@ import com.qualificamaisanaliticinterface.features.people.PersonService;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
 import com.qualificamaisanaliticinterface.features.registers.RegisterService;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
+import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -66,6 +67,7 @@ public class ClassInfoController {
 
     @FXML
     private void initialize() {
+        TextUtils.configureCopy(peopleTable);
         info.visibleProperty().bind(info.textProperty().isNotEmpty());
         info.managedProperty().bind(info.visibleProperty());
     }

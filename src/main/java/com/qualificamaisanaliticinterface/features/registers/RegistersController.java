@@ -5,6 +5,7 @@ import com.qualificamaisanaliticinterface.features.enuns.StatusRegister;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
+import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -52,6 +53,7 @@ public class RegistersController {
 
     @FXML
     private void initialize() {
+        TextUtils.configureCopy(registersTable);
         cpfsColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().person().cpf()));
         namesColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().person().fullName()));
         courseColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().courseOfInterest().name()));

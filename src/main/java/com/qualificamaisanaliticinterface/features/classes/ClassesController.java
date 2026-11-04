@@ -4,6 +4,7 @@ import com.qualificamaisanaliticinterface.api.ApiException;
 import com.qualificamaisanaliticinterface.features.classes.dto.ClassDto;
 import com.qualificamaisanaliticinterface.features.enuns.Period;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
+import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -50,6 +51,7 @@ public class ClassesController {
 
     @FXML
     private void initialize() {
+        TextUtils.configureCopy(classesTable);
 
         courseColumn.setCellValueFactory(cell ->
                 new ReadOnlyStringWrapper(cell.getValue().course() == null ? "Não informado" : cell.getValue().course().name()));

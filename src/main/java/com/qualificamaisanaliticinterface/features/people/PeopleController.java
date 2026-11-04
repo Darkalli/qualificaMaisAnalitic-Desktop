@@ -5,6 +5,7 @@ import com.qualificamaisanaliticinterface.features.enuns.Period;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
 
 import com.qualificamaisanaliticinterface.navigation.Navigator;
+import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
@@ -57,6 +58,7 @@ public class PeopleController {
 
     @FXML
     private void initialize() {
+        TextUtils.configureCopy(peopleTable);
         cpfsColumn.setCellValueFactory(cell ->
                 new ReadOnlyStringWrapper(cell.getValue().cpf())
         );

@@ -7,6 +7,7 @@ import com.qualificamaisanaliticinterface.features.enuns.StatusCourse;
 import com.qualificamaisanaliticinterface.features.enuns.StatusRegister;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
+import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -61,6 +62,7 @@ public class CoursesController {
 
     @FXML
     private void initialize() {
+        TextUtils.configureCopy(coursesTable);
         namesColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().name()));
         descriptionColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().description()));
         periodColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
