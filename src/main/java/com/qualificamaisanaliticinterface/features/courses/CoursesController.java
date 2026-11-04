@@ -141,6 +141,7 @@ public class CoursesController {
         statusFilter.setValue(null);
         startFilter.setValue(null);
         finishFilter.setValue(null);
+        onSearchClick();
     }
 
     private void showLoadError(Throwable failure) {
