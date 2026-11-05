@@ -66,7 +66,7 @@
 }
 
 .login-brand .title {
-    -fx-font-size: 50px;
+    -fx-font-size: 30px;
 }
 
 .login-content {
@@ -92,4 +92,19 @@
     -fx-text-alignment: center;
 
     -fx-padding: 24px;
+}
+
+.startup-title {
+    -fx-text-fill: #E67E22;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.startup-status {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+}
+
+.startup-progress {
+    -fx-progress-color: #E67E22;
 }

@@ -19,8 +19,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/views/Startup.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1380, 810);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/views/startup.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         String[] stylesheets = {
                 "/css/application.css",
                 "/css/navigation.css",
@@ -62,6 +62,10 @@ public class HelloApplication extends Application {
     private void showHome(Scene scene){
         try {
             Navigator.changeScreen(scene, "/views/home.fxml");
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1380);
+            stage.setHeight(810);
+            stage.centerOnScreen();
         } catch (IOException e) {
             throw new CompletionException(e);
         }
@@ -70,6 +74,9 @@ public class HelloApplication extends Application {
     private void showLogin(Scene scene){
         try {
             Navigator.changeScreen(scene, "/views/login.fxml");
+            Stage stage = (Stage) scene.getWindow();
+            stage.sizeToScene();
+            stage.centerOnScreen();
         } catch (IOException e) {
             throw new CompletionException(e);
         }

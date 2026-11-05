@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -22,8 +23,6 @@ public class HomeController {
 
     @FXML
     public BorderPane workspace;
-    @FXML
-    public Label registersCount;
 
     private final AuthService authService = new AuthService();
 
@@ -58,6 +57,11 @@ public class HomeController {
                         Platform.runLater(() -> {
                             UserSession.clear();
                             scene.setRoot(loginRoot);
+                            Stage stage = (Stage) scene.getWindow();
+                            stage.setMaximized(false);
+                            stage.setWidth(380);
+                            stage.setHeight(420);
+                            stage.centerOnScreen();
                             logoutInProgress = false;
                             if (failure != null) {
                                 showLogoutWarning(
