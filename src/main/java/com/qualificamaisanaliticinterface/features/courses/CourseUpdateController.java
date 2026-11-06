@@ -100,7 +100,7 @@ public class CourseUpdateController {
         while (cause instanceof CompletionException && cause.getCause() != null) {
             cause = cause.getCause();
         }
-        info.setText(cause.getMessage() == null ? "Não foi possível criar a inscrição." : cause.getMessage());
+        info.setText(cause.getMessage() == null ? "Não foi possível atualizar o curso." : cause.getMessage());
         if (info.getScene() != null && info.getScene().getWindow() instanceof Stage stage) {
             stage.sizeToScene();
         }
