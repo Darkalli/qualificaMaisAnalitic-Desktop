@@ -1,9 +1,12 @@
 package com.qualificamaisanaliticinterface.api;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.qualificamaisanaliticinterface.config.AppConfig;
 import com.qualificamaisanaliticinterface.features.login.dto.LoginResponse;
 import com.qualificamaisanaliticinterface.session.UserSession;
 
+import java.io.Reader;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -17,6 +20,7 @@ public class ApiClient {
             .connectTimeout(Duration.ofSeconds(10))
             .followRedirects(HttpClient.Redirect.NEVER)
             .build();
+    private final Gson gson = new Gson();
 
     public CompletableFuture<String> get(String path) {
         if (path == null || !path.startsWith("/api/")) {
@@ -57,6 +61,14 @@ public class ApiClient {
                 case 409 -> "A operação conflita com os dados existentes.";
                 default -> "Não foi possível concluir a consulta.";
             };
+            try {
+                ErrorDto error = gson.fromJson(response.body(), ErrorDto.class);
+                if (error != null && error.message() != null
+                        && !error.message().isBlank()) {
+                    message = error.message();
+                }
+            } catch (JsonParseException _) {
+            }
             throw new ApiException(status, message);
         });
     }
@@ -101,6 +113,14 @@ public class ApiClient {
                 case 409 -> "A operação conflita com os dados existentes.";
                 default -> "Não foi possível concluir a consulta.";
             };
+            try {
+                ErrorDto error = gson.fromJson(response.body(), ErrorDto.class);
+                if (error != null && error.message() != null
+                        && !error.message().isBlank()) {
+                    message = error.message();
+                }
+            } catch (JsonParseException _) {
+            }
             throw new ApiException(status, message);
         });
     }
@@ -133,10 +153,18 @@ public class ApiClient {
                         case 400 -> "Confira os dados enviados para a atualização.";
                         case 401 -> "Sessão inválida ou expirada. Entre novamente.";
                         case 403 -> "Você não tem permissão para esta operação.";
-                        case 404 -> "Pessoa não encontrada.";
+                        case 404 -> "Recurso não encontrada.";
                         case 409 -> "A atualização conflita com os dados existentes.";
                         default -> "Não foi possível atualizar a pessoa.";
                     };
+                    try {
+                        ErrorDto error = gson.fromJson(response.body(), ErrorDto.class);
+                        if (error != null && error.message() != null
+                                && !error.message().isBlank()) {
+                            message = error.message();
+                        }
+                    } catch (JsonParseException _) {
+                    }
                     throw new ApiException(status, message);
                 });
     }
@@ -165,13 +193,21 @@ public class ApiClient {
                 return response.body();
             }
             String message = switch (status) {
-                case 400 -> "Confira os dados enviados para o cancelamento.";
+                case 400 -> "Confira os dados enviados para a deleção.";
                 case 401 -> "Sessão inválida ou expirada. Entre novamente.";
                 case 403 -> "Você não tem permissão para esta operação.";
-                case 404 -> "Inscrição não encontrada.";
-                case 409 -> "Não foi possível cancelar: a operação conflita com os dados existentes.";
-                default -> "Não foi possível cancelar a inscrição.";
+                case 404 -> "Recurso não encontrado.";
+                case 409 -> "A operação conflita com os dados existentes.\nPodem haver dados dependentes deste.";
+                default -> "Não foi possível concluir a deleção.";
             };
+            try {
+                ErrorDto error = gson.fromJson(response.body(), ErrorDto.class);
+                if (error != null && error.message() != null
+                        && !error.message().isBlank()) {
+                    message = error.message();
+                }
+            } catch (JsonParseException _) {
+            }
             throw new ApiException(status, message);
         });
     }
@@ -206,6 +242,7 @@ public class ApiClient {
             if (status >= 200 && status < 300) {
                 return response.body();
             }
+
             String message = switch (status) {
                 case 400 -> "Confira os dados enviados para a deleção.";
                 case 401 -> "Sessão inválida ou expirada. Entre novamente.";
@@ -214,6 +251,14 @@ public class ApiClient {
                 case 409 -> "A operação conflita com os dados existentes.\nPodem haver dados dependentes deste.";
                 default -> "Não foi possível concluir a deleção.";
             };
+            try {
+                ErrorDto error = gson.fromJson(response.body(), ErrorDto.class);
+                if (error != null && error.message() != null
+                        && !error.message().isBlank()) {
+                    message = error.message();
+                }
+            } catch (JsonParseException _) {
+            }
             throw new ApiException(status, message);
         });
     }

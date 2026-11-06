@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.users.UserDeleteController"
+            styleClass="delete-dialog" prefWidth="480">
+    <content>
+        <VBox spacing="16" prefWidth="432" maxWidth="432">
+            <Label text="Excluir usuário?" styleClass="delete-heading"/>
+            <Label fx:id="deleteName" styleClass="delete-person-name"
+                   wrapText="true" minHeight="-Infinity" maxWidth="Infinity"/>
+            <VBox spacing="6">
+                <Label text="Esta ação excluirá o cadastro deste usuário."
+                       styleClass="delete-description" wrapText="true"
+                       minHeight="-Infinity" maxWidth="Infinity"/>
+                <Label text="Não será possível desfazer."
+                       styleClass="delete-warning" wrapText="true"
+                       minHeight="-Infinity" maxWidth="Infinity"/>
+            </VBox>
+            <Label fx:id="advise" styleClass="delete-error" wrapText="true"
+                   minHeight="-Infinity" maxWidth="Infinity"/>
+            <HBox alignment="CENTER_RIGHT" spacing="12">
+                <Button fx:id="cancel" onAction="#onClickCancel" text="Cancelar"
+                        styleClass="delete-cancel" minWidth="150" prefWidth="0"
+                        maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="delete" styleClass="delection"
+                        onAction="#onDeleteUserClick" text="Excluir usuário"
+                        minWidth="150" prefWidth="0" maxWidth="Infinity"
+                        HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>

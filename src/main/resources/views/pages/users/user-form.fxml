@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.users.UserFormController"
+            minWidth="300" prefWidth="360" maxWidth="400" fx:id="formDialogPane"
+            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+    <content>
+        <VBox spacing="12">
+            <Label styleClass="box-lower-sub-title" text="Usuário:"/>
+            <TextField fx:id="userField"
+                       promptText="Digite seu nome de usuário"
+                       styleClass="search-field"
+                       HBox.hgrow="ALWAYS"/>
+            <Label styleClass="box-lower-sub-title" text="Senha:"/>
+            <StackPane>
+                <PasswordField fx:id="passwordField"
+                               promptText="Digite sua senha"
+                               styleClass="search-field"
+                               style="-fx-padding: 10px 80px 10px 12px;"/>
+                <TextField fx:id="visiblePasswordField"
+                           promptText="Digite sua senha"
+                           styleClass="search-field"
+                           HBox.hgrow="ALWAYS" style="-fx-padding: 10px 80px 10px 12px;"
+                           visible="false" managed="false"/>
+                <Hyperlink text="Mostrar" styleClass="clear-filters" onAction="#onTogglePassword"
+                           StackPane.alignment="CENTER_RIGHT"
+                           style="-fx-translate-x: -12px;"/>
+            </StackPane>
+            <Label styleClass="box-lower-sub-title" text="Confirmar senha:"/>
+            <StackPane>
+                <PasswordField fx:id="confirmPasswordField"
+                               promptText="Digite sua senha"
+                               styleClass="search-field"
+                               style="-fx-padding: 10px 80px 10px 12px;"/>
+                <TextField fx:id="visibleConfirmPasswordField"
+                           promptText="Digite sua senha"
+                           styleClass="search-field"
+                           HBox.hgrow="ALWAYS" style="-fx-padding: 10px 80px 10px 12px;"
+                           visible="false" managed="false"/>
+                <Hyperlink text="Mostrar" styleClass="clear-filters" onAction="#onTogglePassword"
+                           StackPane.alignment="CENTER_RIGHT"
+                           style="-fx-translate-x: -12px;"/>
+            </StackPane>
+            <Label styleClass="box-lower-sub-title" text="Função"/>
+            <ComboBox maxWidth="Infinity" fx:id="roleSelection" promptText="Todos as funções"
+                      styleClass="filter-field"/>
+            <Label fx:id="info" styleClass="register-message" wrapText="true"
+                   minHeight="-Infinity" maxWidth="560"/>
+            <HBox>
+                <Button fx:id="close" styleClass="button" text="Cancelar" onAction="#onClickCancel"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="add" styleClass="button" text="Registrar" onAction="#onClickAddUser"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>

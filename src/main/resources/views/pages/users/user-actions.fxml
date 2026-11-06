@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.util.Duration?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" spacing="6" alignment="CENTER">
+
+    <Button fx:id="userDelete" onAction="#onDeleteUserClick" styleClass="action-button">
+        <graphic>
+            <FontIcon iconLiteral="fas-trash-alt"
+                      iconSize="16"
+                      iconColor="WHITE"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="Excluir usuário">
+                <showDelay>
+                    <Duration fx:value="200ms"/>
+                </showDelay>
+            </Tooltip>
+        </tooltip>
+    </Button>
+    <Button fx:id="userUpdate" onAction="#onUpdateUserClick" styleClass="action-button">
+        <graphic>
+            <FontIcon iconLiteral="fas-edit"
+                      iconSize="16"
+                      iconColor="WHITE"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="Atualizar usuário">
+                <showDelay>
+                    <Duration fx:value="200ms"/>
+                </showDelay>
+            </Tooltip>
+        </tooltip>
+    </Button>
+</HBox>

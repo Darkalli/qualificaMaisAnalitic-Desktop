@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.users.UserUpdateController"
+            minWidth="300" prefWidth="360" maxWidth="400" fx:id="updateDialogPane"
+            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+    <content>
+        <VBox spacing="12">
+            <Label text="Usuário:"/>
+            <TextField fx:id="userField"
+                       promptText="Digite seu nome de usuário"
+                       styleClass="search-field"
+                       HBox.hgrow="ALWAYS"/>
+            <ComboBox maxWidth="Infinity" fx:id="roleSelection" promptText="Todas as funções"
+                      styleClass="filter-field"/>
+            <Label fx:id="info" styleClass="register-message" wrapText="true"
+                   minHeight="-Infinity" maxWidth="560"/>
+            <HBox>
+                <Button fx:id="close" styleClass="button" text="Cancelar" onAction="#onClickCancel"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="add" styleClass="button" text="Atualizar" onAction="#onClickUpdateUser"/>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>
