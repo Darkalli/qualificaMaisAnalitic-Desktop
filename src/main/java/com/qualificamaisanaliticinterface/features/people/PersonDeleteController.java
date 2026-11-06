@@ -15,10 +15,13 @@ public class PersonDeleteController {
     @FXML
     public Label deleteName;
     public Long personId;
+    @FXML
     public Button delete;
+    @FXML
     public Button cancel;
-    private final ApiClient apiClient = new ApiClient();
+    @FXML
     public Label advise;
+    private final ApiClient apiClient = new ApiClient();
     private Runnable onDeleted;
 
     public void getDelectInfo(PersonDto dto){
