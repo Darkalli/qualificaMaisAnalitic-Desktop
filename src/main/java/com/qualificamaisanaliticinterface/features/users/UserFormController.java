@@ -68,12 +68,6 @@ public class UserFormController {
         }
 
         onTogglePassword();
-        if (passwordField.getText().length() < 8){
-            showError(new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres."));
-            formDialogPane.getContent().setDisable(false);
-            return;
-        }
-
         if (Objects.equals(passwordField.getText(), confirmPasswordField.getText())){
             finalPassword = passwordField.getText();
         } else {
@@ -81,6 +75,12 @@ public class UserFormController {
             formDialogPane.getContent().setDisable(false);
             return;
         }
+        if (passwordField.getText().length() < 8){
+            showError(new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres."));
+            formDialogPane.getContent().setDisable(false);
+            return;
+        }
+
         userService.addUser(userField.getText(), finalPassword, roleSelection.getValue())
                 .whenComplete((response, failure) -> Platform.runLater(() -> {
                     formDialogPane.getContent().setDisable(false);

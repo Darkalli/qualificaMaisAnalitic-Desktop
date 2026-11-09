@@ -14,19 +14,18 @@ module com.qualificamaisanaliticinterface {
     requires com.google.errorprone.annotations;
     requires org.kordamp.ikonli.fontawesome5;
 
-    opens com.qualificamaisanaliticinterface
-            to javafx.fxml;
     exports com.qualificamaisanaliticinterface;
     exports com.qualificamaisanaliticinterface.session;
     exports com.qualificamaisanaliticinterface.features.login.dto;
     exports com.qualificamaisanaliticinterface.features.enuns;
 
+    opens com.qualificamaisanaliticinterface to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.home to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.people to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.registers to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.courses to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.classes to javafx.fxml;
-    opens com.qualificamaisanaliticinterface.features.users to javafx.fxml;
+    opens com.qualificamaisanaliticinterface.features.users to javafx.fxml, org.junit.platform.commons;
 
     opens com.qualificamaisanaliticinterface.features.login.dto to com.google.gson;
     opens com.qualificamaisanaliticinterface.features.people.dto to com.google.gson;
@@ -34,7 +33,8 @@ module com.qualificamaisanaliticinterface {
     opens com.qualificamaisanaliticinterface.features.courses.dto to com.google.gson;
     opens com.qualificamaisanaliticinterface.features.classes.dto to com.google.gson;
     opens com.qualificamaisanaliticinterface.features.users.dto to com.google.gson;
-    opens com.qualificamaisanaliticinterface.api to com.google.gson;
+    opens com.qualificamaisanaliticinterface.api to com.google.gson, org.junit.platform.commons;
+
 
 
 }
