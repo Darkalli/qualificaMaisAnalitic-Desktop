@@ -36,11 +36,20 @@ public class RegisterFormController {
     @FXML
     public Label info;
 
-    private final PersonService personService = new PersonService();
-    private final RegisterService registerService = new RegisterService();
+    private final PersonService personService;
+    private final RegisterService registerService;
     private Runnable onAdded;
     private double dragOffsetX;
     private double dragOffsetY;
+
+    public RegisterFormController() {
+        this(new PersonService(), new RegisterService());
+    }
+
+    RegisterFormController(PersonService personService, RegisterService registerService) {
+        this.personService = personService;
+        this.registerService = registerService;
+    }
 
     @FXML
     private void initialize() {

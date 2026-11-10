@@ -12,8 +12,16 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class RegisterService {
-    private final ApiClient apiClient = new ApiClient();
+    private final ApiClient apiClient;
     private final Gson gson = new Gson();
+
+    public RegisterService() {
+        this(new ApiClient());
+    }
+
+    RegisterService(ApiClient apiClient) {
+        this.apiClient = apiClient;
+    }
 
     public CompletableFuture<List<RegisterDto>> findAll() {
         return apiClient.get("/api/register").thenApply(json -> {

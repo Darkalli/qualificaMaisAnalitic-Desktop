@@ -22,9 +22,17 @@ import java.util.concurrent.CompletionException;
 import static com.qualificamaisanaliticinterface.utils.TextUtils.configureEmptyText;
 
 public class RegistersController {
-    private final RegisterService registerService = new RegisterService();
+    private final RegisterService registerService;
     private List<RegisterDto> allRegisters = List.of();
     private boolean loaded;
+
+    public RegistersController() {
+        this(new RegisterService());
+    }
+
+    RegistersController(RegisterService registerService) {
+        this.registerService = registerService;
+    }
 
     @FXML
     public TableView<RegisterDto> registersTable;
