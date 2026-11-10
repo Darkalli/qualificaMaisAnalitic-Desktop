@@ -35,11 +35,19 @@ public class UserUpdateController {
     public Button add;
 
 
-    private final UserService userService = new UserService();
+    private final UserService userService;
     private Long id;
     private Runnable onChanged;
     private double dragOffsetX;
     private double dragOffsetY;
+
+    public UserUpdateController() {
+        this(new UserService());
+    }
+
+    UserUpdateController(UserService userService) {
+        this.userService = userService;
+    }
 
     @FXML
     private void initialize() {

@@ -20,8 +20,16 @@ import java.util.concurrent.CompletionStage;
 
 public class UserService {
 
-    private final ApiClient apiClient = new ApiClient();
+    private final ApiClient apiClient;
     private final Gson gson = new Gson();
+
+    public UserService() {
+        this(new ApiClient());
+    }
+
+    UserService(ApiClient apiClient) {
+        this.apiClient = apiClient;
+    }
 
     public CompletableFuture<List<UserDto>> findAll() {
         return apiClient.get("/api/auth/all").thenApply(json -> {

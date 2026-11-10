@@ -15,9 +15,17 @@ import java.util.concurrent.CompletionException;
 
 public class UsersController {
 
-    private final UserService userService = new UserService();
+    private final UserService userService;
     private List<UserDto> allUsers = List.of();
     private boolean loaded;
+
+    public UsersController() {
+        this(new UserService());
+    }
+
+    UsersController(UserService userService) {
+        this.userService = userService;
+    }
 
     @FXML
     public Label totalUsersLabel;

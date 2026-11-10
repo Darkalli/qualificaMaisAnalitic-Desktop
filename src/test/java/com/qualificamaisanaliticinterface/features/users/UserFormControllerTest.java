@@ -16,7 +16,11 @@ public class UserFormControllerTest {
 
     @BeforeAll
     static void startJavaFx(){
-        Platform.startup(() -> Platform.setImplicitExit(false));
+        try {
+            Platform.startup(() -> Platform.setImplicitExit(false));
+        } catch (IllegalStateException alreadyStarted) {
+            // JavaFX was started by another test class.
+        }
     }
 
     @Test

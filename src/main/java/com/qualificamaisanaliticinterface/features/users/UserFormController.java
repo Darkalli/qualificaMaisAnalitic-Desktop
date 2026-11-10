@@ -15,9 +15,17 @@ import java.util.concurrent.CompletionException;
 
 public class UserFormController {
 
-    private final UserService userService = new UserService();
+    private final UserService userService;
     private boolean passwordVisibility;
     private Runnable onAdded;
+
+    public UserFormController() {
+        this(new UserService());
+    }
+
+    UserFormController(UserService userService) {
+        this.userService = userService;
+    }
 
     @FXML
     public DialogPane formDialogPane;

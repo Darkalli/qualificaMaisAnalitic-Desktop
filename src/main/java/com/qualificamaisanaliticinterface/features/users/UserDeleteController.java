@@ -21,9 +21,17 @@ public class UserDeleteController {
     @FXML
     public Button delete;
 
-    private final UserService userService = new UserService();
+    private final UserService userService;
     public Long id;
     private Runnable onDeleted;
+
+    public UserDeleteController() {
+        this(new UserService());
+    }
+
+    UserDeleteController(UserService userService) {
+        this.userService = userService;
+    }
 
     public void getDelectInfo(UserDto dto){
         id = dto.id();
