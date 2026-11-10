@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class TextUtils {
+public class  TextUtils {
 
     public static <T> void configureEmptyText(
             ComboBox<T> combo,
@@ -25,6 +25,7 @@ public class TextUtils {
                 setGraphic(null);
             }
         });
+        combo.setPromptText(emptyText);
     }
     public static String formatDate(String date) {
         if (date == null) return "";

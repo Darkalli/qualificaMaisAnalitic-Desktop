@@ -35,6 +35,5 @@ module com.qualificamaisanaliticinterface {
     opens com.qualificamaisanaliticinterface.features.users.dto to com.google.gson;
     opens com.qualificamaisanaliticinterface.api to com.google.gson, org.junit.platform.commons;
 
-
-
+    opens com.qualificamaisanaliticinterface.utils to org.junit.platform.commons;
 }
