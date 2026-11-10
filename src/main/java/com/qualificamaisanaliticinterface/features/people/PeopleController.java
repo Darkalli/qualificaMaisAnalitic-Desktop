@@ -21,7 +21,15 @@ import static com.qualificamaisanaliticinterface.utils.TextUtils.configureEmptyT
 
 public class PeopleController {
 
-    private final PersonService personService = new PersonService();
+    private final PersonService personService;
+
+    public PeopleController() {
+        this(new PersonService());
+    }
+
+    PeopleController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @FXML
     public TableColumn<PersonDto, String> emailsColumn;
@@ -43,9 +51,6 @@ public class PeopleController {
 
     @FXML
     private Label totalPeopleLabel;
-
-    @FXML
-    private Label pageInfoLabel;
 
     @FXML
     private TextField searchField;
@@ -154,8 +159,6 @@ public class PeopleController {
 
         peopleTable.setPlaceholder(new Label(message));
         totalPeopleLabel.setText("—");
-        pageInfoLabel.setText(message);
-
         searchField.setDisable(true);
     }
 

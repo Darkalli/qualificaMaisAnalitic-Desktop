@@ -10,8 +10,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class PersonService {
 
-    private final ApiClient apiClient = new ApiClient();
+    private final ApiClient apiClient;
     private final Gson gson = new Gson();
+
+    public PersonService() {
+        this(new ApiClient());
+    }
+
+    PersonService(ApiClient apiClient) {
+        this.apiClient = apiClient;
+    }
 
     public CompletableFuture<List<PersonDto>> findAll() {
         return apiClient.get("/api/person")
