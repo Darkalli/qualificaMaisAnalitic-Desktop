@@ -26,9 +26,17 @@ import static com.qualificamaisanaliticinterface.utils.TextUtils.configureEmptyT
 
 public class CoursesController {
 
-    private final CourseService courseService = new CourseService();
+    private final CourseService courseService;
     private List<CourseDto> allCourses = List.of();
     private boolean loaded;
+
+    public CoursesController() {
+        this(new CourseService());
+    }
+
+    CoursesController(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @FXML
     public TableView<CourseDto> coursesTable;
@@ -58,7 +66,7 @@ public class CoursesController {
     private DatePicker finishFilter;
 
     @FXML
-    private ComboBox<Period> periodFilter;
+    public ComboBox<Period> periodFilter;
 
     @FXML
     private void initialize() {

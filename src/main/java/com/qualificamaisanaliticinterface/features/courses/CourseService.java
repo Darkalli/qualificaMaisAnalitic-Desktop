@@ -14,8 +14,16 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 public class CourseService {
-    private final ApiClient apiClient = new ApiClient();
+    private final ApiClient apiClient;
     private final Gson gson = new Gson();
+
+    public CourseService() {
+        this(new ApiClient());
+    }
+
+    CourseService(ApiClient apiClient) {
+        this.apiClient = apiClient;
+    }
 
     public CompletableFuture<List<CourseDto>> findAll() {
         return apiClient.get("/api/course").thenApply(json -> {
