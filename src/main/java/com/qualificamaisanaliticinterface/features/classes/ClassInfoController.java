@@ -28,9 +28,18 @@ import java.util.concurrent.CompletionException;
 
 public class ClassInfoController {
 
-    private final RegisterService registerService = new RegisterService();
-    private final ClassService classService = new ClassService();
+    private final RegisterService registerService;
+    private final ClassService classService;
     private final PersonService personService = new PersonService();
+
+    public ClassInfoController() {
+        this(new RegisterService(), new ClassService());
+    }
+
+    ClassInfoController(RegisterService registerService, ClassService classService) {
+        this.registerService = registerService;
+        this.classService = classService;
+    }
     @FXML
     public DialogPane infoDialogPane;
     @FXML

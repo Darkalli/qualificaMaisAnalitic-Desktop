@@ -31,8 +31,17 @@ import java.util.concurrent.CompletionException;
 
 public class ClassBatchFormController {
 
-    private final RegisterService registerService = new RegisterService();
+    private final RegisterService registerService;
     private final ClassService classService = new ClassService();
+
+    public ClassBatchFormController() {
+        this(new RegisterService());
+    }
+
+    ClassBatchFormController(RegisterService registerService) {
+        this.registerService = registerService;
+    }
+
     @FXML
     public DialogPane formDialogPane;
     @FXML
