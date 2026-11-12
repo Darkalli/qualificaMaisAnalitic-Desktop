@@ -25,8 +25,18 @@ import java.util.concurrent.CompletionException;
 
 public class ClassFormController {
 
-    private final RegisterService registerService = new RegisterService();
-    private final ClassService classService = new ClassService();
+    private final RegisterService registerService;
+    private final ClassService classService;
+
+    public ClassFormController() {
+        this(new RegisterService(), new ClassService());
+    }
+
+    ClassFormController(RegisterService registerService, ClassService classService) {
+        this.registerService = registerService;
+        this.classService = classService;
+    }
+
     @FXML
     public DialogPane formDialogPane;
     @FXML

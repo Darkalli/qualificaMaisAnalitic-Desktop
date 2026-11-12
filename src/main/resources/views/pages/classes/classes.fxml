@@ -23,7 +23,7 @@
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER" styleClass="box">
                 <Label styleClass="box-title" alignment="CENTER" text="Média de presença"/>
-                <Label fx:id="presence" styleClass="box-info-title" alignment="CENTER" text="70%"/>
+                <Label fx:id="presence" styleClass="box-info-title" alignment="CENTER"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <Button text="+  Adicionar aula" onAction="#onNewClassClick"/>
@@ -33,7 +33,7 @@
                 <HBox alignment="CENTER_LEFT">
                     <Label styleClass="title" text="Buscar e filtros"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Hyperlink text="Limpar filtros"
+                    <Hyperlink text="Limpar filtros" fx:id="cleanFilter"
                                onAction="#onClearFiltersClick"
                                styleClass="clear-filters"/>
                 </HBox>
@@ -61,7 +61,7 @@
                                   prefWidth="180"
                                   styleClass="filter-field"/>
                     </VBox>
-                    <Button text="Buscar"
+                    <Button text="Buscar" fx:id="search"
                             onAction="#onSearchClick"/>
                 </HBox>
             </VBox>

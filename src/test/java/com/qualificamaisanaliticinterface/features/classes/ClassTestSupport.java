@@ -8,8 +8,8 @@ import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,6 +38,28 @@ final class ClassTestSupport {
         FXMLLoader loader = new FXMLLoader(ClassTestSupport.class.getResource("/views/pages/classes/" + fxml));
         loader.load();
         return loader.getController();
+    }
+
+    static Stage openStage(String fxml, Object controller) throws Exception {
+        return openStage(fxml, controller, () -> {});
+    }
+
+    static Stage openStage(String fxml, Object controller, Runnable afterShow) throws Exception {
+        return fx(() -> {
+            FXMLLoader loader = new FXMLLoader(
+                    ClassTestSupport.class.getResource(
+                            "/views/pages/classes/" + fxml
+                    )
+            );
+            loader.setControllerFactory(type -> controller);
+
+            Parent pane = loader.load();
+            Stage window = new Stage();
+            window.setScene(new Scene(pane));
+            window.show();
+            afterShow.run();
+            return window;
+        });
     }
 
     static PersonDto person(Long id, String name) {

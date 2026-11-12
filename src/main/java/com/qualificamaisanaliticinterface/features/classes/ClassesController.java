@@ -33,8 +33,18 @@ import static com.qualificamaisanaliticinterface.utils.TextUtils.formatDate;
 
 public class ClassesController {
 
-    private final ClassService classService = new ClassService();
-    private final RegisterService registerService = new RegisterService();
+    private final ClassService classService;
+    private final RegisterService registerService;
+
+
+    public ClassesController() {
+        this(new RegisterService(), new ClassService());
+    }
+
+    ClassesController(RegisterService registerService, ClassService classService) {
+        this.registerService = registerService;
+        this.classService = classService;
+    }
 
     private List<ClassDto> allClasses = List.of();
     private boolean loaded;
@@ -56,13 +66,17 @@ public class ClassesController {
     @FXML
     public TableColumn<ClassDto, Void> actionsColumn;
     @FXML
-    public TableColumn<ClassDto,String> periodColumn;
+    public TableColumn<ClassDto, String> periodColumn;
     @FXML
     public SearchableComboBox<CourseDto> courseField;
     @FXML
-    private ComboBox<Period> periodFilter;
+    public ComboBox<Period> periodFilter;
     @FXML
     public DatePicker dateFilter;
+    @FXML
+    public Button search;
+    @FXML
+    public Hyperlink cleanFilter;
 
 
     @FXML
@@ -113,7 +127,7 @@ public class ClassesController {
         }));
 
         CourseDto selectedCourse = courseField.getValue();
-        registerService.findCourses().thenApply( courses -> {
+        registerService.findCourses().thenApply(courses -> {
             Platform.runLater(() -> {
                 courseField.getItems().setAll(courses);
                 courseField.setValue(selectedCourse == null ? null : courses.stream()
@@ -139,7 +153,7 @@ public class ClassesController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate selectedDate = dateFilter.getValue();
 
-        if(selectedDate != null){
+        if (selectedDate != null) {
             selectedDate.format(formatter);
         }
 
@@ -161,17 +175,18 @@ public class ClassesController {
         ));
     }
 
-    private void updatePresenceAverage(List<ClassDto> classes){
+    private void updatePresenceAverage(List<ClassDto> classes) {
         List<CompletableFuture<List<PresenceDto>>> requests = new ArrayList<>();
 
-        for(ClassDto courseClass : classes) {
+        for (ClassDto courseClass : classes) {
             requests.add(
                     classService.findAllPresences(courseClass.course().id(), courseClass.id())
             );
         }
+
         CompletableFuture.allOf(requests.toArray(new CompletableFuture<?>[0]))
-                .whenComplete( (ignored, failure) -> Platform.runLater(() -> {
-                    if (failure != null){
+                .whenComplete((ignored, failure) -> Platform.runLater(() -> {
+                    if (failure != null) {
                         Platform.runLater(() -> presence.setText("-"));
                         return;
                     }
@@ -183,20 +198,23 @@ public class ClassesController {
                         collected.addAll(classPresences);
                     }
 
+                    if (collected.isEmpty()) {
+                        presence.setText("-");
+                        return;
+                    }
+
                     int presenceCount = 0;
-                    for (PresenceDto presence : collected){
-                        if (presence.status() != null && presence.status() == PresenceStatus.PRESENT){
+                    for (PresenceDto presence : collected) {
+                        if (presence.status() != null && presence.status() == PresenceStatus.PRESENT) {
                             presenceCount++;
                         }
                     }
-                    try {
-                        double result = (double) (presenceCount * 100) / collected.size();
-                        DecimalFormat df = new DecimalFormat("0.00");
-                        String formatedResult = df.format(result);
-                        presence.setText(formatedResult + "%");
-                    } catch (ArithmeticException a) {
-                        presence.setText("-");
-                    }
+
+                    double result = (double) (presenceCount * 100) / collected.size();
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String formatedResult = df.format(result);
+                    presence.setText(formatedResult + "%");
+
                 }));
     }
 

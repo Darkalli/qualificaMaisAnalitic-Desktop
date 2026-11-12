@@ -32,14 +32,15 @@ import java.util.concurrent.CompletionException;
 public class ClassBatchFormController {
 
     private final RegisterService registerService;
-    private final ClassService classService = new ClassService();
+    private final ClassService classService;
 
     public ClassBatchFormController() {
-        this(new RegisterService());
+        this(new RegisterService(), new ClassService());
     }
 
-    ClassBatchFormController(RegisterService registerService) {
+    ClassBatchFormController(RegisterService registerService, ClassService classService) {
         this.registerService = registerService;
+        this.classService = classService;
     }
 
     @FXML

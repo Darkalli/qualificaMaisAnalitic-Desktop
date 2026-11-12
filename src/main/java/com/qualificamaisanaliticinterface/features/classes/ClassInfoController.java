@@ -107,7 +107,7 @@ public class ClassInfoController {
         classService.findAllPresences(classDto.course().id(), classDto.id())
                 .whenComplete((list, failure) -> Platform.runLater(() -> {
                     if (failure != null){
-                        info.setText("Não foi possivel carregar as presenças.");
+                        info.setText("Não foi possível carregar as presenças.");
                         return;
                     }
                     savedPresences.clear();
