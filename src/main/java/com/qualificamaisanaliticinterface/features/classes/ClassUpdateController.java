@@ -4,6 +4,7 @@ import com.qualificamaisanaliticinterface.features.classes.dto.ClassDto;
 import com.qualificamaisanaliticinterface.features.courses.CourseService;
 import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.enuns.Period;
+import com.qualificamaisanaliticinterface.features.registers.RegisterService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,6 +27,18 @@ import java.util.concurrent.CompletionException;
 
 public class ClassUpdateController {
 
+    private final CourseService courseService;
+    private final ClassService classService;
+
+    public ClassUpdateController() {
+        this(new CourseService(), new ClassService());
+    }
+
+    ClassUpdateController(CourseService courseService, ClassService classService) {
+        this.courseService = courseService;
+        this.classService = classService;
+    }
+
     @FXML
     public DialogPane formDialogPane;
     @FXML
@@ -46,10 +59,7 @@ public class ClassUpdateController {
     private Runnable onChanged;
     private double dragOffsetX;
     private double dragOffsetY;
-    private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm")
-            .withResolverStyle(ResolverStyle.STRICT);
-    private final CourseService courseService = new CourseService();
-    private final ClassService classService = new ClassService();
+    private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
     private boolean loading = true;
     private boolean saving;
 
@@ -58,7 +68,6 @@ public class ClassUpdateController {
         add.setDisable(true);
         String datePattern = DateTimeFormatterBuilder.getLocalizedDateTimePattern(
                 FormatStyle.SHORT, null, dateField.getChronology(), Locale.getDefault());
-        // Resolve the actual calendar date strictly instead of normalizing e.g. 31/02.
         DateTimeFormatter dateParser = DateTimeFormatter.ofPattern(datePattern.replace("y", "u")
                         .replaceAll("u{2,}", "uuuu"))
                 .withChronology(dateField.getChronology()).withResolverStyle(ResolverStyle.STRICT);
@@ -170,7 +179,6 @@ public class ClassUpdateController {
         updateSaveState();
         info.setText("");
         formDialogPane.getContent().setDisable(true);
-        // Status is intentionally omitted: editing a schedule must not reactivate the class.
         classService.updateClass(courseClass.id(), day.toString(), session,
                 start.toString(), finish.toString(), null, course.id())
                 .whenComplete((response, failure) -> Platform.runLater(() -> {
@@ -189,7 +197,6 @@ public class ClassUpdateController {
     private LocalTime readTime(TextField field, String original) {
         LocalTime parsed = LocalTime.parse(field.getText(), TIME);
         LocalTime previous = LocalTime.parse(original);
-        // The editor shows minutes; untouched values retain their original precision.
         return field.getText().equals(previous.format(TIME)) ? previous : parsed;
     }
 

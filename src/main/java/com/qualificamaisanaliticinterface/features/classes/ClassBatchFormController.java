@@ -148,6 +148,7 @@ public class ClassBatchFormController {
 
         if (course == null){
             showError(new IllegalArgumentException("Informe o curso"));
+            return;
         }
 
         try {
@@ -177,7 +178,6 @@ public class ClassBatchFormController {
         }
 
         Set<DayOfWeek> includedDays = new HashSet<>();
-
         if(sunday.isSelected()){
             includedDays.add(DayOfWeek.SUNDAY);
         }
@@ -198,6 +198,11 @@ public class ClassBatchFormController {
         }
         if(saturday.isSelected()){
             includedDays.add(DayOfWeek.SATURDAY);
+        }
+
+        if(includedDays.isEmpty()){
+            showError(new IllegalArgumentException("Selecione pelo menos um dia da semana."));
+            return;
         }
         List<LocalDate> days = startDate.datesUntil(finishDate.plusDays(1)).toList().stream()
                 .filter(date -> includedDays.contains(date.getDayOfWeek())).toList();
@@ -222,6 +227,7 @@ public class ClassBatchFormController {
                     formDialogPane.getContent().setDisable(false);
                     if (failure != null) {
                         showError(failure);
+                        return;
                     }
                     close.getScene().getWindow().hide();
                     if (onAdded != null) {
@@ -254,7 +260,7 @@ public class ClassBatchFormController {
         while (cause instanceof CompletionException && cause.getCause() != null) {
             cause = cause.getCause();
         }
-        info.setText(cause.getMessage() == null ? "Não foi possível criar a inscrição." : cause.getMessage());
+        info.setText(cause.getMessage() == null ? "Não foi possível criar as aulas." : cause.getMessage());
         if (info.getScene() != null && info.getScene().getWindow() instanceof Stage stage) {
             stage.sizeToScene();
         }

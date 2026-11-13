@@ -165,6 +165,7 @@ public class ClassFormController {
         }
     }
 
+    @FXML
     public void onClickAddClassInBatchPage(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) formDialogPane.getScene().getWindow();
         Scene ownerScene = currentWindow.getOwner().getScene();

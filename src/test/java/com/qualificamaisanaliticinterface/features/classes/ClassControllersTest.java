@@ -2,6 +2,8 @@ package com.qualificamaisanaliticinterface.features.classes;
 
 import com.qualificamaisanaliticinterface.features.classes.dto.ClassDto;
 import com.qualificamaisanaliticinterface.features.classes.dto.PresenceDto;
+import com.qualificamaisanaliticinterface.features.classes.dto.UpdateClassDto;
+import com.qualificamaisanaliticinterface.features.courses.CourseService;
 import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.enuns.Period;
 import com.qualificamaisanaliticinterface.features.enuns.PresenceStatus;
@@ -20,6 +22,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.text.DecimalFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -832,10 +835,7 @@ public class ClassControllersTest {
 
         ClassService fakeClassService = new ClassService() {
             @Override
-            public CompletableFuture<String> addClass(
-                    String day, Period period, String start,
-                    String finish, StatusClass status, Long courseId
-            ) {
+            public CompletableFuture<String> addClass(String day, Period period, String start, String finish, StatusClass status, Long courseId) {
                 return Assertions.fail(
                         "Não deveria tentar salvar com data ou horário inválido."
                 );
@@ -890,9 +890,10 @@ public class ClassControllersTest {
 
         ClassService fakeClassService = new ClassService() {
             long id = 0L;
+
             @Override
             public CompletableFuture<String> addClass(String day, Period period, String start, String finish, StatusClass status, Long courseId) {
-                classes.put(id,new ClassDto(id++, day, period, start, finish, status, course));
+                classes.put(id, new ClassDto(id++, day, period, start, finish, status, course));
                 return CompletableFuture.completedFuture("teste");
             }
         };
@@ -913,8 +914,7 @@ public class ClassControllersTest {
             Period expected = expectedPeriods.get(i);
             long expectedId = classes.size();
 
-            ClassFormController controller =
-                    new ClassFormController(fakeRegisterService, fakeClassService);
+            ClassFormController controller = new ClassFormController(fakeRegisterService, fakeClassService);
 
             Stage stage = openStage("class-form.fxml", controller);
 
@@ -945,8 +945,336 @@ public class ClassControllersTest {
     }
 
     @Test
-    void shouldCreateClassesForSelectedWeekdaysWithinDateRange(){
+    void shouldCreateClassesForSelectedWeekdaysWithinDateRange() throws Exception {
+        CourseDto course = new CourseDto(10L, "Curso A", null, null, null, null, null);
 
+        RegisterService fakeRegisterService = new RegisterService() {
+            @Override
+            public CompletableFuture<List<CourseDto>> findCourses() {
+                return CompletableFuture.completedFuture(List.of(course));
+            }
+        };
+
+        Map<Long, ClassDto> classes = new HashMap<>();
+
+        ClassService fakeClassService = new ClassService() {
+            long id = 0L;
+
+            @Override
+            public CompletableFuture<String> addClass(String day, Period period, String start, String finish, StatusClass status, Long courseId) {
+                Assertions.assertEquals(course.id(), courseId);
+                classes.put(id, new ClassDto(id++, day, period, start, finish, status, course));
+                return CompletableFuture.completedFuture("Teste de adição de classe");
+            }
+        };
+
+        ClassBatchFormController controller = new ClassBatchFormController(fakeRegisterService, fakeClassService);
+
+        Stage stage = openStage("class-batch-form.fxml", controller);
+
+        try {
+            fx(() -> {
+                controller.courseField.setValue(course);
+                controller.startDateField.getEditor().setText("12/11/2026");
+                controller.finishDateField.getEditor().setText("22/11/2026");
+                controller.monday.fire();
+                controller.tuesday.fire();
+                controller.wednesday.fire();
+                controller.thursday.fire();
+                controller.friday.fire();
+                controller.startField.setText("20:00");
+                controller.finishField.setText("22:30");
+                Assertions.assertFalse(controller.add.isDisabled());
+                controller.add.fire();
+
+                Assertions.assertEquals(7, classes.size());
+
+                List<String> expectedDays = List.of(
+                        "2026-11-12", "2026-11-13", "2026-11-16", "2026-11-17",
+                        "2026-11-18", "2026-11-19", "2026-11-20"
+                );
+                for (int i = 0; i < expectedDays.size(); i++) {
+                    ClassDto saved = classes.get((long) i);
+                    Assertions.assertNotNull(saved);
+                    Assertions.assertEquals(expectedDays.get(i), saved.day());
+                    Assertions.assertEquals(Period.NIGHT, saved.session());
+                    Assertions.assertEquals("20:00", saved.start());
+                    Assertions.assertEquals("22:30", saved.finish());
+                    Assertions.assertEquals(StatusClass.ACTIVE, saved.statusClass());
+                }
+
+
+                return null;
+            });
+        } finally {
+            fx(() -> {
+                stage.close();
+                return null;
+            });
+        }
+    }
+
+    @Test
+    void shouldRejectBatchWithoutCourseOrSelectedWeekdays() throws Exception {
+        CourseDto course = new CourseDto(10L, "Curso A", null, null, null, null, null);
+
+        RegisterService fakeRegisterService = new RegisterService() {
+            @Override
+            public CompletableFuture<List<CourseDto>> findCourses() {
+                return CompletableFuture.completedFuture(List.of(course));
+            }
+        };
+
+        ClassService fakeClassService = new ClassService() {
+            @Override
+            public CompletableFuture<String> addClass(String day, Period period, String start, String finish, StatusClass status, Long courseId) {
+                return CompletableFuture.completedFuture("Teste de adição de classe");
+            }
+        };
+
+        ClassBatchFormController controller = new ClassBatchFormController(fakeRegisterService, fakeClassService);
+
+        Stage stage = openStage("class-batch-form.fxml", controller);
+
+        try {
+            fx(() -> {
+                controller.startDateField.getEditor().setText("12/11/2026");
+                controller.finishDateField.getEditor().setText("22/11/2026");
+                controller.monday.setSelected(true);
+                controller.tuesday.setSelected(true);
+                controller.wednesday.setSelected(true);
+                controller.thursday.setSelected(true);
+                controller.friday.setSelected(true);
+                controller.startField.setText("20:00");
+                controller.finishField.setText("22:30");
+                Assertions.assertFalse(controller.add.isDisabled());
+                controller.add.fire();
+
+                Assertions.assertEquals("Informe o curso", controller.info.getText());
+                return null;
+            });
+            fx(() -> {
+                controller.courseField.setValue(course);
+                controller.startDateField.getEditor().setText("12/11/2026");
+                controller.finishDateField.getEditor().setText("22/11/2026");
+                controller.monday.setSelected(false);
+                controller.tuesday.setSelected(false);
+                controller.wednesday.setSelected(false);
+                controller.thursday.setSelected(false);
+                controller.friday.setSelected(false);
+                controller.startField.setText("20:00");
+                controller.finishField.setText("22:30");
+                Assertions.assertFalse(controller.add.isDisabled());
+                controller.add.fire();
+
+                Assertions.assertEquals("Selecione pelo menos um dia da semana.", controller.info.getText());
+                return null;
+            });
+        } finally {
+            fx(() -> {
+                stage.close();
+                return null;
+            });
+        }
+    }
+
+    @Test
+    void shouldKeepBatchFormOpenAfterPartialFailure() throws Exception {
+        CourseDto course = new CourseDto(10L, "Curso A", null, null, null, null, null);
+
+        RegisterService fakeRegisterService = new RegisterService() {
+            @Override
+            public CompletableFuture<List<CourseDto>> findCourses() {
+                return CompletableFuture.completedFuture(List.of(course));
+            }
+        };
+        Map<Long, ClassDto> addedClasses = new HashMap<>();
+        Map<Long, Integer> attempts = new HashMap<>();
+        List<Long> failedIds = new ArrayList<>();
+
+        ClassService fakeClassService = new ClassService() {
+            private int calls = 0;
+            long id;
+            @Override
+            public CompletableFuture<String> addClass(String day, Period period, String start, String finish, StatusClass status, Long courseId) {
+                Assertions.assertEquals(course.id(), courseId);
+                calls++;
+                attempts.merge(id, 1, Integer::sum);
+                if (calls == 2) {
+                    failedIds.add(id);
+                    return CompletableFuture.failedFuture(new RuntimeException("Falha simulada"));
+                }
+                addedClasses.put(id,new ClassDto(id++, day, period, start, finish, status, course));
+                return CompletableFuture.completedFuture("sucesso");
+            }
+        };
+
+        ClassBatchFormController controller = new ClassBatchFormController(fakeRegisterService, fakeClassService);
+
+        Stage stage = openStage("class-batch-form.fxml", controller);
+
+        try {
+            fx(() -> {
+                controller.courseField.setValue(course);
+                controller.startDateField.getEditor().setText("12/11/2026");
+                controller.finishDateField.getEditor().setText("22/11/2026");
+                controller.monday.setSelected(true);
+                controller.tuesday.setSelected(true);
+                controller.wednesday.setSelected(true);
+                controller.thursday.setSelected(true);
+                controller.friday.setSelected(true);
+                controller.startField.setText("20:00");
+                controller.finishField.setText("22:30");
+                Assertions.assertFalse(controller.add.isDisabled());
+                controller.add.fire();
+                return null;
+            });
+            fx(() -> {
+                Assertions.assertEquals(6, addedClasses.size());
+                Assertions.assertEquals(1, failedIds.size());
+                Assertions.assertEquals("Falha simulada", controller.info.getText());
+                Assertions.assertTrue(stage.isShowing());
+                Assertions.assertFalse(controller.add.isDisabled());
+                return null;
+            });
+        } finally {
+            fx(() -> {
+                stage.close();
+                return null;
+            });
+        }
+
+    }
+
+    @Test
+    void shouldPopulateClassFieldsForEditing() throws Exception {
+        CourseDto course = new CourseDto(10L, "Curso A", null, null, null, null, null);
+        ClassDto classDto = new ClassDto(1L,"2026-11-20", Period.AFTERNOON, "20:30", "22:30", StatusClass.ACTIVE, course);
+
+        CourseService fakeCourseService = new CourseService(){
+            @Override
+            public CompletableFuture<List<CourseDto>> findAll() {
+                return CompletableFuture.completedFuture(List.of(course));
+            }
+        };
+
+        ClassUpdateController controller = new ClassUpdateController(fakeCourseService, new ClassService());
+
+        Stage stage = openStage("class-update.fxml", controller, () -> controller.setClass(classDto));
+
+        try {
+            fx(() -> {
+                Assertions.assertEquals(course, controller.courseField.getValue());
+                Assertions.assertEquals(LocalDate.of(2026, 11, 20), controller.dateField.getValue());
+                Assertions.assertEquals("20:30", controller.startField.getText());
+                Assertions.assertEquals("22:30", controller.finishField.getText());
+                return null;
+            });
+        } finally {
+            fx(() -> {
+                stage.close();
+                return null;
+            });
+        }
+    }
+
+    @Test
+    void shouldRejectEndTimeNotAfterStartTime() throws Exception {
+        CourseDto course = new CourseDto(10L, "Curso A", null, null, null, null, null);
+        ClassDto classDto = new ClassDto(1L,"2026-11-20", Period.AFTERNOON, "22:30", "20:30", StatusClass.ACTIVE, course);
+
+        CourseService fakeCourseService = new CourseService(){
+            @Override
+            public CompletableFuture<List<CourseDto>> findAll() {
+                return CompletableFuture.completedFuture(List.of(course));
+            }
+        };
+
+        ClassService fakeClassService = new ClassService(){
+            @Override
+            public CompletableFuture<String> updateClass(Long id,String day, Period session, String start, String finish, StatusClass statusClass, Long courseId) {
+                return CompletableFuture.completedFuture("Teste");
+            }
+        };
+
+        ClassUpdateController controller = new ClassUpdateController(fakeCourseService, fakeClassService);
+
+        Stage stage = openStage("class-update.fxml", controller, () -> controller.setClass(classDto));
+
+        try {
+            fx(() -> {
+                Assertions.assertEquals(course, controller.courseField.getValue());
+                Assertions.assertEquals(LocalDate.of(2026, 11, 20), controller.dateField.getValue());
+                Assertions.assertEquals("22:30", controller.startField.getText());
+                Assertions.assertEquals("20:30", controller.finishField.getText());
+                controller.add.fire();
+                Assertions.assertEquals("O início da aula deve ser anterior ao final.", controller.info.getText());
+
+                controller.startField.setText("20:30");
+                Assertions.assertEquals(course, controller.courseField.getValue());
+                Assertions.assertEquals(LocalDate.of(2026, 11, 20), controller.dateField.getValue());
+                Assertions.assertEquals("20:30", controller.startField.getText());
+                Assertions.assertEquals("20:30", controller.finishField.getText());
+                controller.add.fire();
+                Assertions.assertEquals("O início da aula deve ser anterior ao final.", controller.info.getText());
+
+                return null;
+            });
+        } finally {
+            fx(() -> {
+                stage.close();
+                return null;
+            });
+        }
+    }
+
+    @Test
+    void shouldUpdateScheduleWithoutChangingClassStatus() throws Exception {
+        CourseDto course = new CourseDto(10L, "Curso A", null, null, null, null, null);
+        ClassDto classDto = new ClassDto(1L, "2026-11-20", Period.NIGHT, "20:30", "21:30", StatusClass.POSTPONED, course);
+        List<UpdateClassDto> updates = new ArrayList<>();
+
+        CourseService fakeCourseService = new CourseService() {
+            @Override
+            public CompletableFuture<List<CourseDto>> findAll() {
+                return CompletableFuture.completedFuture(List.of(course));
+            }
+        };
+
+        ClassService fakeClassService = new ClassService() {
+            @Override
+            public CompletableFuture<String> updateClass(Long id, String day, Period session, String start,
+                                                         String finish, StatusClass statusClass, Long courseId) {
+                updates.add(new UpdateClassDto(id, day, session, start, finish, statusClass,
+                        new UpdateClassDto.CourseReference(courseId)));
+                return CompletableFuture.completedFuture("Teste");
+            }
+        };
+
+        ClassUpdateController controller = new ClassUpdateController(fakeCourseService, fakeClassService);
+
+        Stage stage = openStage("class-update.fxml", controller, () -> controller.setClass(classDto));
+
+        try {
+            fx(() -> {
+                Assertions.assertFalse(controller.add.isDisabled());
+                controller.dateField.getEditor().setText(
+                        controller.dateField.getConverter().toString(LocalDate.of(2026, 11, 21)));
+                controller.startField.setText("19:10");
+                controller.finishField.setText("22:30");
+                controller.add.fire();
+                return null;
+            });
+
+            Assertions.assertEquals(List.of(new UpdateClassDto(
+                    1L, "2026-11-21", Period.NIGHT, "19:10", "22:30", null,
+                    new UpdateClassDto.CourseReference(10L))), updates);
+        } finally {
+            fx(() -> {
+                stage.close();
+                return null;
+            });
+        }
     }
 
     private static void assertPresence(TableView<PersonDto> table, PersonDto person, PresenceStatus presence) {
