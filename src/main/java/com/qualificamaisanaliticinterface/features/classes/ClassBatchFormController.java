@@ -154,18 +154,32 @@ public class ClassBatchFormController {
         try {
             startDate = startDateField.getConverter().fromString(startDateField.getEditor().getText());
             finishDate = finishDateField.getConverter().fromString(finishDateField.getEditor().getText());
-            if (startDate == null) {
-                throw new IllegalArgumentException("Informe o dia de começo das aulas.");
-            } else if (finishDate == null){
-                throw new IllegalArgumentException("Informe o dia de final das aulas.");
-            }
         } catch (RuntimeException invalidDate) {
             showError(new IllegalArgumentException("Informe uma data válida."));
             return;
         }
 
-        LocalTime start = LocalTime.parse(startField.getText(), formatter);
-        LocalTime finish = LocalTime.parse(finishField.getText(), formatter);
+        if (startDate == null) {
+            showError(new IllegalArgumentException("Informe o dia de começo das aulas."));
+            return;
+        } else if (finishDate == null) {
+            showError(new IllegalArgumentException("Informe o dia de final das aulas."));
+            return;
+        } else if (!finishDate.isAfter(startDate)) {
+            showError(new IllegalArgumentException("A data de começo deve ser anterior a de final."));
+            return;
+        }
+        LocalTime start;
+        LocalTime finish;
+
+        try {
+            start = LocalTime.parse(startField.getText(), formatter);
+            finish = LocalTime.parse(finishField.getText(), formatter);
+        } catch (RuntimeException invalidHour){
+            showError(new IllegalArgumentException("Informe uma hora válida."));
+            return;
+        }
+
         Period period;
         LocalTime morning = LocalTime.of(12, 0),
                 afternoon = LocalTime.of(18, 0);
@@ -219,6 +233,7 @@ public class ClassBatchFormController {
                 requests.add(request);
             } catch (DateTimeParseException e) {
                 showError(new IllegalArgumentException("Informe uma hora válida."));
+                return;
             }
         }
 

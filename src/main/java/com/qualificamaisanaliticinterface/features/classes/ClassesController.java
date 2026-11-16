@@ -48,6 +48,7 @@ public class ClassesController {
 
     private List<ClassDto> allClasses = List.of();
     private boolean loaded;
+    private long presenceRequestVersion = 0;
 
     @FXML
     public Label presence;
@@ -167,6 +168,7 @@ public class ClassesController {
                 .toList();
 
         classesTable.getItems().setAll(filtered);
+
         updatePresenceAverage(filtered);
         classesTable.setPlaceholder(new Label(
                 allClasses.isEmpty()
@@ -176,6 +178,7 @@ public class ClassesController {
     }
 
     private void updatePresenceAverage(List<ClassDto> classes) {
+        long requestVersion = ++presenceRequestVersion;
         List<CompletableFuture<List<PresenceDto>>> requests = new ArrayList<>();
 
         for (ClassDto courseClass : classes) {
@@ -186,6 +189,11 @@ public class ClassesController {
 
         CompletableFuture.allOf(requests.toArray(new CompletableFuture<?>[0]))
                 .whenComplete((ignored, failure) -> Platform.runLater(() -> {
+
+                    if (requestVersion != presenceRequestVersion) {
+                        return;
+                    }
+
                     if (failure != null) {
                         Platform.runLater(() -> presence.setText("-"));
                         return;

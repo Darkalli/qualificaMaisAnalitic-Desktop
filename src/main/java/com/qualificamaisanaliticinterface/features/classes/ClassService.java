@@ -3,13 +3,9 @@ package com.qualificamaisanaliticinterface.features.classes;
 import com.google.gson.Gson;
 import com.qualificamaisanaliticinterface.api.ApiClient;
 import com.qualificamaisanaliticinterface.features.classes.dto.*;
-import com.qualificamaisanaliticinterface.features.courses.dto.AddCourseRequest;
-import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
-import com.qualificamaisanaliticinterface.features.courses.dto.UpdateCourseDto;
 import com.qualificamaisanaliticinterface.features.enuns.Period;
 import com.qualificamaisanaliticinterface.features.enuns.PresenceStatus;
 import com.qualificamaisanaliticinterface.features.enuns.StatusClass;
-import com.qualificamaisanaliticinterface.features.enuns.StatusCourse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +13,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class ClassService {
 
-    private final ApiClient apiClient = new ApiClient();
+    private final ApiClient apiClient;
     private final Gson gson = new Gson();
+
+    public ClassService() {
+        this(new ApiClient());
+    }
+
+    ClassService(ApiClient apiClient) {
+        this.apiClient = apiClient;
+    }
 
     public CompletableFuture<List<ClassDto>> findAll() {
         return apiClient.get("/api/courseClass").thenApply(json -> {

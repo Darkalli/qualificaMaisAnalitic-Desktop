@@ -129,6 +129,11 @@ public class ClassFormController {
             return;
         }
 
+        if(course == null){
+            showError(new IllegalArgumentException("Informe um curso."));
+            return;
+        }
+
         DateTimeFormatter formatter = DateTimeFormatter
                 .ofPattern("HH:mm")
                 .withResolverStyle(ResolverStyle.STRICT);
