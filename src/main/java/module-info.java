@@ -19,8 +19,10 @@ module com.qualificamaisanaliticinterface {
     exports com.qualificamaisanaliticinterface.features.login.dto;
     exports com.qualificamaisanaliticinterface.features.enuns;
 
-    opens com.qualificamaisanaliticinterface to javafx.fxml;
-    opens com.qualificamaisanaliticinterface.features.home to javafx.fxml;
+    opens com.qualificamaisanaliticinterface to javafx.fxml, org.junit.platform.commons;
+    opens com.qualificamaisanaliticinterface.features.home to javafx.fxml, org.junit.platform.commons;
+    opens com.qualificamaisanaliticinterface.features.login to org.junit.platform.commons;
+    opens com.qualificamaisanaliticinterface.session to org.junit.platform.commons;
     opens com.qualificamaisanaliticinterface.features.people to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.registers to javafx.fxml;
     opens com.qualificamaisanaliticinterface.features.courses to javafx.fxml;

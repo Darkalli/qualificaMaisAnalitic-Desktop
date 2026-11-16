@@ -1,6 +1,7 @@
 package com.qualificamaisanaliticinterface.session;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.qualificamaisanaliticinterface.api.ApiException;
 import com.qualificamaisanaliticinterface.config.AppConfig;
 import com.qualificamaisanaliticinterface.features.login.dto.LoginResponse;
@@ -11,20 +12,34 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.time.Clock;
 import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
 public class SessionService {
 
-    private final WindowsTokenStore store = new WindowsTokenStore();
+    private final TokenStore store;
     private final Gson gson = new Gson();
+    private final HttpClient client;
+    private final String baseUrl;
+    private final Clock clock;
 
-    private final HttpClient client = HttpClient.newBuilder()
-            .connectTimeout(Duration.ofSeconds(10))
-            .followRedirects(HttpClient.Redirect.NEVER)
-            .build();
+    public SessionService() {
+        this(new WindowsTokenStore(), HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .followRedirects(HttpClient.Redirect.NEVER).build(),
+                AppConfig.apiBaseUrl(), Clock.systemUTC());
+    }
+
+    public SessionService(TokenStore store, HttpClient client, String baseUrl, Clock clock) {
+        this.store = store;
+        this.client = client;
+        this.baseUrl = baseUrl;
+        this.clock = clock;
+    }
 
     public CompletableFuture<Optional<LoginResponse>> restoreSession() {
         return CompletableFuture.supplyAsync(() -> {
@@ -77,12 +92,21 @@ public class SessionService {
     }
 
     private Optional<LoginResponse> loadSession() throws IOException {
-        return store.load().map(json -> gson.fromJson(json, LoginResponse.class));
+        Optional<String> saved = store.load();
+        if (saved.isEmpty()) return Optional.empty();
+        try {
+            LoginResponse session = gson.fromJson(saved.get(), LoginResponse.class);
+            if (responseValidator(session)) return Optional.of(session);
+        } catch (JsonParseException invalidJson) {
+            // A sessão local inválida deve levar ao login, sem tentar renová-la.
+        }
+        clearSession();
+        return Optional.empty();
     }
 
     private CompletableFuture<Optional<LoginResponse>> refreshSession(String token) {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConfig.apiBaseUrl() + "/api/auth/refresh"))
+                .uri(URI.create(baseUrl + "/api/auth/refresh"))
                 .timeout(Duration.ofSeconds(5))
                 .header("Authorization", "Bearer " + token)
                 .header("Accept", "application/json")
@@ -109,11 +133,16 @@ public class SessionService {
     }
 
     private boolean responseValidator(LoginResponse session) {
-        return session != null && session.token() != null
-                && !session.token().isBlank()
-                && "Bearer".equals(session.tokenType())
-                && session.expiresAt() != null
-                && !Instant.now().isAfter(Instant.parse(session.expiresAt()))
-                && session.user() != null;
+        if (session == null || session.token() == null
+                || session.token().isBlank()
+                || !"Bearer".equals(session.tokenType())
+                || session.expiresAt() == null || session.user() == null) {
+            return false;
+        }
+        try {
+            return Instant.parse(session.expiresAt()).isAfter(clock.instant());
+        } catch (DateTimeParseException invalidDate) {
+            return false;
+        }
     }
 }

@@ -20,6 +20,17 @@ public class AuthService {
             .build();
 
     private final Gson gson = new Gson();
+    private final HttpClient client;
+    private final String baseUrl;
+
+    public AuthService() {
+        this(CLIENT, AppConfig.apiBaseUrl());
+    }
+
+    public AuthService(HttpClient client, String baseUrl) {
+        this.client = client;
+        this.baseUrl = baseUrl;
+    }
 
     public CompletableFuture<LoginResponse> login(
             String username,
@@ -28,14 +39,14 @@ public class AuthService {
         String json = gson.toJson(new LoginRequest(username, password));
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConfig.apiBaseUrl() + "/api/auth/login"))
+                .uri(URI.create(baseUrl + "/api/auth/login"))
                 .timeout(Duration.ofSeconds(20))
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
 
-        return CLIENT.sendAsync(
+        return client.sendAsync(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         ).thenApply(response -> {
@@ -88,13 +99,13 @@ public class AuthService {
         }
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConfig.apiBaseUrl() + "/api/auth/logout"))
+                .uri(URI.create(baseUrl + "/api/auth/logout"))
                 .timeout(Duration.ofSeconds(20))
                 .header("Authorization", "Bearer " + token)
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .build();
 
-        return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.discarding())
+        return client.sendAsync(request, HttpResponse.BodyHandlers.discarding())
                 .thenApply(response ->{
                     int status = response.statusCode();
 

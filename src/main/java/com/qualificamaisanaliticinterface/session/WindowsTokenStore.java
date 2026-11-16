@@ -10,16 +10,24 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Optional;
 
-public final class WindowsTokenStore {
+public final class WindowsTokenStore implements TokenStore {
     private final Path file;
 
     public WindowsTokenStore() {
+        this(defaultFile());
+    }
+
+    WindowsTokenStore(Path file) {
+        this.file = file;
+    }
+
+    private static Path defaultFile() {
         String localAppData = System.getenv("LOCALAPPDATA");
 
         if (localAppData == null || localAppData.isBlank()) {
             throw new IllegalStateException("Armazenamento disponível somente no Windows.");
         }
-        file = Path.of(localAppData, "QualificaMais", "session.dat");
+        return Path.of(localAppData, "QualificaMais", "session.dat");
     }
 
     public void save(String token) throws IOException {

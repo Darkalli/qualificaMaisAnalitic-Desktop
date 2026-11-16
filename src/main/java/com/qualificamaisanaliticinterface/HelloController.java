@@ -1,11 +1,10 @@
 package com.qualificamaisanaliticinterface;
 
-import com.google.gson.Gson;
 import com.qualificamaisanaliticinterface.features.login.AuthService;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.session.UserSession;
 
-import com.qualificamaisanaliticinterface.session.WindowsTokenStore;
+import com.qualificamaisanaliticinterface.session.SessionService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +19,17 @@ import java.util.concurrent.CompletionException;
 
 public class HelloController {
 
-    private final AuthService authService = new AuthService();
+    private final AuthService authService;
+    private final SessionService sessionService;
+
+    public HelloController() {
+        this(new AuthService(), new SessionService());
+    }
+
+    public HelloController(AuthService authService, SessionService sessionService) {
+        this.authService = authService;
+        this.sessionService = sessionService;
+    }
 
     private boolean loginInProgress;
     private boolean passwordVisibility;
@@ -35,8 +44,6 @@ public class HelloController {
     @FXML
     private CheckBox persistLoginCheckBox;
 
-    private final Gson gson = new Gson();
-
     @FXML
     private void initialize() {
         visiblePasswordField.textProperty()
@@ -47,9 +54,6 @@ public class HelloController {
         if (loginInProgress) {
             return;
         }
-
-        visiblePasswordField.textProperty()
-                .bindBidirectional(passwordField.textProperty());
 
         clearError();
 
@@ -91,27 +95,21 @@ public class HelloController {
                                 return;
                             }
 
-                            UserSession.start(response);
-                            if(persistLoginCheckBox.isSelected()){
-                                WindowsTokenStore store = new WindowsTokenStore();
-
-                                try {
-                                    store.save(gson.toJson(response));
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
+                            try {
+                                if (persistLoginCheckBox.isSelected()) {
+                                    sessionService.saveSession(response);
+                                } else {
+                                    sessionService.clearSession();
                                 }
+                            } catch (IOException | IllegalArgumentException failureToSave) {
+                                showError("Login aceito, mas não foi possível atualizar a sessão salva. Tente novamente.");
+                                return;
                             }
+                            UserSession.start(response);
                             passwordField.clear();
 
                             try {
-                                Stage stage = (Stage) userField.getScene().getWindow();
-                                Navigator.changeScreen(
-                                        userField.getScene(),
-                                        "/views/home.fxml"
-                                );
-                                stage.setWidth(1380);
-                                stage.setHeight(810);
-                                stage.centerOnScreen();
+                                showHome();
                             } catch (IOException exception) {
                                 UserSession.clear();
 
@@ -122,6 +120,14 @@ public class HelloController {
                             }
                         })
                 );
+    }
+
+    protected void showHome() throws IOException {
+        Stage stage = (Stage) userField.getScene().getWindow();
+        Navigator.changeScreen(userField.getScene(), "/views/home.fxml");
+        stage.setWidth(1380);
+        stage.setHeight(810);
+        stage.centerOnScreen();
     }
 
     private void showError(String message) {

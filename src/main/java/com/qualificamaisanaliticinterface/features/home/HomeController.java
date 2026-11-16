@@ -3,6 +3,7 @@ package com.qualificamaisanaliticinterface.features.home;
 import com.qualificamaisanaliticinterface.features.login.AuthService;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.session.UserSession;
+import com.qualificamaisanaliticinterface.session.SessionService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +25,17 @@ public class HomeController {
     @FXML
     public BorderPane workspace;
 
-    private final AuthService authService = new AuthService();
+    private final AuthService authService;
+    private final SessionService sessionService;
+
+    public HomeController() {
+        this(new AuthService(), new SessionService());
+    }
+
+    HomeController(AuthService authService, SessionService sessionService) {
+        this.authService = authService;
+        this.sessionService = sessionService;
+    }
 
     private boolean logoutInProgress;
 
@@ -37,14 +48,18 @@ public class HomeController {
         Scene scene = source.getScene();
         Parent loginRoot;
         try {
-            loginRoot = FXMLLoader.load(
-                    HomeController.class.getResource("/views/login.fxml")
-            );
+            loginRoot = loadLoginScreen();
         } catch (IOException exception) {
             showLogoutWarning(
                     "Não foi possível preparar a tela de login. "
                             + "A sessão atual foi mantida."
             );
+            return;
+        }
+        try {
+            sessionService.clearSession();
+        } catch (IOException exception) {
+            showLogoutWarning("Não foi possível apagar a sessão salva. Tente sair novamente.");
             return;
         }
         var session = UserSession.current();
@@ -73,7 +88,11 @@ public class HomeController {
                         })
                 );
     }
-    private void showLogoutWarning(String message) {
+    protected Parent loadLoginScreen() throws IOException {
+        return FXMLLoader.load(HomeController.class.getResource("/views/login.fxml"));
+    }
+
+    protected void showLogoutWarning(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Qualifica");
         alert.setHeaderText(null);

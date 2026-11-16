@@ -15,12 +15,22 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiClient {
-    private static final String BASE_URL = AppConfig.apiBaseUrl();
     private static final HttpClient CLIENT = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))
             .followRedirects(HttpClient.Redirect.NEVER)
             .build();
     private final Gson gson = new Gson();
+    private final HttpClient client;
+    private final String baseUrl;
+
+    public ApiClient() {
+        this(CLIENT, AppConfig.apiBaseUrl());
+    }
+
+    public ApiClient(HttpClient client, String baseUrl) {
+        this.client = client;
+        this.baseUrl = baseUrl;
+    }
 
     public CompletableFuture<String> get(String path) {
         if (path == null || !path.startsWith("/api/")) {
@@ -39,13 +49,13 @@ public class ApiClient {
             );
         }
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
+                .uri(URI.create(baseUrl + path))
                 .timeout(Duration.ofSeconds(20))
                 .header("Accept", "application/json")
                 .header("Authorization", "Bearer " + session.token())
                 .GET()
                 .build();
-        return CLIENT.sendAsync(
+        return client.sendAsync(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         ).thenApply(response -> {
@@ -90,14 +100,14 @@ public class ApiClient {
             );
         }
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
+                .uri(URI.create(baseUrl + path))
                 .timeout(Duration.ofSeconds(20))
                 .header("Accept", "application/json")
                 .header("Authorization", "Bearer " + session.token())
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
-        return CLIENT.sendAsync(
+        return client.sendAsync(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         ).thenApply(response -> {
@@ -136,14 +146,14 @@ public class ApiClient {
                     new ApiException(401, "Entre novamente para continuar."));
         }
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
+                .uri(URI.create(baseUrl + path))
                 .timeout(Duration.ofSeconds(20))
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + session.token())
                 .method("PATCH", HttpRequest.BodyPublishers.ofString(json))
                 .build();
-        return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     int status = response.statusCode();
                     if (status >= 200 && status < 300) {
@@ -180,14 +190,14 @@ public class ApiClient {
                     new ApiException(401, "Entre novamente para continuar."));
         }
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
+                .uri(URI.create(baseUrl + path))
                 .timeout(Duration.ofSeconds(20))
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + session.token())
                 .method("DELETE", HttpRequest.BodyPublishers.ofString(json))
                 .build();
-        return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenApply(response -> {
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenApply(response -> {
             int status = response.statusCode();
             if (status >= 200 && status < 300) {
                 return response.body();
@@ -229,12 +239,12 @@ public class ApiClient {
             );
         }
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + path))
+                .uri(URI.create(baseUrl + path))
                 .timeout(Duration.ofSeconds(20))
                 .header("Authorization", "Bearer " + session.token())
                 .DELETE()
                 .build();
-        return CLIENT.sendAsync(
+        return client.sendAsync(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         ).thenApply(response -> {
