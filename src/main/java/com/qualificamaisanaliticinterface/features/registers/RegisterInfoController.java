@@ -3,7 +3,9 @@ package com.qualificamaisanaliticinterface.features.registers;
 import com.qualificamaisanaliticinterface.features.people.PersonInfoController;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
@@ -11,8 +13,16 @@ import javafx.stage.Window;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class RegisterInfoController {
+
+    private RegisterService registerService = new RegisterService();
+
+    @FXML
+    public DatePicker startField;
+    @FXML
+    public DatePicker finishField;
     @FXML
     public DialogPane infoDialogPane;
     @FXML
@@ -71,5 +81,61 @@ public class RegisterInfoController {
         Window window = infoDialogPane.getScene().getWindow();
         window.setX(event.getScreenX() - dragOffsetX);
         window.setY(event.getScreenY() - dragOffsetY);
+    }
+
+    public void onRegisterProofClick(ActionEvent actionEvent) {
+        Window owner = ((Node) actionEvent.getSource())
+                .getScene()
+                .getWindow();
+
+        registerService.downloadPdf(
+                "/api/reports/registrations/" + register.id() + "/proof",
+                "Comprovante-de-inscrição-" + register.person().fullName() + ".pdf",
+                owner
+        );
+    }
+
+    public void onParticipationClick(ActionEvent actionEvent) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Window owner = ((Node) actionEvent.getSource())
+                .getScene()
+                .getWindow();
+        LocalDate start = null;
+        LocalDate finish = null;
+
+        if(startField.getValue() != null && finishField.getValue() != null) {
+            start = LocalDate.parse(startField.getValue().format(formatter));
+            finish = LocalDate.parse(finishField.getValue().format(formatter));
+        }
+
+        if (start != null && finish != null) {
+            registerService.downloadPdf(
+                    "/api/reports/registrations/"
+                            + register.id() + "/declaration"
+                            + "?start=" + start
+                            + "&finish=" + finish,
+                    "Declaração-de-participação-" + register.person().fullName() + "-" + start + "-" + finish + ".pdf",
+                    owner
+            );
+        } else {
+            registerService.downloadPdf(
+                    "/api/reports/registrations/"
+                            + register.id() + "/declaration",
+                    "Declaração-de-participação-" + register.person().fullName() + ".pdf",
+                    owner
+            );
+        }
+    }
+
+    public void onConclusionClick(ActionEvent actionEvent) {
+        Window owner = ((Node) actionEvent.getSource())
+                .getScene()
+                .getWindow();
+
+        registerService.downloadPdf(
+                "/api/reports/registrations/" + register.id() + "/certificate",
+                "Certificado-de-conclusão-" + register.person().fullName() + ".pdf",
+                owner
+        );
     }
 }

@@ -177,3 +177,126 @@
 .button.delection:pressed {
     -fx-background-color: #440000;
 }
+
+.button.document-button {
+    -fx-background-color: linear-gradient(to bottom right, #FB923C, #EA580C);
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(234,88,12,0.25), 10, 0, 0, 3);
+}
+
+.button:hover.document-button {
+    -fx-background-color: linear-gradient(to bottom right, #F97316, #C2410C);
+}
+
+.button:pressed.document-button {
+    -fx-background-color: #C2410C;
+    -fx-effect: none;
+}
+
+.content .box.documents-box {
+    -fx-padding: 16px;
+}
+
+.documents-box .button.document-button {
+    -fx-font-size: 12px;
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 12px;
+    -fx-text-alignment: center;
+}
+
+.documents-box .document-date-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #cbd5e1;
+}
+
+.documents-box .declaration-group {
+    -fx-background-color: #22324e;
+    -fx-background-radius: 10px;
+    -fx-border-color: #E67E22;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+}
+
+.documents-box .declaration-heading {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1f5f9;
+}
+
+.documents-box .register-date {
+    -fx-font-size: 12px;
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+}
+
+.pdf-alert {
+    -fx-background-color: #1e2c46;
+}
+
+.pdf-alert .header-panel {
+    -fx-background-color: #293a5a;
+}
+
+.pdf-alert .label {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.pdf-alert .button {
+    -fx-background-color: linear-gradient(to bottom right, #FB923C, #EA580C);
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(234,88,12,0.25), 10, 0, 0, 3);
+}
+
+.pdf-alert .button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #F97316, #C2410C);
+}
+
+.pdf-alert .button:pressed {
+    -fx-background-color: #C2410C;
+    -fx-effect: none;
+}
+
+.pdf-error-alert {
+    -fx-background-color: #1e2c46;
+}
+
+.pdf-error-alert .label {
+    -fx-text-fill: #dc2626;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.pdf-error-alert .button {
+    -fx-background-color: linear-gradient(to bottom right, #FF0000, #dc2626);
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(234,88,12,0.25), 10, 0, 0, 3);
+}
+
+.pdf-error-alert .button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #FF0000, #660000);
+}
+
+.pdf-error-alert .button:pressed {
+    -fx-background-color: #991b1b;
+    -fx-effect: none;
+}

@@ -1,0 +1,27 @@
+.pdf-alert.pdf-branded-alert {
+    -fx-padding: 16px 18px;
+}
+
+.pdf-alert.pdf-branded-alert .button-bar {
+    -fx-padding: 0;
+}
+
+.pdf-alert.pdf-branded-alert > .content {
+    -fx-padding: 0;
+}
+
+.pdf-alert.pdf-branded-alert .button {
+    -fx-min-height: 36px;
+}
+
+.pdf-alert.pdf-error-alert {
+    -fx-border-color: #ef4444;
+}
+
+.pdf-alert.pdf-error-alert .label {
+    -fx-text-fill: #fca5a5;
+}
+
+.pdf-alert.pdf-error-alert .button {
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.25), 10, 0, 0, 3);
+}

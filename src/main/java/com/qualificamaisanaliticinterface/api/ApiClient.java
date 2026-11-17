@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
@@ -271,5 +272,70 @@ public class ApiClient {
             }
             throw new ApiException(status, message);
         });
+    }
+
+    public CompletableFuture<byte[]> getPdf(String path) {
+        if (path == null || !path.startsWith("/api/")) {
+            return CompletableFuture.failedFuture(
+                    new IllegalArgumentException("Path must start with /api/.")
+            );
+        }
+
+        LoginResponse session = UserSession.current();
+
+        if (session == null || session.token() == null
+                || session.token().isBlank()) {
+            return CompletableFuture.failedFuture(
+                    new ApiException(401, "Entre novamente para continuar.")
+            );
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + path))
+                .timeout(Duration.ofSeconds(60))
+                .header("Accept", "application/pdf, application/json")
+                .header("Authorization", "Bearer " + session.token())
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofByteArray())
+                .thenApply(response -> {
+                    int status = response.statusCode();
+
+                    if (status < 200 || status >= 300) {
+                        String message = "Não foi possível baixar o PDF.";
+
+                        try {
+                            String json = new String(
+                                    response.body(),
+                                    StandardCharsets.UTF_8
+                            );
+
+                            ErrorDto error = gson.fromJson(json, ErrorDto.class);
+
+                            if (error != null && error.message() != null
+                                    && !error.message().isBlank()) {
+                                message = error.message();
+                            }
+                        } catch (JsonParseException ignored) {
+                        }
+
+                        throw new ApiException(status, message);
+                    }
+
+                    String contentType = response.headers()
+                            .firstValue("Content-Type")
+                            .orElse("")
+                            .split(";", 2)[0]
+                            .trim();
+
+                    if (!contentType.equalsIgnoreCase("application/pdf")) {
+                        throw new IllegalStateException(
+                                "A API não retornou um PDF."
+                        );
+                    }
+
+                    return response.body();
+                });
     }
 }

@@ -1,57 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.qualificamaisanaliticinterface.features.registers.RegisterInfoController"
-            fx:id="infoDialogPane" prefWidth="620" styleClass="dialog-pane"
-            onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.DatePicker?>
+<DialogPane fx:id="infoDialogPane" onMouseDragged="#onDragMoved" onMousePressed="#onDragPressed" prefWidth="620"
+            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.qualificamaisanaliticinterface.features.registers.RegisterInfoController">
     <content>
-        <VBox styleClass="content" spacing="20">
-            <Label text="Detalhes da inscrição" styleClass="title"/>
-            <GridPane styleClass="box" hgap="12" vgap="12">
+        <VBox spacing="20" styleClass="content">
+            <Label styleClass="title" text="Detalhes da inscrição"/>
+            <GridPane hgap="12" styleClass="box" vgap="12">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="65"/>
                     <ColumnConstraints percentWidth="35"/>
                 </columnConstraints>
-                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <Label text="Pessoa" styleClass="box-lower-sub-title"/>
-                    <Label fx:id="personName" styleClass="info-value" wrapText="true"
-                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                <VBox minWidth="0" spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label styleClass="box-lower-sub-title" text="Pessoa"/>
+                    <Label fx:id="personName" maxWidth="Infinity" minHeight="-Infinity" minWidth="0"
+                           styleClass="info-value" wrapText="true"/>
                 </VBox>
-                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <Label text="CPF" styleClass="box-lower-sub-title"/>
-                    <Label fx:id="personCpf" styleClass="info-value" wrapText="true"
-                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                <VBox minWidth="0" spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label styleClass="box-lower-sub-title" text="CPF"/>
+                    <Label fx:id="personCpf" maxWidth="Infinity" minHeight="-Infinity" minWidth="0"
+                           styleClass="info-value" wrapText="true"/>
                 </VBox>
-                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <Label text="Curso" styleClass="box-lower-sub-title"/>
-                    <Label fx:id="courseName" styleClass="info-value" wrapText="true"
-                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                <VBox minWidth="0" spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label styleClass="box-lower-sub-title" text="Curso"/>
+                    <Label fx:id="courseName" maxWidth="Infinity" minHeight="-Infinity" minWidth="0"
+                           styleClass="info-value" wrapText="true"/>
                 </VBox>
-                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <Label text="Situação" styleClass="box-lower-sub-title"/>
-                    <Label fx:id="statusField" styleClass="info-value" wrapText="true"
-                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                <VBox minWidth="0" spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label styleClass="box-lower-sub-title" text="Situação"/>
+                    <Label fx:id="statusField" maxWidth="Infinity" minHeight="-Infinity" minWidth="0"
+                           styleClass="info-value" wrapText="true"/>
                 </VBox>
-                <VBox spacing="6" minWidth="0" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    <Label text="Data da inscrição" styleClass="box-lower-sub-title"/>
-                    <Label fx:id="dateField" styleClass="info-value" wrapText="true"
-                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                <VBox minWidth="0" spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label styleClass="box-lower-sub-title" text="Data da inscrição"/>
+                    <Label fx:id="dateField" maxWidth="Infinity" minHeight="-Infinity" minWidth="0"
+                           styleClass="info-value" wrapText="true"/>
                 </VBox>
-                <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <Label text="Número do registro" styleClass="box-lower-sub-title"/>
-                    <Label fx:id="numberField" styleClass="info-value" wrapText="true"
-                           minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                <VBox minWidth="0" spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label styleClass="box-lower-sub-title" text="Número do registro"/>
+                    <Label fx:id="numberField" maxWidth="Infinity" minHeight="-Infinity" minWidth="0"
+                           styleClass="info-value" wrapText="true"/>
                 </VBox>
             </GridPane>
-            <VBox styleClass="box" spacing="6">
-                <Label text="Descrição do curso" styleClass="box-lower-sub-title"/>
-                <Label fx:id="courseDescription" wrapText="true" maxWidth="530" minHeight="-Infinity"/>
+            <VBox spacing="6" styleClass="box">
+                <Label styleClass="box-lower-sub-title" text="Descrição do curso"/>
+                <Label fx:id="courseDescription" maxWidth="530" minHeight="-Infinity" wrapText="true"/>
+            </VBox>
+            <VBox spacing="12" styleClass="box, documents-box">
+                <Label styleClass="box-lower-sub-title, icon-heading" text="Documentos">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-folder-open"/>
+                    </graphic>
+                </Label>
+                <GridPane hgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
+                    <Button maxWidth="Infinity" minWidth="0" onAction="#onRegisterProofClick"
+                            styleClass="document-button, icon-button" text="Comprovante de inscrição" wrapText="true"
+                            GridPane.columnIndex="0">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-file-pdf"/>
+                        </graphic>
+                    </Button>
+                    <Button maxWidth="Infinity" minWidth="0" onAction="#onConclusionClick"
+                            styleClass="document-button, icon-button" text="Certificado de conclusão" wrapText="true"
+                            GridPane.columnIndex="1">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-certificate"/>
+                        </graphic>
+                    </Button>
+                </GridPane>
+                <VBox spacing="8" styleClass="declaration-group">
+                    <VBox spacing="8">
+                        <Label styleClass="declaration-heading" text="Período da declaração"/>
+                        <Label styleClass="declaration-heading"
+                               text="Caso não inserir data será retornado todo o periodo do curso"/>
+                    </VBox>
+                    <GridPane alignment="BOTTOM_LEFT" hgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="26"/>
+                            <ColumnConstraints percentWidth="26"/>
+                            <ColumnConstraints percentWidth="48"/>
+                        </columnConstraints>
+                        <VBox minWidth="0" spacing="6" GridPane.columnIndex="0">
+                            <Label labelFor="${startField}" styleClass="document-date-label" text="Data inicial"/>
+                            <DatePicker fx:id="startField" maxWidth="Infinity" minWidth="0" prefWidth="0"
+                                        promptText="dd/mm/aaaa" styleClass="register-date"/>
+                        </VBox>
+                        <VBox minWidth="0" spacing="6" GridPane.columnIndex="1">
+                            <Label labelFor="${finishField}" styleClass="document-date-label" text="Data final"/>
+                            <DatePicker fx:id="finishField" maxWidth="Infinity" minWidth="0" prefWidth="0"
+                                        promptText="dd/mm/aaaa" styleClass="register-date"/>
+                        </VBox>
+                        <Button maxWidth="Infinity" minWidth="0" onAction="#onParticipationClick"
+                                styleClass="document-button, icon-button" text="Declaração de participação" wrapText="true"
+                                GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-file-signature"/>
+                            </graphic>
+                        </Button>
+                    </GridPane>
+                    <Label fx:id="declarationInfo" managed="false" maxWidth="Infinity"
+                           styleClass="register-message" visible="false" wrapText="true"/>
+                </VBox>
             </VBox>
             <HBox spacing="12">
-                <Button text="Ver pessoa" onAction="#onPersonInfoClick"/>
+                <Button onAction="#onPersonInfoClick" text="Ver pessoa" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-user"/>
+                    </graphic>
+                </Button>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="close" text="Voltar" onAction="#onClickCancel"/>
+                <Button fx:id="close" onAction="#onClickCancel" text="Voltar" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-arrow-left"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>
