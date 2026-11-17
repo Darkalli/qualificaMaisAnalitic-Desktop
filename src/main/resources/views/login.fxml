@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
@@ -10,6 +11,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Hyperlink?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.qualificamaisanaliticinterface.HelloController"
       prefWidth="360" minWidth="350" styleClass="side-menu" spacing="12">
@@ -21,6 +24,9 @@
                styleClass="title, brand-plus"/>
         <Label text="Ijui"
                styleClass="title, brand-city"/>
+        <ImageView fitWidth="50.0" preserveRatio="true">
+            <Image url="@../images/logo-qualifica-original-transparente.png"/>
+        </ImageView>
     </HBox>
 
     <Label text="Usuário:"/>
@@ -34,13 +40,14 @@
         <PasswordField fx:id="passwordField"
                        promptText="Digite sua senha"
                        styleClass="search-field"
-                       style="-fx-padding: 10px 80px 10px 12px;" />
+                       style="-fx-padding: 10px 80px 10px 12px;"/>
         <TextField fx:id="visiblePasswordField"
                    promptText="Digite sua senha"
                    styleClass="search-field"
                    HBox.hgrow="ALWAYS" style="-fx-padding: 10px 80px 10px 12px;"
                    visible="false" managed="false"/>
-        <Hyperlink text="Mostrar" styleClass="clear-filters" onAction="#onTogglePassword" StackPane.alignment="CENTER_RIGHT"
+        <Hyperlink text="Mostrar" styleClass="clear-filters" onAction="#onTogglePassword"
+                   StackPane.alignment="CENTER_RIGHT"
                    style="-fx-translate-x: -12px;"/>
     </StackPane>
     <CheckBox fx:id="persistLoginCheckBox" text="Manter conectado" styleClass="checkBox" selected="true"/>
@@ -52,6 +59,10 @@
            prefWidth="460"
            maxWidth="460"
            alignment="CENTER"/>
-    <Button styleClass="button" text="Login"
-            onAction="#onClick"/>
+    <Button styleClass="button, icon-button" text="Login"
+            onAction="#onClick">
+        <graphic>
+            <FontIcon iconLiteral="fas-sign-in-alt"/>
+        </graphic>
+    </Button>
 </VBox>

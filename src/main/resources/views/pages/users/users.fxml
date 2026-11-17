@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -24,16 +25,28 @@
                 <Label fx:id="totalUsersLabel" styleClass="box-info-title" alignment="CENTER"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="+  Novo Usuário" onAction="#onNewUserClick"/>
+            <Button text="Novo Usuário" onAction="#onNewUserClick" styleClass="icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-user-plus"/>
+                </graphic>
+            </Button>
         </HBox>
         <HBox styleClass="box">
             <VBox spacing="12" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT">
-                    <Label text="Buscar e filtros"/>
+                    <Label text="Buscar e filtros" styleClass="icon-heading">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-filter"/>
+                        </graphic>
+                    </Label>
                     <Region HBox.hgrow="ALWAYS"/>
                     <Hyperlink text="Limpar filtros"
                                onAction="#onClearFiltersClick"
-                               styleClass="clear-filters"/>
+                               styleClass="clear-filters, icon-link">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-eraser"/>
+                        </graphic>
+                    </Hyperlink>
                 </HBox>
                 <HBox spacing="12" alignment="BOTTOM_LEFT">
                     <VBox spacing="6" HBox.hgrow="ALWAYS">
@@ -45,7 +58,11 @@
                                    HBox.hgrow="ALWAYS"/>
                     </VBox>
                     <Button text="Buscar"
-                            onAction="#onSearchClick"/>
+                            onAction="#onSearchClick" styleClass="icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-search"/>
+                        </graphic>
+                    </Button>
                 </HBox>
             </VBox>
         </HBox>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?><?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.classes.ClassInfoController"
@@ -30,7 +31,11 @@
                         <Label fx:id="finishField" maxWidth="Infinity" styleClass="search-field"/>
                     </VBox>
             </GridPane>
-            <Label text="Registro de presenças" styleClass="title"/>
+            <Label text="Registro de presenças" styleClass="title, icon-heading">
+                <graphic>
+                    <FontIcon iconLiteral="fas-clipboard-check"/>
+                </graphic>
+            </Label>
             <TableView styleClass="table" fx:id="peopleTable"
                        VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
@@ -51,9 +56,17 @@
             <Label fx:id="info" styleClass="register-message" wrapText="true"
                    minHeight="-Infinity" maxWidth="560"/>
             <HBox spacing="12">
-                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel"/>
+                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-times"/>
+                    </graphic>
+                </Button>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="confirm" text="Salvar presenças" onAction="#onSavePresencesClick"/>
+                <Button fx:id="confirm" text="Salvar presenças" onAction="#onSavePresencesClick" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-save"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -51,9 +52,17 @@
             <Label fx:id="info" styleClass="register-message" wrapText="true"
                    minHeight="-Infinity" maxWidth="560"/>
             <HBox>
-                <Button fx:id="close" styleClass="button" text="Cancelar" onAction="#onClickCancel"/>
+                <Button fx:id="close" styleClass="button, icon-button" text="Cancelar" onAction="#onClickCancel">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-times"/>
+                    </graphic>
+                </Button>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="add" styleClass="button" text="Registrar" onAction="#onClickAddUser"/>
+                <Button fx:id="add" styleClass="button, icon-button" text="Registrar" onAction="#onClickAddUser">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-user-plus"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>

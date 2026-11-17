@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?><?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.registers.RegistersController">
@@ -16,13 +17,25 @@
                 <Label fx:id="totalRegistersLabel" text="—" styleClass="box-info-title"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="newRegister" text="+ Nova inscrição" onAction="#onNewRegisterClick"/>
+            <Button fx:id="newRegister" text="Nova inscrição" onAction="#onNewRegisterClick" styleClass="icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-plus"/>
+                </graphic>
+            </Button>
         </HBox>
         <VBox styleClass="box" spacing="12">
             <HBox alignment="CENTER_LEFT">
-                <Label styleClass="title" text="Buscar e filtros"/>
+                <Label styleClass="title, icon-heading" text="Buscar e filtros">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-filter"/>
+                    </graphic>
+                </Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Hyperlink text="Limpar filtros" onAction="#onClearFiltersClick" styleClass="clear-filters"/>
+                <Hyperlink text="Limpar filtros" onAction="#onClearFiltersClick" styleClass="clear-filters, icon-link">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-eraser"/>
+                    </graphic>
+                </Hyperlink>
             </HBox>
             <HBox spacing="12" alignment="BOTTOM_LEFT">
                 <VBox spacing="6" HBox.hgrow="ALWAYS">
@@ -40,7 +53,11 @@
                     <ComboBox fx:id="statusFilter" promptText="Todas as situações" minWidth="200"
                               prefWidth="200" styleClass="filter-field"/>
                 </VBox>
-                <Button text="Buscar" onAction="#onSearchClick"/>
+                <Button text="Buscar" onAction="#onSearchClick" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-search"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
         <VBox styleClass="box" spacing="12" VBox.vgrow="ALWAYS">

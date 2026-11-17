@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?><?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.courses.CoursesFormController"
@@ -36,9 +37,17 @@
             <Label fx:id="info" styleClass="register-message" wrapText="true"
                    minHeight="-Infinity" maxWidth="560"/>
             <HBox spacing="12">
-                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel"/>
+                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-times"/>
+                    </graphic>
+                </Button>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="add" text="Inscrever" onAction="#onClickAddCourse"/>
+                <Button fx:id="add" text="Inscrever" onAction="#onClickAddCourse" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-plus"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>

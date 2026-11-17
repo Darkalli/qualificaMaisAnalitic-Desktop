@@ -1,0 +1,88 @@
+.home-scroll,
+.home-scroll > .viewport {
+    -fx-background-color: #1e2c46;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.home-content {
+    -fx-padding: 32;
+}
+
+.home-welcome {
+    -fx-padding: 8 0 4 0;
+}
+
+.home-content .home-eyebrow {
+    -fx-text-fill: #fb923c;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.home-content .home-greeting {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.home-content .home-description,
+.home-content .home-date {
+    -fx-text-fill: #cbd5e1;
+}
+
+.home-date-row {
+    -fx-padding: 10 0 0 0;
+}
+
+.home-date-row .ikonli-font-icon {
+    -fx-icon-color: #fb923c;
+    -fx-icon-size: 16;
+}
+
+.home-card {
+    -fx-background-color: #293a5a;
+    -fx-background-radius: 14;
+    -fx-border-color: #405170;
+    -fx-border-radius: 14;
+    -fx-padding: 22;
+    -fx-pref-width: 225;
+    -fx-min-height: 175;
+}
+
+.home-content .home-card-title {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.home-content .home-card-value {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+.home-content .home-card-description {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 12px;
+}
+
+.home-card .ikonli-font-icon {
+    -fx-icon-size: 20;
+}
+
+.home-card-courses .ikonli-font-icon { -fx-icon-color: #fb923c; }
+.home-card-registers .ikonli-font-icon { -fx-icon-color: #4ade80; }
+.home-card-people .ikonli-font-icon { -fx-icon-color: #2dd4bf; }
+.home-card-classes .ikonli-font-icon { -fx-icon-color: #60a5fa; }
+
+.home-content .home-refresh {
+    -fx-background-radius: 8;
+    -fx-padding: 8 14;
+    -fx-font-size: 12px;
+    -fx-graphic-text-gap: 8;
+}
+
+.home-refresh .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 13;
+}

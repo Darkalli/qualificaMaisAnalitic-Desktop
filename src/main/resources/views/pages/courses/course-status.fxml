@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?><?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.courses.CourseStatusController"
@@ -20,9 +21,17 @@
                    maxWidth="470" minHeight="-Infinity"/>
             <HBox spacing="12">
                 <Button fx:id="close" text="Voltar" onAction="#onClickCancel"
-                        minWidth="120" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                        minWidth="120" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-arrow-left"/>
+                    </graphic>
+                </Button>
                 <Button fx:id="confirm" onAction="#onConfirmClick"
-                        minWidth="180" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                        minWidth="180" prefWidth="0" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-exchange-alt"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>

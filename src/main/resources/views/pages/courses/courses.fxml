@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?><?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.courses.CoursesController">
@@ -16,17 +17,25 @@
                 <Label fx:id="totalCoursesLabel" text="—" styleClass="box-info-title"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="newCourse" text="+ Novo curso" onAction="#onNewCourseClick"/>
+            <Button fx:id="newCourse" text="Novo curso" onAction="#onNewCourseClick" styleClass="icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-plus"/>
+                </graphic>
+            </Button>
         </HBox>
         <GridPane styleClass="box" hgap="12" vgap="8">
             <columnConstraints>
-                <ColumnConstraints percentWidth="40"/>
-                <ColumnConstraints percentWidth="25"/>
-                <ColumnConstraints percentWidth="25"/>
-                <ColumnConstraints percentWidth="10"/>
+                <ColumnConstraints minWidth="180" hgrow="ALWAYS"/>
+                <ColumnConstraints minWidth="180" prefWidth="220" hgrow="SOMETIMES"/>
+                <ColumnConstraints minWidth="180" prefWidth="220" hgrow="SOMETIMES"/>
+                <ColumnConstraints minWidth="-Infinity" hgrow="NEVER"/>
             </columnConstraints>
             <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <Label styleClass="title" text="Buscar e filtros"/>
+                <Label styleClass="title, icon-heading" text="Buscar e filtros">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-filter"/>
+                    </graphic>
+                </Label>
             </VBox>
             <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
                 <Label text="Buscar"/>
@@ -54,10 +63,18 @@
                           prefWidth="220" maxWidth="280" styleClass="register-date"/>
             </VBox>
             <VBox alignment="TOP_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="0">
-            <Hyperlink text="Limpar filtros" onAction="#onClearFiltersClick" styleClass="clear-filters"/>
+                <Hyperlink text="Limpar filtros" minWidth="-Infinity" onAction="#onClearFiltersClick" styleClass="clear-filters, icon-link">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-eraser"/>
+                    </graphic>
+                </Hyperlink>
             </VBox>
             <VBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                <Button text="Buscar" onAction="#onSearchClick"/>
+                <Button text="Buscar" minWidth="-Infinity" onAction="#onSearchClick" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-search"/>
+                    </graphic>
+                </Button>
             </VBox>
         </GridPane>
         <VBox styleClass="box" spacing="12" VBox.vgrow="ALWAYS">

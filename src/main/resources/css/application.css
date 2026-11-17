@@ -41,25 +41,50 @@
     -fx-border-color: #2563eb;
 }
 
-/* Botão */
 .button {
-    -fx-background-color: #E67E22;
-    -fx-background-radius: 8px;
+    -fx-background-color: linear-gradient(to bottom right, #FB923C, #EA580C);
+    -fx-background-radius: 30;
     -fx-text-fill: white;
-
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-padding: 10px 20px;
+    -fx-padding: 11 26;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(234,88,12,0.25), 10, 0, 0, 3);
 }
 
-/* Mouse sobre o botão */
 .button:hover {
-    -fx-background-color: #1d4ed8;
+    -fx-background-color: linear-gradient(to bottom right, #F97316, #C2410C);
 }
 
-/* Botão sendo pressionado */
 .button:pressed {
-    -fx-background-color: #8a9bb8;
+    -fx-background-color: #C2410C;
+    -fx-effect: none;
+}
+
+.icon-button,
+.icon-link,
+.icon-heading {
+    -fx-graphic-text-gap: 8;
+}
+
+.icon-button .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 16;
+}
+
+.document-button.icon-button .ikonli-font-icon,
+.icon-link .ikonli-font-icon,
+.icon-heading .ikonli-font-icon {
+    -fx-icon-size: 14;
+}
+
+.icon-link .ikonli-font-icon,
+.icon-heading .ikonli-font-icon {
+    -fx-icon-color: #FB923C;
+}
+
+.icon-link:pressed .ikonli-font-icon {
+    -fx-icon-color: #8a9bb8;
 }
 
 .content {

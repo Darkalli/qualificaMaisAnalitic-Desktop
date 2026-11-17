@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -24,12 +25,20 @@
                    minHeight="-Infinity" maxWidth="Infinity"/>
             <HBox alignment="CENTER_RIGHT" spacing="12">
                 <Button fx:id="cancel" onAction="#onClickCancel" text="Cancelar"
-                        styleClass="delete-cancel" minWidth="150" prefWidth="0"
-                        maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-                <Button fx:id="delete" styleClass="delection"
+                        styleClass="delete-cancel, icon-button" minWidth="150" prefWidth="0"
+                        maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-times"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="delete" styleClass="delection, icon-button"
                         onAction="#onDeletePersonClick" text="Excluir pessoa"
                         minWidth="150" prefWidth="0" maxWidth="Infinity"
-                        HBox.hgrow="ALWAYS"/>
+                        HBox.hgrow="ALWAYS">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-trash-alt"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>

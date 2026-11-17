@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.control.*?>
 
 <?import javafx.scene.layout.VBox?>
@@ -18,7 +19,11 @@
             <Label styleClass="title" fx:id="infoName" wrapText="true"
                    minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
             <VBox>
-                <Label text="Identificação"/>
+                <Label text="Identificação" styleClass="icon-heading">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-id-card"/>
+                    </graphic>
+                </Label>
                 <GridPane styleClass="box" hgap="12" vgap="12">
                     <columnConstraints>
                         <ColumnConstraints percentWidth="50"/>
@@ -67,7 +72,11 @@
                 </GridPane>
             </VBox>
             <VBox>
-                <Label text="Endereço"/>
+                <Label text="Endereço" styleClass="icon-heading">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-map-marker-alt"/>
+                    </graphic>
+                </Label>
                 <HBox styleClass="box" spacing="4">
                     <VBox spacing="4" HBox.hgrow="NEVER" minWidth="76" prefWidth="76" maxWidth="76">
                         <Label text="Número" styleClass="box-lower-sub-title"/>
@@ -102,7 +111,11 @@
                 </HBox>
             </VBox>
             <VBox>
-                <Label text="Contato"/>
+                <Label text="Contato" styleClass="icon-heading">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-phone"/>
+                    </graphic>
+                </Label>
                 <HBox styleClass="box" alignment="CENTER" spacing="12">
                     <VBox spacing="4" HBox.hgrow="ALWAYS" minWidth="0">
                         <Label text="Número pessoal" styleClass="box-lower-sub-title"/>
@@ -131,7 +144,11 @@
                 </HBox>
             </VBox>
             <VBox>
-                <Label text="Informações pessoais"/>
+                <Label text="Informações pessoais" styleClass="icon-heading">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-user-circle"/>
+                    </graphic>
+                </Label>
                 <GridPane styleClass="box" hgap="12" vgap="8">
                     <columnConstraints>
                         <ColumnConstraints percentWidth="70"/>
@@ -176,7 +193,11 @@
             </VBox>
             <HBox alignment="CENTER">
                 <Button fx:id="close" text="Voltar"
-                        onAction="#onClickCancel"/>
+                        onAction="#onClickCancel" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-arrow-left"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>

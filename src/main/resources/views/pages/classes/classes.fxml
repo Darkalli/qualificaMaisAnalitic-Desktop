@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -26,16 +27,28 @@
                 <Label fx:id="presence" styleClass="box-info-title" alignment="CENTER"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="+  Adicionar aula" onAction="#onNewClassClick"/>
+            <Button text="Adicionar aula" onAction="#onNewClassClick" styleClass="icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-plus"/>
+                </graphic>
+            </Button>
         </HBox>
         <HBox styleClass="box">
             <VBox spacing="12" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT">
-                    <Label styleClass="title" text="Buscar e filtros"/>
+                    <Label styleClass="title, icon-heading" text="Buscar e filtros">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-filter"/>
+                        </graphic>
+                    </Label>
                     <Region HBox.hgrow="ALWAYS"/>
                     <Hyperlink text="Limpar filtros" fx:id="cleanFilter"
                                onAction="#onClearFiltersClick"
-                               styleClass="clear-filters"/>
+                               styleClass="clear-filters, icon-link">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-eraser"/>
+                        </graphic>
+                    </Hyperlink>
                 </HBox>
                 <HBox spacing="12" alignment="BOTTOM_LEFT">
                     <VBox spacing="6" HBox.hgrow="ALWAYS">
@@ -62,7 +75,11 @@
                                   styleClass="filter-field"/>
                     </VBox>
                     <Button text="Buscar" fx:id="search"
-                            onAction="#onSearchClick"/>
+                            onAction="#onSearchClick" styleClass="icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-search"/>
+                        </graphic>
+                    </Button>
                 </HBox>
             </VBox>
         </HBox>

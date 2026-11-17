@@ -1,33 +1,30 @@
 /* Navegação: menu lateral, cabeçalho e separadores. */
 
 .side-button {
-    -fx-background-color: #293a5a;
-    -fx-background-radius: 8px;
+    -fx-background-color: linear-gradient(to bottom right, #FB923C, #EA580C);
+    -fx-background-radius: 8;
     -fx-text-fill: white;
-
-    -fx-min-width: 150px;
-    -fx-pref-width: 150px;
-    -fx-max-width: 150px;
-
-    -fx-min-height: 50px;
-    -fx-pref-height: 50px;
-    -fx-max-height: 50px;
-
-    -fx-alignment: center-left;
-
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-padding: 10px 20px 10px 5px;
+    -fx-padding: 12 18;
+    -fx-alignment: CENTER_LEFT;
+    -fx-graphic-text-gap: 12;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(234,88,12,0.15), 6, 0, 0, 2);
 }
 
-/* Mouse sobre o botão */
+.side-button .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 18;
+}
+
 .side-button:hover {
-    -fx-background-color: #E67E22;
+    -fx-background-color: linear-gradient(to bottom right, #F97316, #C2410C);
 }
 
-/* Botão sendo pressionado */
 .side-button:pressed {
-    -fx-background-color: #8a9bb8;
+    -fx-background-color: #C2410C;
+    -fx-effect: none;
 }
 
 .side-menu {
@@ -39,6 +36,72 @@
 .header {
     -fx-background-color: #293a5a;
     -fx-padding: 20px;
+}
+
+/* Barra de titulo da janela. */
+.window-title-bar {
+    -fx-background-color: #1e2c46;
+    -fx-min-height: 36px;
+    -fx-pref-height: 36px;
+    -fx-max-height: 36px;
+    -fx-padding: 0 0 0 12px;
+    -fx-spacing: 4px;
+}
+
+.window-title-bar .title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.window-title-bar .brand-name {
+    -fx-text-fill: #66BB6A;
+}
+
+.window-title-bar .brand-plus {
+    -fx-text-fill: #E67E22;
+}
+
+.window-title-bar .brand-city {
+    -fx-text-fill: #12A797;
+}
+
+.window-title-bar .window-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+    -fx-min-width: 44px;
+    -fx-pref-width: 44px;
+    -fx-max-width: 44px;
+    -fx-min-height: 36px;
+    -fx-pref-height: 36px;
+    -fx-max-height: 36px;
+    -fx-text-fill: #f1f5f9;
+    -fx-cursor: hand;
+    -fx-effect: none;
+}
+
+.window-title-bar .window-button .ikonli-font-icon {
+    -fx-icon-color: #f1f5f9;
+    -fx-icon-size: 12;
+}
+
+.window-title-bar .window-button:focused,
+.window-title-bar .window-button:hover {
+    -fx-background-color: #405170;
+}
+
+.window-title-bar .window-button:pressed {
+    -fx-background-color: #526789;
+}
+
+.window-title-bar .window-close:hover {
+    -fx-background-color: #dc2626;
+}
+
+.window-title-bar .window-close:pressed {
+    -fx-background-color: #991b1b;
 }
 
 .side-menu .label,
@@ -57,6 +120,29 @@
 
 .side-menu .brand-city {
     -fx-text-fill: #12A797;
+}
+
+.side-menu .sidebar-brand .title {
+    -fx-font-size: 18px;
+}
+
+.side-menu .logo-container {
+    -fx-cursor: hand;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-effect: none;
+}
+
+.side-menu .logo-container:hover {
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+    -fx-effect: dropshadow(gaussian, rgba(251,146,60,0.4), 10, 0, 0, 0);
+}
+
+.side-menu .logo-container:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: none;
 }
 
 

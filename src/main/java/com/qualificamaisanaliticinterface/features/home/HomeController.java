@@ -14,30 +14,130 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 
 import java.io.IOException;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class HomeController {
 
     @FXML
     public BorderPane workspace;
+    @FXML
+    public FontIcon maximise;
+    @FXML
+    public BorderPane homePane;
+    @FXML
+    private ScrollPane homeContent;
+    @FXML
+    private Label pageTitle;
+    @FXML
+    private Label greeting;
+    @FXML
+    private Label currentDate;
+    @FXML
+    private Label coursesCount;
+    @FXML
+    private Label coursesState;
+    @FXML
+    private Label registersCount;
+    @FXML
+    private Label registersState;
+    @FXML
+    private Label peopleCount;
+    @FXML
+    private Label peopleState;
+    @FXML
+    private Label classesCount;
+    @FXML
+    private Label classesState;
 
     private final AuthService authService;
     private final SessionService sessionService;
+    private final HomeSummaryService summaryService;
+    private final Clock clock;
+    private long summaryRequest;
+    private boolean maximized;
+    private double dragOffsetX;
+    private double dragOffsetY;
 
     public HomeController() {
         this(new AuthService(), new SessionService());
     }
 
     HomeController(AuthService authService, SessionService sessionService) {
+        this(authService, sessionService, new HomeSummaryService(), Clock.systemDefaultZone());
+    }
+
+    HomeController(AuthService authService, SessionService sessionService,
+                   HomeSummaryService summaryService, Clock clock) {
         this.authService = authService;
         this.sessionService = sessionService;
+        this.summaryService = summaryService;
+        this.clock = clock;
     }
 
     private boolean logoutInProgress;
+
+    @FXML
+    private void initialize() {
+        homeContent.addEventFilter(MouseEvent.MOUSE_PRESSED, this::onDragPressed);
+        homeContent.addEventFilter(MouseEvent.MOUSE_DRAGGED, this::onDragMoved);
+        onRefreshSummary();
+    }
+
+    @FXML
+    private void onHomeClick() {
+        workspace.setCenter(homeContent);
+        pageTitle.setText("Início");
+        onRefreshSummary();
+    }
+
+    @FXML
+    private void onRefreshSummary() {
+        var session = UserSession.current();
+        String username = session == null || session.user() == null ? null : session.user().username();
+        greeting.setText(username == null || username.isBlank() ? "Olá!" : "Olá, " + username.strip() + "!");
+        LocalDate today = LocalDate.now(clock);
+        currentDate.setText(today.format(DateTimeFormatter.ofPattern(
+                "EEEE, d 'de' MMMM 'de' uuuu", Locale.forLanguageTag("pt-BR"))));
+
+        long request = ++summaryRequest;
+        loadCount(coursesCount, coursesState, summaryService::activeCourses, "Em andamento", request);
+        loadCount(registersCount, registersState, summaryService::activeRegisters, "Inscrições com situação ativa", request);
+        loadCount(peopleCount, peopleState, summaryService::registeredPeople, "Total de cadastros", request);
+        loadCount(classesCount, classesState, () -> summaryService.todaysClasses(today), "Aulas ativas agendadas para hoje", request);
+    }
+
+    private void loadCount(Label count, Label state, Supplier<CompletableFuture<Long>> query,
+                           String description, long request) {
+        count.setText("—");
+        state.setText("Carregando...");
+        CompletableFuture<Long> result;
+        try {
+            result = query.get();
+        } catch (RuntimeException exception) {
+            result = CompletableFuture.failedFuture(exception);
+        }
+        result.whenComplete((total, failure) -> Platform.runLater(() -> {
+            if (request != summaryRequest || logoutInProgress) {
+                return;
+            }
+            count.setText(failure == null ? String.valueOf(total) : "—");
+            state.setText(failure == null ? description : "Não foi possível carregar.");
+        }));
+    }
 
     @FXML
     private void onLogoutClick(ActionEvent event) {
@@ -107,11 +207,59 @@ public class HomeController {
 
         if (path == null || path.isBlank()) {
             throw new IOException(
-                    "Página não configurada para o botão: "
-                            + buttonClicked.getText()
+                    "Página não configurada para o botão: " + buttonClicked.getText()
             );
         }
 
         Navigator.changeContent(workspace, path);
+        pageTitle.setText(buttonClicked.getText());
+    }
+
+    @FXML
+    public void onHomeGoClick(MouseEvent mouseEvent) {
+        onHomeClick();
+    }
+
+    @FXML
+    public void onMinimizeClick(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    public void onMaximiseClick(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        if(!maximized) {
+            maximise.setIconLiteral("far-clone");
+            stage.setMaximized(true);
+            maximized = true;
+        } else {
+            maximise.setIconLiteral("far-square");
+            stage.setMaximized(false);
+            maximized = false;
+        }
+    }
+
+    @FXML
+    public void onCloseClick(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void onDragPressed(MouseEvent event) {
+        Window window = homePane.getScene().getWindow();
+        dragOffsetX = event.getScreenX() - window.getX();
+        dragOffsetY = event.getScreenY() - window.getY();
+    }
+
+    @FXML
+    private void onDragMoved(MouseEvent event) {
+        Window window = homePane.getScene().getWindow();
+        window.setX(event.getScreenX() - dragOffsetX);
+        window.setY(event.getScreenY() - dragOffsetY);
     }
 }

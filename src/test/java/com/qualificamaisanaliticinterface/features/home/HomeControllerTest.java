@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -32,6 +34,7 @@ class HomeControllerTest {
     private Scene scene;
     private Stage stage;
     private Button logout;
+    private FakeSummaryService summary;
 
     @BeforeAll
     static void startJavaFx() {
@@ -46,7 +49,8 @@ class HomeControllerTest {
             store.saved = GSON.toJson(UserSession.current());
             auth = new FakeAuthService();
             SessionService sessions = new SessionService(store, new StubHttpClient(), BASE_URL, CLOCK);
-            controller = new TestController(auth, sessions);
+            summary = new FakeSummaryService();
+            controller = new TestController(auth, sessions, summary);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
             loader.setControllerFactory(type -> controller);
             home = loader.load();
@@ -67,6 +71,66 @@ class HomeControllerTest {
                 stage.close();
             }
             UserSession.clear();
+            return null;
+        });
+    }
+
+    @Test
+    void shouldDisplayLoggedInUserDateAndSummaryWithoutWaitingForAllRequests() throws Exception {
+        summary.courses.complete(4L);
+        summary.registers.complete(18L);
+        summary.people.complete(27L);
+        fx(() -> {
+            Assertions.assertEquals("Olá, ana!", label("greeting").getText());
+            Assertions.assertEquals("segunda-feira, 16 de novembro de 2026", label("currentDate").getText());
+            Assertions.assertEquals(LocalDate.of(2026, 11, 16), summary.requestedDate);
+            Assertions.assertEquals("4", label("coursesCount").getText());
+            Assertions.assertEquals("18", label("registersCount").getText());
+            Assertions.assertEquals("27", label("peopleCount").getText());
+            Assertions.assertEquals("Carregando...", label("classesState").getText());
+            return null;
+        });
+        summary.classes.complete(0L);
+        fx(() -> {
+            Assertions.assertEquals("0", label("classesCount").getText());
+            return null;
+        });
+    }
+
+    @Test
+    void shouldKeepAvailableCountsWhenOneRequestFailsAndAllowRefresh() throws Exception {
+        summary.courses.completeExceptionally(new IOException("offline"));
+        summary.people.complete(12L);
+        fx(() -> {
+            Assertions.assertEquals("—", label("coursesCount").getText());
+            Assertions.assertEquals("Não foi possível carregar.", label("coursesState").getText());
+            Assertions.assertEquals("12", label("peopleCount").getText());
+            summary.courses = CompletableFuture.completedFuture(3L);
+            home.lookupAll(".button").stream().filter(Button.class::isInstance)
+                    .map(Button.class::cast).filter(button -> "Atualizar".equals(button.getText()))
+                    .findFirst().orElseThrow().fire();
+            return null;
+        });
+        fx(() -> {
+            Assertions.assertEquals("3", label("coursesCount").getText());
+            Assertions.assertEquals("Em andamento", label("coursesState").getText());
+            return null;
+        });
+    }
+
+    @Test
+    void shouldIgnoreOldSummaryAfterRefresh() throws Exception {
+        CompletableFuture<Long> previous = summary.courses;
+        fx(() -> {
+            summary.courses = CompletableFuture.completedFuture(8L);
+            home.lookupAll(".button").stream().filter(Button.class::isInstance)
+                    .map(Button.class::cast).filter(button -> "Atualizar".equals(button.getText()))
+                    .findFirst().orElseThrow().fire();
+            return null;
+        });
+        previous.complete(2L);
+        fx(() -> {
+            Assertions.assertEquals("8", label("coursesCount").getText());
             return null;
         });
     }
@@ -190,6 +254,10 @@ class HomeControllerTest {
         });
     }
 
+    private Label label(String id) {
+        return (Label) home.lookup("#" + id);
+    }
+
     private void clickLogout() throws Exception {
         fx(() -> {
             logout.fire();
@@ -232,8 +300,8 @@ class HomeControllerTest {
         int loginLoads;
         IOException loadFailure;
 
-        TestController(AuthService auth, SessionService sessions) {
-            super(auth, sessions);
+        TestController(AuthService auth, SessionService sessions, HomeSummaryService summary) {
+            super(auth, sessions, summary, CLOCK);
             this.auth = auth;
             this.sessions = sessions;
         }
@@ -253,6 +321,33 @@ class HomeControllerTest {
         @Override
         protected void showLogoutWarning(String message) {
             warnings.add(message);
+        }
+    }
+
+    private static class FakeSummaryService extends HomeSummaryService {
+        CompletableFuture<Long> courses = new CompletableFuture<>();
+        final CompletableFuture<Long> registers = new CompletableFuture<>();
+        final CompletableFuture<Long> people = new CompletableFuture<>();
+        final CompletableFuture<Long> classes = new CompletableFuture<>();
+        LocalDate requestedDate;
+
+        FakeSummaryService() {
+            super(null, null, null, null);
+        }
+
+        @Override
+        public CompletableFuture<Long> activeCourses() { return courses; }
+
+        @Override
+        public CompletableFuture<Long> activeRegisters() { return registers; }
+
+        @Override
+        public CompletableFuture<Long> registeredPeople() { return people; }
+
+        @Override
+        public CompletableFuture<Long> todaysClasses(LocalDate today) {
+            requestedDate = today;
+            return classes;
         }
     }
 }

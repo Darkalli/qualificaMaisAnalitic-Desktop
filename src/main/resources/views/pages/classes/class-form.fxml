@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?><?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.SearchableComboBox?>
 <DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
@@ -28,15 +29,27 @@
                     <TextField fx:id="finishField" promptText="HH:mm" maxWidth="Infinity" styleClass="search-field"/>
                 </VBox>
                 <HBox alignment="BOTTOM_RIGHT" >
-                <Hyperlink text="Adicionar aulas em lote" onAction="#onClickAddClassInBatchPage" styleClass="clear-filters"/>
+                <Hyperlink text="Adicionar aulas em lote" onAction="#onClickAddClassInBatchPage" styleClass="clear-filters, icon-link">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-layer-group"/>
+                    </graphic>
+                </Hyperlink>
                 </HBox>
             </VBox>
             <Label fx:id="info" styleClass="register-message" wrapText="true"
                    minHeight="-Infinity" maxWidth="560"/>
             <HBox spacing="12">
-                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel"/>
+                <Button fx:id="close" text="Cancelar" onAction="#onClickCancel" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-times"/>
+                    </graphic>
+                </Button>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="add" text="Inscrever" onAction="#onClickAddClass"/>
+                <Button fx:id="add" text="Inscrever" onAction="#onClickAddClass" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-plus"/>
+                    </graphic>
+                </Button>
             </HBox>
         </VBox>
     </content>
