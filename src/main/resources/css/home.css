@@ -61,6 +61,10 @@
     -fx-font-weight: bold;
 }
 
+.home-content .home-card-value .text {
+    -fx-font-smoothing-type: gray;
+}
+
 .home-content .home-card-description {
     -fx-text-fill: #cbd5e1;
     -fx-font-size: 12px;

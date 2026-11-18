@@ -1,6 +1,8 @@
 package com.qualificamaisanaliticinterface.navigation;
 
+import com.qualificamaisanaliticinterface.features.home.HomeController;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -28,7 +30,17 @@ public final class Navigator {
         FXMLLoader loader = new FXMLLoader(arquivo);
         Parent novaTela = loader.load();
 
-        scene.setRoot(novaTela);
+        loader = new FXMLLoader(Navigator.class.getResource("/views/window-bar.fxml"));
+        Node header = loader.load();
+        BorderPane pane = new BorderPane();
+        if(path == "/views/login.fxml"){
+            WindowBarController controller = loader.getController();
+            controller.setMaximise();
+        }
+        pane.setTop(header);
+        pane.setCenter(novaTela);
+
+        scene.setRoot(pane);
     }
     public static void changeContent(BorderPane pane, String pagePath)
             throws IOException {
@@ -55,6 +67,13 @@ public final class Navigator {
         Dialog<Void> dialog = new Dialog<>();
         DialogPane pane = loader.load();
 
+        loader = new FXMLLoader(Navigator.class.getResource("/views/window-bar.fxml"));
+        Node header = loader.load();
+        WindowBarController controller = loader.getController();
+        controller.setMaximise();
+        controller.setMinimise();
+        pane.setHeader(header);
+
         dialog.initStyle(StageStyle.UNDECORATED);
         dialog.setDialogPane(pane);
         dialog.initOwner(scene.getWindow());
@@ -72,6 +91,13 @@ public final class Navigator {
         Dialog<Void> dialog = new Dialog<>();
         DialogPane pane = loader.load();
         configure.accept(loader.getController());
+
+        loader = new FXMLLoader(Navigator.class.getResource("/views/window-bar.fxml"));
+        Node header = loader.load();
+        WindowBarController controller = loader.getController();
+        controller.setMaximise();
+        controller.setMinimise();
+        pane.setHeader(header);
 
         dialog.initStyle(StageStyle.UNDECORATED);
         dialog.setDialogPane(pane);

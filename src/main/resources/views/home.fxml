@@ -18,126 +18,103 @@
 <BorderPane fx:id="homePane" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.home.HomeController"
             stylesheets="@../css/home.css" onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
-    <top>
-        <HBox alignment="CENTER_LEFT" styleClass="window-title-bar">
-            <Label text="Qualifica" minWidth="-Infinity" styleClass="title, brand-name"/>
-            <Label text="+" minWidth="-Infinity" styleClass="title, brand-plus"/>
-            <Label text="Ijui" minWidth="-Infinity" styleClass="title, brand-city"/>
-            <ImageView fitWidth="32" fitHeight="32" preserveRatio="true">
-                <Image url="@../images/logo-qualifica-original-transparente.png"
-                       requestedWidth="64" requestedHeight="64" preserveRatio="true" smooth="true"/>
-            </ImageView>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button onAction="#onMinimizeClick" styleClass="window-button">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-minus"/>
-                    </StackPane>
-                </graphic>
-            </Button>
-            <Button onAction="#onMaximiseClick" styleClass="window-button">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon fx:id="maximise" iconLiteral="far-square"/>
-                    </StackPane>
-                </graphic>
-            </Button>
-            <Button onAction="#onCloseClick" styleClass="window-button, window-close">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-times"/>
-                    </StackPane>
-                </graphic>
-            </Button>
-        </HBox>
-    </top>
     <left>
-        <VBox prefWidth="220" styleClass="side-menu" spacing="20">
-            <HBox alignment="CENTER_LEFT" spacing="2" styleClass="sidebar-brand">
-                <HBox alignment="CENTER_LEFT" spacing="2" onMouseClicked="#onHomeGoClick" styleClass="logo-container">
-                    <Label text="Qualifica" minWidth="-Infinity" styleClass="title, brand-name"/>
-                    <Label text="+" minWidth="-Infinity" styleClass="title, brand-plus"/>
-                    <Label text="Ijui" minWidth="-Infinity" styleClass="title, brand-city"/>
-                    <ImageView fitWidth="32" fitHeight="32" preserveRatio="true">
-                        <Image url="@../images/logo-qualifica-original-transparente.png"
-                               requestedWidth="64" requestedHeight="64" preserveRatio="true" smooth="true"/>
-                    </ImageView>
-                </HBox>
-            </HBox>
+        <VBox prefWidth="220" styleClass="side-menu, home-sidebar">
+            <StackPane styleClass="sidebar-header" minHeight="-Infinity"
+                       prefHeight="${workspaceHeader.height}" maxHeight="-Infinity">
+                <Button styleClass="side-button" maxWidth="Infinity" text="Menu" onAction="#onHomeGoClick">
+                    <graphic>
+                        <ImageView fitWidth="32" fitHeight="32" preserveRatio="true">
+                            <Image url="@../images/Ícone-qualifica-branco.png"
+                                   requestedWidth="64" requestedHeight="64" preserveRatio="true" smooth="true"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </StackPane>
             <Separator styleClass="menu-divider"/>
-            <Button styleClass="side-button" maxWidth="Infinity" text="Inscrições" onAction="#onPageClick">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-clipboard-list"/>
-                    </StackPane>
-                </graphic>
-                <userData>
-                    <String fx:value="/views/pages/registers/registers.fxml"/>
-                </userData>
-            </Button>
-            <Button styleClass="side-button" maxWidth="Infinity" text="Pessoas" onAction="#onPageClick">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-users"/>
-                    </StackPane>
-                </graphic>
-                <userData>
-                    <String fx:value="/views/pages/people/people.fxml"/>
-                </userData>
-            </Button>
-            <Button styleClass="side-button" maxWidth="Infinity" text="Cursos" onAction="#onPageClick">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-graduation-cap"/>
-                    </StackPane>
-                </graphic>
-                <userData>
-                    <String fx:value="/views/pages/courses/courses.fxml"/>
-                </userData>
-            </Button>
-            <Button styleClass="side-button" maxWidth="Infinity" text="Aulas" onAction="#onPageClick">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-calendar-alt"/>
-                    </StackPane>
-                </graphic>
-                <userData>
-                    <String fx:value="/views/pages/classes/classes.fxml"/>
-                </userData>
-            </Button>
-            <Button styleClass="side-button" maxWidth="Infinity" text="Usuários" onAction="#onPageClick">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-user-cog"/>
-                    </StackPane>
-                </graphic>
-                <userData>
-                    <String fx:value="/views/pages/users/users.fxml"/>
-                </userData>
-            </Button>
-            <Label text="Gestão"
-                   styleClass="sub-title"/>
-            <Button styleClass="side-button" maxWidth="Infinity" text="Estatísticas" onAction="#onPageClick">
-                <graphic>
-                    <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                        <FontIcon iconLiteral="fas-chart-bar"/>
-                    </StackPane>
-                </graphic>
-                <userData>
-                    <String fx:value="/views/pages/superset.fxml"/>
-                </userData>
-            </Button>
+            <VBox styleClass="sidebar-links" spacing="30">
+                <VBox alignment="CENTER">
+                    <Label text="Cadastros"
+                           styleClass="sidebar-section-title"/>
+                </VBox>
+                <Button styleClass="side-button" maxWidth="Infinity" text="Inscrições" onAction="#onPageClick">
+                    <graphic>
+                        <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                            <FontIcon iconLiteral="fas-clipboard-list"/>
+                        </StackPane>
+                    </graphic>
+                    <userData>
+                        <String fx:value="/views/pages/registers/registers.fxml"/>
+                    </userData>
+                </Button>
+                <Button styleClass="side-button" maxWidth="Infinity" text="Pessoas" onAction="#onPageClick">
+                    <graphic>
+                        <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                            <FontIcon iconLiteral="fas-users"/>
+                        </StackPane>
+                    </graphic>
+                    <userData>
+                        <String fx:value="/views/pages/people/people.fxml"/>
+                    </userData>
+                </Button>
+                <Button styleClass="side-button" maxWidth="Infinity" text="Cursos" onAction="#onPageClick">
+                    <graphic>
+                        <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                            <FontIcon iconLiteral="fas-graduation-cap"/>
+                        </StackPane>
+                    </graphic>
+                    <userData>
+                        <String fx:value="/views/pages/courses/courses.fxml"/>
+                    </userData>
+                </Button>
+                <Button styleClass="side-button" maxWidth="Infinity" text="Aulas" onAction="#onPageClick">
+                    <graphic>
+                        <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                            <FontIcon iconLiteral="fas-calendar-alt"/>
+                        </StackPane>
+                    </graphic>
+                    <userData>
+                        <String fx:value="/views/pages/classes/classes.fxml"/>
+                    </userData>
+                </Button>
+            </VBox>
+            <Separator styleClass="menu-divider"/>
+            <VBox styleClass="sidebar-links" spacing="30">
+                <VBox alignment="CENTER">
+                    <Label text="Gestão" styleClass="sidebar-section-title"/>
+                </VBox>
+                <Button styleClass="side-button" maxWidth="Infinity" text="Usuários" onAction="#onPageClick">
+                    <graphic>
+                        <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                            <FontIcon iconLiteral="fas-user-cog"/>
+                        </StackPane>
+                    </graphic>
+                    <userData>
+                        <String fx:value="/views/pages/users/users.fxml"/>
+                    </userData>
+                </Button>
+                <Button styleClass="side-button" maxWidth="Infinity" text="Estatísticas" onAction="#onPageClick">
+                    <graphic>
+                        <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                            <FontIcon iconLiteral="fas-chart-bar"/>
+                        </StackPane>
+                    </graphic>
+                    <userData>
+                        <String fx:value="/views/pages/superset.fxml"/>
+                    </userData>
+                </Button>
+            </VBox>
         </VBox>
     </left>
     <center>
         <BorderPane fx:id="workspace">
             <top>
-                <HBox prefWidth="220" styleClass="header">
-                    <Label fx:id="pageTitle" styleClass="title" text="Início"/>
+                <HBox fx:id="workspaceHeader" prefWidth="220" styleClass="header">
+                    <Label fx:id="pageTitle" styleClass="title" text="Menu"/>
 
                     <Region HBox.hgrow="ALWAYS"/>
                     <Button text="Sair"
-                            onAction="#onLogoutClick" styleClass="icon-button">
+                            onAction="#onLogoutClick" styleClass="icon-button, logout-button">
                         <graphic>
                             <FontIcon iconLiteral="fas-sign-out-alt"/>
                         </graphic>

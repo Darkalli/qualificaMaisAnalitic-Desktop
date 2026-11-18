@@ -1,7 +1,7 @@
 /* Navegação: menu lateral, cabeçalho e separadores. */
 
 .side-button {
-    -fx-background-color: linear-gradient(to bottom right, #FB923C, #EA580C);
+    -fx-background-color: transparent;
     -fx-background-radius: 8;
     -fx-text-fill: white;
     -fx-font-size: 14px;
@@ -10,7 +10,7 @@
     -fx-alignment: CENTER_LEFT;
     -fx-graphic-text-gap: 12;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(234,88,12,0.15), 6, 0, 0, 2);
+    -fx-effect: none;
 }
 
 .side-button .ikonli-font-icon {
@@ -36,6 +36,68 @@
 .header {
     -fx-background-color: #293a5a;
     -fx-padding: 20px;
+}
+
+.header .logout-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+    -fx-padding: 8 12;
+    -fx-graphic-text-gap: 8;
+    -fx-cursor: hand;
+    -fx-effect: none;
+}
+
+.header .logout-button .ikonli-font-icon {
+    -fx-icon-color: #cbd5e1;
+    -fx-icon-size: 14;
+}
+
+.header .logout-button:hover {
+    -fx-background-color: #405170;
+    -fx-text-fill: #f8fafc;
+}
+
+.header .logout-button:hover .ikonli-font-icon {
+    -fx-icon-color: #f8fafc;
+}
+
+.header .logout-button:focused {
+    -fx-border-color: #94a3b8;
+}
+
+.header .logout-button:pressed {
+    -fx-background-color: #1e2c46;
+}
+
+.side-menu.home-sidebar {
+    -fx-padding: 0;
+}
+
+.home-sidebar .sidebar-header {
+    -fx-padding: 12px 30px;
+}
+
+.home-sidebar .menu-divider {
+    -fx-padding: 0 30px;
+    -fx-min-height: 1px;
+    -fx-pref-height: 1px;
+    -fx-max-height: 1px;
+}
+
+.home-sidebar .sidebar-links {
+    -fx-padding: 20px 30px 30px;
+}
+
+.home-sidebar .label.sidebar-section-title {
+    -fx-text-fill: #a8b8d0;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 /* Barra de titulo da janela. */

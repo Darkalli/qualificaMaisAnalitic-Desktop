@@ -2,6 +2,7 @@ package com.qualificamaisanaliticinterface.features.home;
 
 import com.qualificamaisanaliticinterface.features.login.AuthService;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
+import com.qualificamaisanaliticinterface.navigation.WindowBarController;
 import com.qualificamaisanaliticinterface.session.UserSession;
 import com.qualificamaisanaliticinterface.session.SessionService;
 import javafx.application.Platform;
@@ -68,7 +69,6 @@ public class HomeController {
     private final HomeSummaryService summaryService;
     private final Clock clock;
     private long summaryRequest;
-    private boolean maximized;
     private double dragOffsetX;
     private double dragOffsetY;
 
@@ -140,7 +140,7 @@ public class HomeController {
     }
 
     @FXML
-    private void onLogoutClick(ActionEvent event) {
+    private void onLogoutClick(ActionEvent event) throws IOException {
         if (logoutInProgress) {
             return;
         }
@@ -171,7 +171,20 @@ public class HomeController {
                 .whenComplete((ignored, failure) ->
                         Platform.runLater(() -> {
                             UserSession.clear();
-                            scene.setRoot(loginRoot);
+                            FXMLLoader loader = new FXMLLoader(Navigator.class.getResource("/views/window-bar.fxml"));
+                            Node header = null;
+                            try {
+                                header = loader.load();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            BorderPane pane = new BorderPane();
+                            WindowBarController controller = loader.getController();
+                            controller.setMaximise();
+                            pane.setTop(header);
+                            pane.setCenter(loginRoot);
+
+                            scene.setRoot(pane);
                             Stage stage = (Stage) scene.getWindow();
                             stage.setMaximized(false);
                             stage.setWidth(380);
@@ -179,22 +192,33 @@ public class HomeController {
                             stage.centerOnScreen();
                             logoutInProgress = false;
                             if (failure != null) {
-                                showLogoutWarning(
-                                        "Você saiu deste aplicativo, mas não foi "
-                                                + "possível confirmar a revogação "
-                                                + "da sessão no servidor."
-                                );
+                                try {
+                                    showLogoutWarning(
+                                            "Você saiu deste aplicativo, mas não foi "
+                                                    + "possível confirmar a revogação "
+                                                    + "da sessão no servidor."
+                                    );
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
                             }
                         })
                 );
     }
+
     protected Parent loadLoginScreen() throws IOException {
         return FXMLLoader.load(HomeController.class.getResource("/views/login.fxml"));
     }
 
-    protected void showLogoutWarning(String message) {
+    protected void showLogoutWarning(String message) throws IOException {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Qualifica");
+        FXMLLoader loader = new FXMLLoader(Navigator.class.getResource("/views/window-bar.fxml"));
+        Node header = loader.load();
+        WindowBarController controller = loader.getController();
+        controller.setMaximise();
+        controller.setMinimise();
+        alert.getDialogPane().setHeader(header);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
@@ -216,37 +240,8 @@ public class HomeController {
     }
 
     @FXML
-    public void onHomeGoClick(MouseEvent mouseEvent) {
+    public void onHomeGoClick(ActionEvent mouseEvent) {
         onHomeClick();
-    }
-
-    @FXML
-    public void onMinimizeClick(ActionEvent actionEvent) {
-        Node node = (Node) actionEvent.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    @FXML
-    public void onMaximiseClick(ActionEvent actionEvent) {
-        Node node = (Node) actionEvent.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        if(!maximized) {
-            maximise.setIconLiteral("far-clone");
-            stage.setMaximized(true);
-            maximized = true;
-        } else {
-            maximise.setIconLiteral("far-square");
-            stage.setMaximized(false);
-            maximized = false;
-        }
-    }
-
-    @FXML
-    public void onCloseClick(ActionEvent actionEvent) {
-        Node node = (Node) actionEvent.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
     }
 
     @FXML
