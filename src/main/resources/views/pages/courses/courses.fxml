@@ -7,10 +7,7 @@
     <VBox styleClass="content" spacing="16" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0"
           AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
         <HBox spacing="16" alignment="CENTER_LEFT">
-            <VBox spacing="6">
-                <Label text="Cursos" styleClass="box-title"/>
-                <Label text="Encontre aqui os cursos registrados" styleClass="box-lower-sub-title"/>
-            </VBox>
+            <Label text="Encontre aqui os cursos registrados" styleClass="box-lower-sub-title"/>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER" styleClass="box">
                 <Label text="Total de cursos" styleClass="box-lower-title"/>
@@ -55,15 +52,16 @@
             <VBox spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="0">
                 <Label text="Começo do curso"/>
                 <DatePicker fx:id="startFilter" promptText="Começo" minWidth="180"
-                          prefWidth="220" maxWidth="280" styleClass="register-date"/>
+                            prefWidth="220" maxWidth="280" styleClass="register-date"/>
             </VBox>
             <VBox spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
                 <Label text="Final do curso"/>
                 <DatePicker fx:id="finishFilter" promptText="Final" minWidth="180"
-                          prefWidth="220" maxWidth="280" styleClass="register-date"/>
+                            prefWidth="220" maxWidth="280" styleClass="register-date"/>
             </VBox>
             <VBox alignment="TOP_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                <Hyperlink text="Limpar filtros" minWidth="-Infinity" onAction="#onClearFiltersClick" styleClass="clear-filters, icon-link">
+                <Hyperlink text="Limpar filtros" minWidth="-Infinity" onAction="#onClearFiltersClick"
+                           styleClass="clear-filters, icon-link">
                     <graphic>
                         <FontIcon iconLiteral="fas-eraser"/>
                     </graphic>

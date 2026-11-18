@@ -14,14 +14,11 @@
           AnchorPane.rightAnchor="0"
           AnchorPane.bottomAnchor="0"
           AnchorPane.leftAnchor="0">
-        <HBox styleClass="content">
-            <VBox>
-                <Label styleClass="box-title" text="Usuários"/>
-                <Label styleClass="box-lower-sub-title" text="Encontre aqui os usuários ativos no sistema"/>
-            </VBox>
+        <HBox spacing="16" alignment="CENTER_LEFT">
+            <Label styleClass="box-lower-sub-title" text="Encontre aqui os usuários ativos no sistema"/>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER" styleClass="box">
-                <Label styleClass="box-title" alignment="CENTER" text="Total de usuários"/>
+                <Label styleClass="box-lower-title" alignment="CENTER" text="Total de usuários"/>
                 <Label fx:id="totalUsersLabel" styleClass="box-info-title" alignment="CENTER"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
