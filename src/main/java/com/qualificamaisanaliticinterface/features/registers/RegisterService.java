@@ -7,6 +7,7 @@ import com.qualificamaisanaliticinterface.features.registers.dto.AddRegisterRequ
 import com.qualificamaisanaliticinterface.features.registers.dto.SearchRegisterRequest;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -26,6 +27,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.stage.Stage;
 
@@ -33,11 +35,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.CompletionException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class RegisterService {
     private final ApiClient apiClient;
@@ -124,13 +128,12 @@ public class RegisterService {
                                 && cause.getCause() != null) {
                             cause = cause.getCause();
                         }
-
                         createPdfErrorAlert(owner).showAndWait();
 
                         return;
                     }
-
                     createPdfSuccessAlert(owner).showAndWait();
+
                 }));
     }
 
@@ -179,6 +182,21 @@ public class RegisterService {
         pane.getStyleClass().addAll("pdf-alert", "pdf-branded-alert",
                 error ? "pdf-error-alert" : "pdf-success-alert");
         pane.setContent(new Region());
+
+        double[] dragOffset = new double[2];
+        pane.addEventFilter(MouseEvent.MOUSE_PRESSED, (event)-> {
+            Window window = pane.getScene().getWindow();
+            dragOffset[0] = (event.getScreenX() - window.getX());
+            dragOffset[1] = (event.getScreenY() - window.getY());
+        });
+
+        pane.addEventFilter(MouseEvent.MOUSE_DRAGGED, (event) -> {
+            Window window = pane.getScene().getWindow();
+            window.setX(event.getScreenX() - dragOffset[0]);
+            window.setY(event.getScreenY() - dragOffset[1]);
+        });
+
+        alert.initStyle(StageStyle.UNDECORATED);
         alert.setDialogPane(pane);
         alert.getButtonTypes().add(ButtonType.OK);
         alert.setOnShown(event -> {
