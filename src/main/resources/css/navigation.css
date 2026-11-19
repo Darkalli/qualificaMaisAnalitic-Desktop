@@ -113,18 +113,19 @@
 .window-title-bar .title {
     -fx-font-size: 15px;
     -fx-font-weight: bold;
+    -fx-font-family: Manrope Bold;
 }
 
 .window-title-bar .brand-name {
-    -fx-text-fill: #66BB6A;
+    -fx-text-fill: #15803D;
 }
 
 .window-title-bar .brand-plus {
-    -fx-text-fill: #E67E22;
+    -fx-text-fill: #EA580C;
 }
 
 .window-title-bar .brand-city {
-    -fx-text-fill: #12A797;
+    -fx-text-fill: #2563EB;
 }
 
 .window-title-bar .window-button {

@@ -1,12 +1,17 @@
 package com.qualificamaisanaliticinterface;
 
 import com.qualificamaisanaliticinterface.navigation.Navigator;
+import com.qualificamaisanaliticinterface.navigation.WindowResizeSupport;
 import com.qualificamaisanaliticinterface.session.SessionService;
 import com.qualificamaisanaliticinterface.session.UserSession;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -39,8 +44,15 @@ public class HelloApplication extends Application {
             );
         }
         stage.setTitle("Qualifica+Ijui!");
+        String iconUrl = Objects.requireNonNull(HelloApplication.class.getResource(
+                "/images/logo-qualifica-atalho.png")).toExternalForm();
+        for (int size : new int[]{16, 32, 48, 64, 128, 256}) {
+            stage.getIcons().add(new Image(iconUrl, size, size, true, true));
+        }
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        configureWindowCorners(stage, scene);
+        WindowResizeSupport.install(stage, scene);
         stage.show();
 
         sessionService.restoreSession()
@@ -59,6 +71,24 @@ public class HelloApplication extends Application {
                             }
                         })
                 );
+    }
+
+    private void configureWindowCorners(Stage stage, Scene scene) {
+        scene.setFill(Color.TRANSPARENT);
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(scene.widthProperty());
+        clip.heightProperty().bind(scene.heightProperty());
+        clip.arcWidthProperty().bind(Bindings.when(
+                stage.maximizedProperty().or(stage.fullScreenProperty())
+        ).then(0).otherwise(24));
+        clip.arcHeightProperty().bind(clip.arcWidthProperty());
+
+        scene.getRoot().setClip(clip);
+        scene.rootProperty().addListener((observable, previousRoot, newRoot) -> {
+            previousRoot.setClip(null);
+            newRoot.setClip(clip);
+        });
     }
 
     private void showHome(Scene scene){

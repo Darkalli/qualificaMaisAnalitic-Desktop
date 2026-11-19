@@ -10,35 +10,36 @@
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.qualificamaisanaliticinterface.navigation.WindowBarController"
-      alignment="CENTER_LEFT" styleClass="window-title-bar" onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+      alignment="CENTER_LEFT" styleClass="window-title-bar" onMousePressed="#onDragPressed"
+      onMouseDragged="#onDragMoved">
 
-        <Label text="Qualifica" minWidth="-Infinity" styleClass="title, brand-name"/>
-        <Label text="+" minWidth="-Infinity" styleClass="title, brand-plus"/>
-        <Label text="Ijui" minWidth="-Infinity" styleClass="title, brand-city"/>
-        <ImageView fitWidth="32" fitHeight="32" preserveRatio="true">
-            <Image url="@../images/logo-qualifica-original-transparente.png"
-                   requestedWidth="64" requestedHeight="64" preserveRatio="true" smooth="true"/>
-        </ImageView>
-        <Region HBox.hgrow="ALWAYS"/>
-        <Button fx:id="minimiseButton" onAction="#onMinimizeClick" styleClass="window-button">
-            <graphic>
-                <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                    <FontIcon iconLiteral="fas-minus"/>
-                </StackPane>
-            </graphic>
-        </Button>
-        <Button fx:id="maximiseButton" onAction="#onMaximiseClick" styleClass="window-button">
-            <graphic>
-                <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                    <FontIcon fx:id="maximise" iconLiteral="far-square"/>
-                </StackPane>
-            </graphic>
-        </Button>
-        <Button onAction="#onCloseClick" styleClass="window-button, window-close">
-            <graphic>
-                <StackPane minWidth="20" prefWidth="20" maxWidth="20">
-                    <FontIcon iconLiteral="fas-times"/>
-                </StackPane>
-            </graphic>
-        </Button>
+    <Label text="Qualifica" minWidth="-Infinity" styleClass="title, brand-name"/>
+    <Label text="+" minWidth="-Infinity" styleClass="title, brand-plus"/>
+    <Label text="Ijui" minWidth="-Infinity" styleClass="title, brand-city"/>
+    <ImageView fitWidth="32" fitHeight="32" preserveRatio="true">
+        <Image url="@../images/logo-qualifica-original-transparente.png"
+               requestedWidth="64" requestedHeight="64" preserveRatio="true" smooth="true"/>
+    </ImageView>
+    <Region HBox.hgrow="ALWAYS"/>
+    <Button fx:id="minimiseButton" onAction="#onMinimizeClick" styleClass="window-button">
+        <graphic>
+            <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                <FontIcon iconLiteral="fas-minus"/>
+            </StackPane>
+        </graphic>
+    </Button>
+    <Button fx:id="maximiseButton" onAction="#onMaximiseClick" styleClass="window-button">
+        <graphic>
+            <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                <FontIcon fx:id="maximise" iconLiteral="far-square"/>
+            </StackPane>
+        </graphic>
+    </Button>
+    <Button onAction="#onCloseClick" styleClass="window-button, window-close">
+        <graphic>
+            <StackPane minWidth="20" prefWidth="20" maxWidth="20">
+                <FontIcon iconLiteral="fas-times"/>
+            </StackPane>
+        </graphic>
+    </Button>
 </HBox>
