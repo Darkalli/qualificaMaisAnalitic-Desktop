@@ -111,8 +111,12 @@
             <top>
                 <HBox fx:id="workspaceHeader" prefWidth="220" styleClass="header">
                     <Label fx:id="pageTitle" styleClass="title" text="Menu"/>
-
                     <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Configurações" onAction="#onConfigClick" styleClass="icon-button, logout-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-cog"/>
+                        </graphic>
+                    </Button>
                     <Button text="Sair"
                             onAction="#onLogoutClick" styleClass="icon-button, logout-button">
                         <graphic>

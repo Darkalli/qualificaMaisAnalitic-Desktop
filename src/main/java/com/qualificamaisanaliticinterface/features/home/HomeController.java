@@ -244,17 +244,7 @@ public class HomeController {
         onHomeClick();
     }
 
-    @FXML
-    private void onDragPressed(MouseEvent event) {
-        Window window = homePane.getScene().getWindow();
-        dragOffsetX = event.getScreenX() - window.getX();
-        dragOffsetY = event.getScreenY() - window.getY();
-    }
-
-    @FXML
-    private void onDragMoved(MouseEvent event) {
-        Window window = homePane.getScene().getWindow();
-        window.setX(event.getScreenX() - dragOffsetX);
-        window.setY(event.getScreenY() - dragOffsetY);
+    public void onConfigClick(ActionEvent actionEvent) throws IOException {
+        Navigator.openForm(homePane.getScene(), "/views/config.fxml");
     }
 }

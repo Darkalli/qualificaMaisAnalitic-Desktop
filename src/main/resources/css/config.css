@@ -1,0 +1,59 @@
+.dialog-pane.config-dialog {
+    -fx-padding: 0;
+}
+
+.config-dialog > .content {
+    -fx-padding: 0;
+}
+
+.config-dialog .config-content {
+    -fx-padding: 20px 24px 24px;
+}
+
+.config-dialog .config-heading {
+    -fx-text-fill: #f1f5f9;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.config-dialog .config-description {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 13px;
+}
+
+.config-dialog .config-fields {
+    -fx-background-color: #293a5a;
+    -fx-background-radius: 10px;
+    -fx-border-color: #405170;
+    -fx-border-radius: 10px;
+    -fx-padding: 20px;
+}
+
+.config-dialog .config-field-label {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.config-dialog .text-field {
+    -fx-background-color: #1f2e49;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px;
+    -fx-border-color: #526789;
+    -fx-border-radius: 8px;
+    -fx-text-fill: #f1f5f9;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-highlight-fill: #405170;
+    -fx-highlight-text-fill: white;
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+    -fx-padding: 10px 12px;
+}
+
+.config-dialog .text-field:hover {
+    -fx-border-color: #8a9bb8;
+}
+
+.config-dialog .text-field:focused {
+    -fx-border-color: #E67E22;
+}

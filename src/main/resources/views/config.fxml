@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<DialogPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.config.ConfigController"
+            prefWidth="560" minWidth="520"
+            styleClass="dialog-pane, config-dialog"
+            stylesheets="@../css/application.css, @../css/navigation.css, @../css/config.css">
+    <content>
+        <VBox spacing="20" styleClass="config-content">
+            <VBox spacing="4">
+                <Label text="Configurações" styleClass="config-heading"/>
+                <Label text="Conexões do sistema" styleClass="config-description"/>
+            </VBox>
+            <GridPane hgap="16" vgap="16" styleClass="config-fields">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="126" prefWidth="126" maxWidth="126"/>
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="0"/>
+                </columnConstraints>
+                <Label text="Endereço da API" styleClass="config-field-label"
+                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="apiUrlField" promptText="http://192.168.0.10:8080"
+                           accessibleText="Endereço da API" maxWidth="Infinity"
+                           GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="URL do Superset" styleClass="config-field-label"
+                       GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="supersetUrlField" promptText="http://192.168.0.10:8088"
+                           accessibleText="URL do Superset" maxWidth="Infinity"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            </GridPane>
+        </VBox>
+    </content>
+</DialogPane>
+
