@@ -94,10 +94,19 @@
 
 .dialog-pane {
     -fx-background-color: #1e2c46;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
     -fx-border-color: #E67E22;
     -fx-border-width: 1px;
+}
+
+.dialog-pane.rounded-form > .content,
+.dialog-pane.rounded-form > .window-title-bar {
+    -fx-background-color: transparent;
+}
+
+.dialog-pane.rounded-form .window-title-bar .window-close {
+    -fx-background-radius: 0 11px 0 0;
 }
 
 .dialog-pane.delete-dialog {

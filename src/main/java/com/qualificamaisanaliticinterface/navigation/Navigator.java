@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import java.util.function.Consumer;
 
@@ -74,8 +75,7 @@ public final class Navigator {
         controller.setMinimise();
         pane.setHeader(header);
 
-        dialog.initStyle(StageStyle.UNDECORATED);
-        dialog.setDialogPane(pane);
+        configureFormCorners(dialog, pane);
         dialog.initOwner(scene.getWindow());
         dialog.showAndWait();
     }
@@ -99,9 +99,15 @@ public final class Navigator {
         controller.setMinimise();
         pane.setHeader(header);
 
-        dialog.initStyle(StageStyle.UNDECORATED);
-        dialog.setDialogPane(pane);
+        configureFormCorners(dialog, pane);
         dialog.initOwner(scene.getWindow());
         dialog.showAndWait();
+    }
+
+    private static void configureFormCorners(Dialog<?> dialog, DialogPane pane) {
+        dialog.initStyle(StageStyle.TRANSPARENT);
+        pane.getStyleClass().add("rounded-form");
+        dialog.setDialogPane(pane);
+        pane.getScene().setFill(Color.TRANSPARENT);
     }
 }
