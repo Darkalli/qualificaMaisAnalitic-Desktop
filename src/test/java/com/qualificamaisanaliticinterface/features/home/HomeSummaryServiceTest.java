@@ -20,6 +20,29 @@ import java.util.concurrent.CompletableFuture;
 
 class HomeSummaryServiceTest {
     @Test
+    void shouldListTodaysClassesInTimeOrderIncludingCanceledAndPostponed() {
+        ClassService classes = new ClassService() {
+            @Override
+            public CompletableFuture<List<ClassDto>> findAll() {
+                return CompletableFuture.completedFuture(List.of(
+                        new ClassDto(1L, "2026-11-18", null, "19:00", "21:00", StatusClass.ACTIVE, null),
+                        new ClassDto(2L, "2026-11-18", null, "08:00", "10:00", StatusClass.CANCELED, null),
+                        new ClassDto(3L, "2026-11-18", null, "14:00", "16:00", StatusClass.POSTPONED, null),
+                        new ClassDto(4L, "2026-11-17", null, "07:00", "09:00", StatusClass.ACTIVE, null),
+                        new ClassDto(5L, "2026-11-19", null, "07:00", "09:00", StatusClass.ACTIVE, null),
+                        new ClassDto(6L, null, null, null, null, StatusClass.ACTIVE, null)));
+            }
+        };
+        HomeSummaryService service = new HomeSummaryService(null, null, null, classes);
+
+        var result = service.findTodaysClasses(LocalDate.of(2026, 11, 18)).join();
+
+        Assertions.assertEquals(List.of(2L, 3L, 1L), result.stream().map(ClassDto::id).toList());
+        Assertions.assertEquals(1L, service.todaysClasses(LocalDate.of(2026, 11, 18)).join());
+        Assertions.assertTrue(service.findTodaysClasses(LocalDate.of(2026, 11, 20)).join().isEmpty());
+    }
+
+    @Test
     void shouldCountActiveRecordsAndOnlyActiveClassesOnRequestedDay() {
         CourseDto active = new CourseDto(1L, "Ativo", null, null, null, StatusCourse.ACTIVE, null);
         CourseDto closed = new CourseDto(2L, "Encerrado", null, null, null, StatusCourse.CLOSED, null);

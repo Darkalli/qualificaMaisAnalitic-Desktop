@@ -3,6 +3,7 @@ package com.qualificamaisanaliticinterface.features.home;
 import com.qualificamaisanaliticinterface.AuthTestSupport.MemoryTokenStore;
 import com.qualificamaisanaliticinterface.AuthTestSupport.StubHttpClient;
 import com.qualificamaisanaliticinterface.HelloController;
+import com.qualificamaisanaliticinterface.features.classes.dto.ClassDto;
 import com.qualificamaisanaliticinterface.features.login.AuthService;
 import com.qualificamaisanaliticinterface.session.SessionService;
 import com.qualificamaisanaliticinterface.session.UserSession;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -90,7 +92,7 @@ class HomeControllerTest {
             Assertions.assertEquals("Carregando...", label("classesState").getText());
             return null;
         });
-        summary.classes.complete(0L);
+        summary.classes.complete(List.of());
         fx(() -> {
             Assertions.assertEquals("0", label("classesCount").getText());
             return null;
@@ -268,8 +270,11 @@ class HomeControllerTest {
     private void assertLoggedOut() {
         Assertions.assertNull(UserSession.current());
         Assertions.assertNull(store.saved);
-        Assertions.assertSame(controller.loginRoot, scene.getRoot());
-        Assertions.assertFalse(scene.getRoot().isDisable());
+        BorderPane root = Assertions.assertInstanceOf(BorderPane.class, scene.getRoot());
+        Assertions.assertSame(controller.loginRoot, root.getCenter());
+        Assertions.assertNotNull(root.getTop());
+        Assertions.assertTrue(root.getTop().getStyleClass().contains("window-title-bar"));
+        Assertions.assertFalse(root.isDisable());
         Assertions.assertFalse(stage.isMaximized());
         Assertions.assertEquals(380, stage.getWidth(), 1);
         Assertions.assertEquals(420, stage.getHeight(), 1);
@@ -328,7 +333,7 @@ class HomeControllerTest {
         CompletableFuture<Long> courses = new CompletableFuture<>();
         final CompletableFuture<Long> registers = new CompletableFuture<>();
         final CompletableFuture<Long> people = new CompletableFuture<>();
-        final CompletableFuture<Long> classes = new CompletableFuture<>();
+        final CompletableFuture<List<ClassDto>> classes = new CompletableFuture<>();
         LocalDate requestedDate;
 
         FakeSummaryService() {
@@ -345,7 +350,7 @@ class HomeControllerTest {
         public CompletableFuture<Long> registeredPeople() { return people; }
 
         @Override
-        public CompletableFuture<Long> todaysClasses(LocalDate today) {
+        public CompletableFuture<List<ClassDto>> findTodaysClasses(LocalDate today) {
             requestedDate = today;
             return classes;
         }

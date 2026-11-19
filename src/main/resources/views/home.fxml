@@ -14,10 +14,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <BorderPane fx:id="homePane" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.home.HomeController"
-            stylesheets="@../css/home.css" onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
+            stylesheets="@../css/home.css">
     <left>
         <VBox prefWidth="220" styleClass="side-menu, home-sidebar">
             <StackPane styleClass="sidebar-header" minHeight="-Infinity"
@@ -34,8 +36,7 @@
             <Separator styleClass="menu-divider"/>
             <VBox styleClass="sidebar-links" spacing="30">
                 <VBox alignment="CENTER">
-                    <Label text="Cadastros"
-                           styleClass="sidebar-section-title"/>
+                    <Label text="Cadastros" styleClass="sidebar-section-title"/>
                 </VBox>
                 <Button styleClass="side-button" maxWidth="Infinity" text="Inscrições" onAction="#onPageClick">
                     <graphic>
@@ -128,15 +129,42 @@
             <center>
                 <ScrollPane fx:id="homeContent" fitToWidth="true" styleClass="home-scroll">
                     <VBox styleClass="home-content" spacing="24">
-                        <VBox styleClass="home-welcome" spacing="8">
-                            <Label text="QUALIFICA+ IJUÍ" styleClass="home-eyebrow"/>
-                            <Label fx:id="greeting" styleClass="home-greeting"/>
-                            <Label text="Acompanhe o resumo das atividades." styleClass="home-description"/>
-                            <HBox styleClass="home-date-row" spacing="10" alignment="CENTER_LEFT">
-                                <FontIcon iconLiteral="fas-calendar-alt"/>
-                                <Label fx:id="currentDate" styleClass="home-date"/>
-                            </HBox>
-                        </VBox>
+                        <GridPane hgap="24">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="35"/>
+                                <ColumnConstraints percentWidth="65"/>
+                            </columnConstraints>
+                            <VBox styleClass="home-welcome" spacing="8" minWidth="0" GridPane.columnIndex="0" GridPane.valignment="CENTER">
+                                <Label text="QUALIFICA+ IJUÍ" styleClass="home-eyebrow"/>
+                                <Label fx:id="greeting" styleClass="home-greeting"/>
+                                <Label text="Acompanhe o resumo das atividades." styleClass="home-description"/>
+                                <HBox styleClass="home-date-row" spacing="10" alignment="CENTER_LEFT">
+                                    <FontIcon iconLiteral="fas-calendar-alt"/>
+                                    <Label fx:id="currentDate" styleClass="home-date"/>
+                                </HBox>
+                            </VBox>
+                            <VBox styleClass="home-shortcuts" spacing="16" minWidth="0" maxWidth="Infinity"
+                                  GridPane.columnIndex="1" GridPane.valignment="CENTER">
+                                <Label text="Atalhos rápidos" styleClass="home-shortcuts-title"/>
+                                <FlowPane hgap="12" vgap="12">
+                                    <Button text="Nova inscrição" onAction="#onNewRegisterClick" styleClass="home-quick-button">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fas-clipboard-list"/>
+                                        </graphic>
+                                    </Button>
+                                    <Button text="Cadastrar pessoa" onAction="#onNewPersonClick" styleClass="home-quick-button">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fas-user-plus"/>
+                                        </graphic>
+                                    </Button>
+                                    <Button text="Novo curso" onAction="#onNewCourseClick" styleClass="home-quick-button">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fas-graduation-cap"/>
+                                        </graphic>
+                                    </Button>
+                                </FlowPane>
+                            </VBox>
+                        </GridPane>
                         <HBox alignment="CENTER_LEFT">
                             <Label text="Resumo geral" styleClass="home-card-title"/>
                             <Region HBox.hgrow="ALWAYS"/>
@@ -147,31 +175,55 @@
                             </Button>
                         </HBox>
                         <FlowPane hgap="18" vgap="18">
-                            <VBox styleClass="home-card, home-card-courses" spacing="10">
+                            <VBox styleClass="home-card, home-card-courses" spacing="4">
                                 <FontIcon iconLiteral="fas-graduation-cap"/>
                                 <Label text="Cursos ativos" styleClass="home-card-title"/>
                                 <Label fx:id="coursesCount" styleClass="home-card-value"/>
                                 <Label fx:id="coursesState" styleClass="home-card-description" wrapText="true"/>
                             </VBox>
-                            <VBox styleClass="home-card, home-card-registers" spacing="10">
+                            <VBox styleClass="home-card, home-card-registers" spacing="4">
                                 <FontIcon iconLiteral="fas-clipboard-list"/>
                                 <Label text="Inscrições ativas" styleClass="home-card-title"/>
                                 <Label fx:id="registersCount" styleClass="home-card-value"/>
                                 <Label fx:id="registersState" styleClass="home-card-description" wrapText="true"/>
                             </VBox>
-                            <VBox styleClass="home-card, home-card-people" spacing="10">
+                            <VBox styleClass="home-card, home-card-people" spacing="4">
                                 <FontIcon iconLiteral="fas-users"/>
                                 <Label text="Pessoas cadastradas" styleClass="home-card-title"/>
                                 <Label fx:id="peopleCount" styleClass="home-card-value"/>
                                 <Label fx:id="peopleState" styleClass="home-card-description" wrapText="true"/>
                             </VBox>
-                            <VBox styleClass="home-card, home-card-classes" spacing="10">
+                            <VBox styleClass="home-card, home-card-classes" spacing="4">
                                 <FontIcon iconLiteral="fas-calendar-alt"/>
                                 <Label text="Aulas de hoje" styleClass="home-card-title"/>
                                 <Label fx:id="classesCount" styleClass="home-card-value"/>
                                 <Label fx:id="classesState" styleClass="home-card-description" wrapText="true"/>
                             </VBox>
                         </FlowPane>
+                        <VBox styleClass="home-agenda" spacing="16">
+                            <VBox spacing="6">
+                                <Label text="Aulas de hoje" styleClass="home-agenda-title"/>
+                                <Label text="Confira os horários e acesse o registro de presenças." styleClass="home-card-description" wrapText="true"/>
+                            </VBox>
+                            <Label fx:id="todayClassesMessage" styleClass="home-card-description" wrapText="true"/>
+                            <VBox fx:id="todayClassesList" spacing="10"/>
+                        </VBox>
+                        <VBox styleClass="home-agenda" spacing="16">
+                            <VBox spacing="6">
+                                <Label text="Inscrições recentes" styleClass="home-agenda-title"/>
+                                <Label text="As cinco últimas inscrições, da mais recente para a mais antiga." styleClass="home-card-description" wrapText="true"/>
+                            </VBox>
+                            <Label fx:id="recentRegistersMessage" styleClass="home-card-description" wrapText="true"/>
+                            <VBox fx:id="recentRegistersList" spacing="10"/>
+                        </VBox>
+                        <VBox styleClass="home-agenda" spacing="16">
+                            <VBox spacing="6">
+                                <Label text="Pendências de presença" styleClass="home-agenda-title"/>
+                                <Label text="Aulas ativas encerradas sem nenhum registro de presença, da mais antiga para a mais recente." styleClass="home-card-description" wrapText="true"/>
+                            </VBox>
+                            <Label fx:id="pendingPresencesMessage" styleClass="home-card-description" wrapText="true"/>
+                            <VBox fx:id="pendingPresencesList" spacing="10"/>
+                        </VBox>
                     </VBox>
                 </ScrollPane>
             </center>

@@ -9,6 +9,53 @@
     -fx-padding: 32;
 }
 
+.home-scroll > .scroll-bar:vertical,
+.home-scroll > .scroll-bar:horizontal {
+    -fx-background-color: #1e2c46;
+    -fx-background-insets: 0;
+    -fx-padding: 3;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
+}
+
+.home-scroll > .scroll-bar .track,
+.home-scroll > .scroll-bar .track-background {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+}
+
+.home-scroll > .scroll-bar .thumb {
+    -fx-background-color: #64748b;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+}
+
+.home-scroll > .scroll-bar .thumb:hover {
+    -fx-background-color: #94a3b8;
+}
+
+.home-scroll > .scroll-bar .thumb:pressed {
+    -fx-background-color: #fb923c;
+}
+
+.home-scroll > .scroll-bar .increment-button,
+.home-scroll > .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.home-scroll > .scroll-bar .increment-arrow,
+.home-scroll > .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.home-scroll > .corner {
+    -fx-background-color: #1e2c46;
+}
+
 .home-welcome {
     -fx-padding: 8 0 4 0;
 }
@@ -44,9 +91,9 @@
     -fx-background-radius: 14;
     -fx-border-color: #405170;
     -fx-border-radius: 14;
-    -fx-padding: 22;
-    -fx-pref-width: 225;
-    -fx-min-height: 175;
+    -fx-padding: 14 20;
+    -fx-pref-width: 250;
+    -fx-min-height: 135;
 }
 
 .home-content .home-card-title {
@@ -89,4 +136,101 @@
 .home-refresh .ikonli-font-icon {
     -fx-icon-color: white;
     -fx-icon-size: 13;
+}
+
+.home-agenda,
+.home-shortcuts {
+    -fx-background-color: #293a5a;
+    -fx-background-radius: 14;
+    -fx-border-color: #405170;
+    -fx-border-radius: 14;
+    -fx-padding: 22;
+}
+
+.home-content .home-agenda-title,
+.home-content .home-shortcuts-title {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.home-agenda-row {
+    -fx-background-color: #1e2c46;
+    -fx-background-radius: 8;
+    -fx-padding: 16;
+}
+
+.home-content .home-agenda-course {
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.home-content .home-agenda-time {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 13px;
+}
+
+.home-content .home-agenda-status {
+    -fx-text-fill: #cbd5e1;
+    -fx-background-color: #405170;
+    -fx-background-radius: 6;
+    -fx-padding: 5 10;
+    -fx-font-size: 12px;
+    -fx-min-width: 80;
+    -fx-alignment: CENTER;
+}
+
+.home-content .home-agenda-status-active {
+    -fx-text-fill: #86efac;
+    -fx-background-color: #234537;
+}
+
+.home-content .home-agenda-status-canceled {
+    -fx-text-fill: #fca5a5;
+    -fx-background-color: #4c2c38;
+}
+
+.home-content .home-agenda-status-postponed {
+    -fx-text-fill: #fde68a;
+    -fx-background-color: #49412e;
+}
+
+.home-agenda-row .home-agenda-button {
+    -fx-background-radius: 8;
+    -fx-padding: 9 14;
+    -fx-font-size: 12px;
+    -fx-graphic-text-gap: 8;
+    -fx-min-width: 145;
+    -fx-effect: none;
+}
+
+.home-agenda-button .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 14;
+}
+
+.home-shortcuts .home-quick-button {
+    -fx-background-color: #1e2c46;
+    -fx-background-radius: 8;
+    -fx-text-fill: #f8fafc;
+    -fx-font-size: 13px;
+    -fx-padding: 14 18;
+    -fx-pref-width: 200;
+    -fx-alignment: CENTER_LEFT;
+    -fx-graphic-text-gap: 10;
+    -fx-effect: none;
+}
+
+.home-shortcuts .home-quick-button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #F97316, #C2410C);
+}
+
+.home-shortcuts .home-quick-button:pressed {
+    -fx-background-color: #C2410C;
+}
+
+.home-quick-button .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-icon-size: 16;
 }
