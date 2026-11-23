@@ -22,6 +22,16 @@ public final class AppConfig {
         return value.strip().replaceAll("/+$", "");
     }
 
+    public static String supersetBaseUrl() {
+        String value = PROPERTIES.getProperty("superset-url");
+
+        if (value == null || value.isBlank()) {
+            throw new IllegalStateException("O Url do superset não foi configurada.");
+        }
+
+        return value.strip().replaceAll("/+$", "");
+    }
+
     private static Properties loadProperties() {
         Properties properties = new Properties();
 

@@ -10,6 +10,7 @@ import com.qualificamaisanaliticinterface.features.registers.RegisterFormControl
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.navigation.WindowBarController;
+import com.qualificamaisanaliticinterface.session.SupersetSession;
 import com.qualificamaisanaliticinterface.session.UserSession;
 import com.qualificamaisanaliticinterface.session.SessionService;
 import javafx.application.Platform;
@@ -358,6 +359,7 @@ public class HomeController {
             return;
         }
         try {
+            SupersetSession.clearSavedSession();
             sessionService.clearSession();
         } catch (IOException exception) {
             showLogoutWarning("Não foi possível apagar a sessão salva. Tente sair novamente.");
