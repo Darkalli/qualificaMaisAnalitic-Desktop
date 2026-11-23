@@ -9,5 +9,4 @@
     <center>
         <WebView fx:id="supersetWebView"/>
     </center>
-
 </BorderPane>
