@@ -227,7 +227,7 @@
     -fx-text-fill: #E67E22;
 }
 
-.login-content .login-error {
+.side-menu .login-error {
     -fx-background-color: #172033;
     -fx-background-radius: 12px;
 

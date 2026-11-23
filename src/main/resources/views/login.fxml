@@ -56,8 +56,10 @@
            visible="false"
            managed="false"
            wrapText="true"
-           prefWidth="460"
-           maxWidth="460"
+           minWidth="0"
+           prefWidth="0"
+           maxWidth="Infinity"
+           minHeight="-Infinity"
            alignment="CENTER"/>
     <Button styleClass="button, icon-button" text="Login"
             onAction="#onClick">

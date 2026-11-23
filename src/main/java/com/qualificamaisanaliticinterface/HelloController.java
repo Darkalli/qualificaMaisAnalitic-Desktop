@@ -8,6 +8,8 @@ import com.qualificamaisanaliticinterface.session.SessionService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -134,6 +136,23 @@ public class HelloController {
         loginErrorLabel.setText(message);
         loginErrorLabel.setManaged(true);
         loginErrorLabel.setVisible(true);
+        growWindowToFitContent();
+    }
+
+    private void growWindowToFitContent() {
+        Scene scene = loginErrorLabel.getScene();
+        if (scene == null || !(scene.getWindow() instanceof Stage stage)
+                || !stage.isShowing() || stage.isMaximized() || stage.isFullScreen()) {
+            return;
+        }
+
+        Parent root = scene.getRoot();
+        root.applyCss();
+        double decorationHeight = stage.getHeight() - scene.getHeight();
+        double requiredHeight = Math.ceil(root.prefHeight(scene.getWidth()) + decorationHeight);
+        if (requiredHeight > stage.getHeight()) {
+            stage.setHeight(requiredHeight);
+        }
     }
 
     private void clearError() {
