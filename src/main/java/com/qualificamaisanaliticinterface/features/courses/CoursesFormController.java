@@ -35,6 +35,8 @@ public class CoursesFormController {
     public DatePicker startField;
     @FXML
     public DatePicker finishField;
+    @FXML
+    public TextField maxStudents;
 
     private Runnable onAdded;
     private double dragOffsetX;
@@ -45,6 +47,14 @@ public class CoursesFormController {
         startField.setValue(LocalDate.now());
         finishField.setValue(LocalDate.now().plusDays(1));
         periodField.getItems().setAll(Period.values());
+
+        maxStudents.setTextFormatter(new TextFormatter<String>(change -> {
+            String text = change.getControlNewText();
+            if (!text.matches("\\d*")) {
+                return null;
+            }
+            return change;
+        }));
     }
     @FXML
     private void onClickAddCourse() {
@@ -65,7 +75,7 @@ public class CoursesFormController {
         }
         info.setText("");
         formDialogPane.getContent().setDisable(true);
-        courseService.addCourse(nameField.getText(), descriptionField.getText(), startDate.toString(),finishDate.toString(), StatusCourse.ACTIVE, periodField.getValue())
+        courseService.addCourse(nameField.getText(), descriptionField.getText(), startDate.toString(),finishDate.toString(), StatusCourse.ACTIVE, periodField.getValue(), Integer.valueOf(maxStudents.getText()))
                 .whenComplete((response, failure) -> Platform.runLater(() -> {
                     formDialogPane.getContent().setDisable(false);
                     if (failure != null) {

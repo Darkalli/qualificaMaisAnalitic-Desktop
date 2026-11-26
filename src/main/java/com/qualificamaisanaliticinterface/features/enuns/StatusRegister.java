@@ -1,7 +1,7 @@
 package com.qualificamaisanaliticinterface.features.enuns;
 
 public enum StatusRegister {
-    ACTIVE("Ativa"), CANCELED("Cancelada");
+    ACTIVE("Ativa"), CANCELED("Cancelada"), WAITLISTED("Reserva");
 
     private final String description;
 

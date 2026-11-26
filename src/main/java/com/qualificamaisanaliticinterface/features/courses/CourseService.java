@@ -35,9 +35,9 @@ public class CourseService {
         });
     }
 
-    public CompletableFuture<String> addCourse(String name, String description, String start, String finish, StatusCourse statusCourse, Period period) {
+    public CompletableFuture<String> addCourse(String name, String description, String start, String finish, StatusCourse statusCourse, Period period, Integer maximumStudents) {
         AddCourseRequest request = new AddCourseRequest(
-                name, description, start, finish, statusCourse, period);
+                name, description, start, finish, statusCourse, period, maximumStudents);
         return apiClient.post("/api/course", gson.toJson(request));
     }
 
@@ -49,8 +49,8 @@ public class CourseService {
         return apiClient.patch("/api/course/"+ course.id(), gson.toJson(course.id()));
     }
 
-    public CompletableFuture<String> updateCourse(Long id,String name, String description, String start, String finish, StatusCourse statusCourse, Period period) {
-        UpdateCourseDto request = new UpdateCourseDto(id, name, description, start, finish, statusCourse, period);
+    public CompletableFuture<String> updateCourse(Long id,String name, String description, String start, String finish, StatusCourse statusCourse, Period period, Integer maximumStudents) {
+        UpdateCourseDto request = new UpdateCourseDto(id, name, description, start, finish, statusCourse, period, maximumStudents);
         return apiClient.patch("/api/course", gson.toJson(request));
     }
 }
