@@ -39,6 +39,26 @@ class RegistersControllerTest {
     }
 
     @Test
+    void formatsRegistrationDateTimesAndHandlesMissingOrInvalidDates() throws Exception {
+        List<RegisterDto> registers = List.of(
+                new RegisterDto(1L, person(), course(), "2026-10-27T00:00:00", StatusRegister.ACTIVE),
+                new RegisterDto(2L, person(), course(), "2026-10-27T14:35:42.123", StatusRegister.ACTIVE),
+                new RegisterDto(3L, person(), course(), "2026-10-27", StatusRegister.ACTIVE),
+                new RegisterDto(4L, person(), course(), null, StatusRegister.ACTIVE),
+                new RegisterDto(5L, person(), course(), "invalid", StatusRegister.ACTIVE));
+        RegistersController controller = fx(() -> load(CompletableFuture.completedFuture(registers)));
+
+        fx(() -> {
+            assertEquals("27/10/2026 00:00", controller.dateColumn.getCellData(0));
+            assertEquals("27/10/2026 14:35", controller.dateColumn.getCellData(1));
+            assertEquals("27/10/2026", controller.dateColumn.getCellData(2));
+            assertEquals("", controller.dateColumn.getCellData(3));
+            assertEquals("invalid", controller.dateColumn.getCellData(4));
+            return null;
+        });
+    }
+
+    @Test
     void filtersByNameCpfCourseAndStatusAndClearsFilters() throws Exception {
         RegistersController controller = fx(() -> load(CompletableFuture.completedFuture(registers())));
 

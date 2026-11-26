@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -147,6 +148,10 @@ public class RegistersController {
     private String formatDate(String date) {
         if (date == null) return "";
         try {
+            if (date.contains("T")) {
+                return LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME)
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            }
             return LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeParseException invalidDate) {
             return date;

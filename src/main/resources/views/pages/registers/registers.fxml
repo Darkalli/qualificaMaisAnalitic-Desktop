@@ -66,7 +66,7 @@
                     <TableColumn fx:id="cpfsColumn" text="CPF" minWidth="125" prefWidth="140" maxWidth="155"/>
                     <TableColumn fx:id="namesColumn" text="Nome" minWidth="180" prefWidth="260"/>
                     <TableColumn fx:id="courseColumn" text="Curso" minWidth="180" prefWidth="250"/>
-                    <TableColumn fx:id="dateColumn" text="Data" minWidth="100" prefWidth="110" maxWidth="125"/>
+                    <TableColumn fx:id="dateColumn" text="Data" minWidth="160" prefWidth="170" maxWidth="190"/>
                     <TableColumn fx:id="statusColumn" text="Situação" minWidth="100" prefWidth="110" maxWidth="130"/>
                     <TableColumn fx:id="actionsColumn" text="Ações" minWidth="100" prefWidth="110" maxWidth="130"/>
                 </columns>
