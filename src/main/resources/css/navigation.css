@@ -171,18 +171,20 @@
 .header .label,
 .content .label {
     -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: Manrope Bold;
 }
 
 .side-menu .brand-name {
-    -fx-text-fill: #66BB6A;
+    -fx-text-fill: #15803D;
 }
 
 .side-menu .brand-plus {
-    -fx-text-fill: #E67E22;
+    -fx-text-fill: #EA580C;
 }
 
 .side-menu .brand-city {
-    -fx-text-fill: #12A797;
+    -fx-text-fill: #2563EB;
 }
 
 .side-menu .sidebar-brand .title {
