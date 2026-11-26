@@ -258,7 +258,7 @@ public class ClassBatchFormController {
         Platform.runLater(() -> {
             try {
                 Navigator.openForm(ownerScene, "/views/pages/classes/class-form.fxml",
-                        (ClassFormController controller) -> controller.setOnAdded(this::loadOptions));
+                        (ClassFormController controller) -> controller.setOnAdded(onAdded));
             } catch (IOException e) {
                 throw new CompletionException("Não foi possível carregar a pagina de aulas!", e);
             }

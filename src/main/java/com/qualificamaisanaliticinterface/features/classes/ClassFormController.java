@@ -178,7 +178,7 @@ public class ClassFormController {
         Platform.runLater(() -> {
             try {
                 Navigator.openForm(ownerScene, "/views/pages/classes/class-batch-form.fxml",
-                        (ClassBatchFormController controller) -> controller.setOnAdded(this::loadOptions));
+                        (ClassBatchFormController controller) -> controller.setOnAdded(onAdded));
             } catch (IOException e) {
                 throw new CompletionException("Não foi possível carregar a pagina de aulas em lote!", e);
             }
