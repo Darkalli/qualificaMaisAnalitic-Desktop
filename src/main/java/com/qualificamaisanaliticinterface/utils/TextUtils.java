@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -31,6 +32,18 @@ public class  TextUtils {
         if (date == null) return "";
         try {
             return LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeParseException invalidDate) {
+            return date;
+        }
+    }
+
+    public static String formatDateOrDateTime(String date) {
+        if (date == null || !date.contains("T")) {
+            return formatDate(date);
+        }
+        try {
+            return LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME)
+                    .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         } catch (DateTimeParseException invalidDate) {
             return date;
         }

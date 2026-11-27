@@ -3,6 +3,7 @@ package com.qualificamaisanaliticinterface.features.registers;
 import com.qualificamaisanaliticinterface.features.people.PersonInfoController;
 import com.qualificamaisanaliticinterface.features.registers.dto.RegisterDto;
 import com.qualificamaisanaliticinterface.navigation.Navigator;
+import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,12 +13,10 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public class RegisterInfoController {
 
-    private RegisterService registerService = new RegisterService();
+    private final RegisterService registerService = new RegisterService();
 
     @FXML
     public DatePicker startField;
@@ -53,7 +52,7 @@ public class RegisterInfoController {
         courseDescription.setText(register.courseOfInterest().description() == null
                 ? "Não informado" : register.courseOfInterest().description());
         dateField.setText(register.registerDate() == null ? "Não informada"
-                : LocalDate.parse(register.registerDate()).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                : TextUtils.formatDateOrDateTime(register.registerDate()));
         statusField.setText(register.status() == null ? "Não informada" : register.status().toString());
         numberField.setText(register.id() == null ? "Não informado" : register.id().toString());
     }
@@ -96,35 +95,20 @@ public class RegisterInfoController {
     }
 
     public void onParticipationClick(ActionEvent actionEvent) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Window owner = ((Node) actionEvent.getSource())
                 .getScene()
                 .getWindow();
-        LocalDate start = null;
-        LocalDate finish = null;
 
-        if(startField.getValue() != null && finishField.getValue() != null) {
-            start = LocalDate.parse(startField.getValue().format(formatter));
-            finish = LocalDate.parse(finishField.getValue().format(formatter));
-        }
+        LocalDate start = startField.getValue();
+        LocalDate finish = finishField.getValue();
 
+        String endpoint = "/api/reports/registrations/" + register.id() + "/declaration";
+        String filename = "Declaração-de-participação-" + register.person().fullName();
         if (start != null && finish != null) {
-            registerService.downloadPdf(
-                    "/api/reports/registrations/"
-                            + register.id() + "/declaration"
-                            + "?start=" + start
-                            + "&finish=" + finish,
-                    "Declaração-de-participação-" + register.person().fullName() + "-" + start + "-" + finish + ".pdf",
-                    owner
-            );
-        } else {
-            registerService.downloadPdf(
-                    "/api/reports/registrations/"
-                            + register.id() + "/declaration",
-                    "Declaração-de-participação-" + register.person().fullName() + ".pdf",
-                    owner
-            );
+            endpoint += "?start=" + start + "&finish=" + finish;
+            filename += "-" + start + "-" + finish;
         }
+        registerService.downloadPdf(endpoint, filename + ".pdf", owner);
     }
 
     public void onConclusionClick(ActionEvent actionEvent) {

@@ -12,10 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletionException;
@@ -66,7 +62,8 @@ public class RegistersController {
         cpfsColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().person().cpf()));
         namesColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().person().fullName()));
         courseColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().courseOfInterest().name()));
-        dateColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(formatDate(cell.getValue().registerDate())));
+        dateColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
+                TextUtils.formatDateOrDateTime(cell.getValue().registerDate())));
         statusColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(
                 cell.getValue().status() == null ? "Não informado" : cell.getValue().status().toString()));
         actionsColumn.setCellFactory(column -> new RegisterActionsCell(this::loadRegisters));
@@ -143,18 +140,5 @@ public class RegistersController {
         allRegisters = List.of();
         totalRegistersLabel.setText("—");
         registersTable.setPlaceholder(new Label(message));
-    }
-
-    private String formatDate(String date) {
-        if (date == null) return "";
-        try {
-            if (date.contains("T")) {
-                return LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME)
-                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-            }
-            return LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (DateTimeParseException invalidDate) {
-            return date;
-        }
     }
 }

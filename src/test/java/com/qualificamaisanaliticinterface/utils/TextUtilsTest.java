@@ -49,6 +49,12 @@ public class TextUtilsTest {
     }
 
     @Test
+    void shouldFormatRegistrationDatesWithAndWithoutTime() {
+        Assertions.assertEquals("10/11/2026", formatDateOrDateTime("2026-11-10"));
+        Assertions.assertEquals("10/11/2026 14:30", formatDateOrDateTime("2026-11-10T14:30:00"));
+    }
+
+    @Test
     void shouldShowTextInComboBox() throws ExecutionException, InterruptedException, TimeoutException {
         FutureTask<Void> task = new FutureTask<>(() -> {
             Stage stage = new Stage();
