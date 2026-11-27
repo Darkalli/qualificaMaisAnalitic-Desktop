@@ -21,6 +21,11 @@
     -fx-font-size: 13px;
 }
 
+.config-dialog .config-error {
+    -fx-text-fill: #fca5a5;
+    -fx-font-size: 13px;
+}
+
 .config-dialog .config-fields {
     -fx-background-color: #293a5a;
     -fx-background-radius: 10px;

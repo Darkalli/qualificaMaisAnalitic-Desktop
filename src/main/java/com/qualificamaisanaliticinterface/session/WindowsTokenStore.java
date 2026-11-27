@@ -14,20 +14,24 @@ public final class WindowsTokenStore implements TokenStore {
     private final Path file;
 
     public WindowsTokenStore() {
-        this(defaultFile());
+        this("session.dat");
+    }
+
+    WindowsTokenStore(String fileName) {
+        this(defaultFile(fileName));
     }
 
     WindowsTokenStore(Path file) {
         this.file = file;
     }
 
-    private static Path defaultFile() {
+    private static Path defaultFile(String fileName) {
         String localAppData = System.getenv("LOCALAPPDATA");
 
         if (localAppData == null || localAppData.isBlank()) {
             throw new IllegalStateException("Armazenamento disponível somente no Windows.");
         }
-        return Path.of(localAppData, "QualificaMais", "session.dat");
+        return Path.of(localAppData, "QualificaMais", fileName);
     }
 
     public void save(String token) throws IOException {

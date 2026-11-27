@@ -51,6 +51,12 @@ public class HelloController {
         visiblePasswordField.textProperty()
                 .bindBidirectional(passwordField.textProperty());
     }
+
+    @FXML
+    private void onConfigClick() throws IOException {
+        Navigator.openForm(userField.getScene(), "/views/config.fxml");
+    }
+
     @FXML
     private void onClick() {
         if (loginInProgress) {

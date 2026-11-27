@@ -61,10 +61,13 @@
            maxWidth="Infinity"
            minHeight="-Infinity"
            alignment="CENTER"/>
-    <Button styleClass="button, icon-button" text="Login"
-            onAction="#onClick">
-        <graphic>
-            <FontIcon iconLiteral="fas-sign-in-alt"/>
-        </graphic>
-    </Button>
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Button styleClass="button, icon-button" text="Login"
+                onAction="#onClick">
+            <graphic>
+                <FontIcon iconLiteral="fas-sign-in-alt"/>
+            </graphic>
+        </Button>
+        <Hyperlink text="Configurações de conexão" styleClass="clear-filters" onAction="#onConfigClick"/>
+    </HBox>
 </VBox>

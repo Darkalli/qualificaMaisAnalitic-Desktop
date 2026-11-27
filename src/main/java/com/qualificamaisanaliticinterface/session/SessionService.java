@@ -11,10 +11,14 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
+import java.util.HexFormat;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
@@ -28,10 +32,24 @@ public class SessionService {
     private final Clock clock;
 
     public SessionService() {
-        this(new WindowsTokenStore(), HttpClient.newBuilder()
+        this(defaultTokenStore(), HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
                 .followRedirects(HttpClient.Redirect.NEVER).build(),
                 AppConfig.apiBaseUrl(), Clock.systemUTC());
+    }
+
+    private static TokenStore defaultTokenStore() {
+        if (AppConfig.usesDefaultApiAddress()) {
+            return new WindowsTokenStore();
+        }
+
+        try {
+            byte[] address = AppConfig.apiBaseUrl().getBytes(StandardCharsets.UTF_8);
+            String server = HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(address));
+            return new WindowsTokenStore("session-" + server + ".dat");
+        } catch (NoSuchAlgorithmException exception) {
+            throw new IllegalStateException("Não foi possível identificar o endereço da API.", exception);
+        }
     }
 
     public SessionService(TokenStore store, HttpClient client, String baseUrl, Clock clock) {
