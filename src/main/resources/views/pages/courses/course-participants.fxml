@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.qualificamaisanaliticinterface.features.courses.CourseParticipantsController"
+            fx:id="participantsPane" prefWidth="740" styleClass="dialog-pane">
+    <content>
+        <VBox styleClass="content" spacing="16">
+            <VBox spacing="4">
+                <Label text="Participantes do curso" styleClass="title"/>
+                <Label fx:id="courseName" styleClass="box-lower-sub-title" wrapText="true"/>
+            </VBox>
+            <GridPane hgap="12">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
+                </columnConstraints>
+                <VBox spacing="12" minWidth="0" styleClass="box" GridPane.columnIndex="0">
+                    <Label fx:id="enrolledHeading" text="Inscritos" styleClass="box-lower-sub-title"/>
+                    <TableView fx:id="enrolled" accessibleText="Inscritos" styleClass="table" prefHeight="280">
+                        <columns>
+                            <TableColumn fx:id="enrolledName" text="Nome" sortable="false"/>
+                        </columns>
+                    </TableView>
+                    <Button fx:id="enrolledPersonButton" text="Ver ficha da pessoa"
+                            onAction="#onEnrolledPersonClick" maxWidth="Infinity" styleClass="document-button, icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-user"/>
+                        </graphic>
+                    </Button>
+                </VBox>
+                <VBox spacing="12" minWidth="0" styleClass="box" GridPane.columnIndex="1">
+                    <Label fx:id="waitingHeading" text="Lista de espera" styleClass="box-lower-sub-title"/>
+                    <TableView fx:id="waiting" accessibleText="Lista de espera" styleClass="table" prefHeight="280">
+                        <columns>
+                            <TableColumn fx:id="waitingName" text="Nome" sortable="false"/>
+                        </columns>
+                    </TableView>
+                    <Button fx:id="waitingPersonButton" text="Ver ficha da pessoa"
+                            onAction="#onWaitingPersonClick" maxWidth="Infinity" styleClass="document-button, icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-user"/>
+                        </graphic>
+                    </Button>
+                </VBox>
+            </GridPane>
+            <HBox alignment="CENTER">
+                <Button text="Voltar" onAction="#onCloseClick" styleClass="icon-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-arrow-left"/>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </content>
+</DialogPane>

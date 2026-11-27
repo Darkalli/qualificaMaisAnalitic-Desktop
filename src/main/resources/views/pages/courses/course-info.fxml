@@ -34,6 +34,13 @@
                     <Label fx:id="finish" styleClass="info-value" wrapText="true"
                            minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
                 </VBox>
+                <Button fx:id="participantsButton" text="Inscritos e lista de espera" disable="true"
+                        onAction="#onParticipantsClick" styleClass="document-button, icon-button" maxWidth="Infinity"
+                        GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-users"/>
+                    </graphic>
+                </Button>
                 <VBox spacing="6" minWidth="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <Label text="Status do curso" styleClass="box-lower-sub-title"/>
                     <Label fx:id="status" styleClass="info-value" wrapText="true"

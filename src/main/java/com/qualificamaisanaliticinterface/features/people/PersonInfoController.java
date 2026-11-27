@@ -14,6 +14,8 @@ import javafx.stage.Window;
 import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
 
+import java.util.Objects;
+
 public class PersonInfoController {
 
     @FXML
@@ -81,15 +83,16 @@ public class PersonInfoController {
         cpfField.setText(dto.cpf());
         emailField.setText(dto.email());
         personalNumberField.setText(dto.personalPhone());
-        hasWhatsAppCheckBox.setSelected(dto.personalPhoneHasWhatsapp());
+        hasWhatsAppCheckBox.setSelected(Boolean.TRUE.equals(dto.personalPhoneHasWhatsapp()));
         familyNumberField.setText(dto.familyPhone());
-        genderField.setText(dto.gender().toString());
-        educationField.setText(dto.education().toString());
-        workstateField.setText(dto.workState().toString());
-        disabilitiesInfoField.setText(dto.disabilities().toString());
-        numberField.setText(String.valueOf(dto.address().number()));
-        streetField.setText(dto.address().street());
-        neighborhoodField.setText(dto.address().neighborhood());
+        genderField.setText(Objects.toString(dto.gender(), "Não informado"));
+        educationField.setText(Objects.toString(dto.education(), "Não informada"));
+        workstateField.setText(Objects.toString(dto.workState(), "Não informada"));
+        disabilitiesInfoField.setText(Objects.toString(dto.disabilities(), "Não informado"));
+        PersonDto.AddressDto address = dto.address();
+        numberField.setText(address == null ? "" : Objects.toString(address.number(), ""));
+        streetField.setText(address == null ? "" : address.street());
+        neighborhoodField.setText(address == null ? "" : address.neighborhood());
     }
 
     @FXML

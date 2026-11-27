@@ -2,6 +2,7 @@ package com.qualificamaisanaliticinterface.features.courses;
 
 import com.qualificamaisanaliticinterface.features.courses.dto.CourseDto;
 import com.qualificamaisanaliticinterface.features.registers.RegisterService;
+import com.qualificamaisanaliticinterface.navigation.Navigator;
 import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.converter.LocalDateStringConverter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -43,6 +45,8 @@ public class CourseInfoController {
     @FXML
     private VBox documentsBox;
     @FXML
+    private Button participantsButton;
+    @FXML
     private CheckBox includeContact;
     @FXML
     private DatePicker reportStart;
@@ -63,7 +67,9 @@ public class CourseInfoController {
 
     public void setCourse(CourseDto course) {
         this.course = course;
-        documentsBox.setDisable(course.id() == null || course.id() <= 0);
+        boolean invalidCourseId = course.id() == null || course.id() <= 0;
+        documentsBox.setDisable(invalidCourseId);
+        participantsButton.setDisable(invalidCourseId);
         name.setText(course.name());
         description.setText(course.description() == null
                 ? "Não informado" : course.description());
@@ -72,6 +78,12 @@ public class CourseInfoController {
         finish.setText(course.finish() == null ? "Não informada"
                 : LocalDate.parse(course.finish()).format(DATE_FORMAT));
         status.setText(course.statusCourse() == null ? "Não informada" : course.statusCourse().toString());
+    }
+
+    @FXML
+    private void onParticipantsClick() throws IOException {
+        Navigator.openForm(infoDialogPane.getScene(), "/views/pages/courses/course-participants.fxml",
+                (CourseParticipantsController controller) -> controller.setCourse(course));
     }
 
     @FXML
