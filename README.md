@@ -5,128 +5,106 @@
 ![JavaFX](https://img.shields.io/badge/JavaFX-21.0.6-007396?style=for-the-badge)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-Cliente desktop do **Qualifica+ Ijuí** para gestão de pessoas, cursos, inscrições, aulas e lançamentos de presença.
+Cliente desktop do **Qualifica+ Ijuí** para gestão de pessoas, cursos, inscrições, aulas e presenças. O aplicativo usa a API Qualifica para autenticação, cadastros e emissão de PDFs, e abre os painéis do Superset na área de Estatísticas.
 
-A interface utiliza **JavaFX**, layouts em **FXML** e estilos em **CSS**, com navegação lateral na mesma janela. O aplicativo já se integra à API Qualifica para autenticação, consulta e manutenção dos cadastros; não depende apenas de dados demonstrativos locais.
+[Interface](#interface) · [Funcionalidades](#funcionalidades) · [Como executar](#como-executar) · [Tecnologias](#tecnologias)
 
-> Projeto em desenvolvimento. O cliente desktop é separado do backend e precisa de acesso à API para autenticar e realizar as operações.
+## Interface
+
+A tela inicial reúne atalhos de cadastro, indicadores, aulas do dia, inscrições recentes e pendências de presença. As capturas usam dados fictícios.
+
+![Tela inicial do Qualifica+ com atalhos, resumo de atividades e aulas do dia](docs/images/inicio.png)
+
+<details>
+<summary>Pessoas</summary>
+
+![Cadastro de pessoas com pesquisa por nome ou CPF e ações por registro](docs/images/pessoas.png)
+
+</details>
+
+<details>
+<summary>Cursos, inscritos e lista de espera</summary>
+
+![Listagem de cursos com filtros por período, situação e datas](docs/images/cursos.png)
+
+![Detalhes do curso com acesso à lista de inscritos, à lista de espera e aos PDFs](docs/images/curso-detalhes.png)
+
+![Janela de participantes com inscritos e lista de espera lado a lado](docs/images/participantes-curso.png)
+
+</details>
+
+<details>
+<summary>Inscrições e documentos</summary>
+
+![Listagem de inscrições com filtros por curso e situação, incluindo a situação Reserva](docs/images/inscricoes.png)
+
+![Detalhes da inscrição com comprovante, certificado e período da declaração](docs/images/inscricao-detalhes.png)
+
+</details>
+
+<details>
+<summary>Aulas e presenças</summary>
+
+![Listagem de aulas com filtros, média de presença e acesso à chamada](docs/images/aulas.png)
+
+![Chamada da aula com as opções Presente, Ausente e Justificada](docs/images/presencas.png)
+
+</details>
+
+<details>
+<summary>Configurações de conexão</summary>
+
+![Configurações com os endereços atuais da API e do Superset e botão Salvar](docs/images/configuracoes.png)
+
+</details>
 
 ## Funcionalidades
 
-| Área | Recursos |
+| Área | O que você pode fazer |
 | --- | --- |
-| **Pessoas** | Listagem e total de pessoas, pesquisa por nome ou CPF, cadastro, consulta da ficha, edição e exclusão. |
-| **Cursos** | Cadastro, detalhes, edição, cancelamento e reativação; busca por nome e filtros de período, situação e datas de início e fim. |
-| **Inscrições** | Inscrição de pessoas em cursos, consulta de detalhes, cancelamento e reativação; pesquisa por nome ou CPF e filtros por curso e situação. |
-| **Aulas** | Cadastro individual ou em lote por intervalo de datas e dias da semana; consulta, edição de agenda, cancelamento e reativação; filtros por curso, data e período. |
-| **Presenças** | Marcação de presente, ausente ou falta justificada por participante, com envio pelo botão de salvar e indicador de presença na listagem de aulas. |
-| **Tabelas** | Seleção de células e cópia do valor selecionado com **Ctrl+C**. |
-| **Sessão** | Autenticação pela API e tentativa de restauração da sessão salva ao iniciar o aplicativo. |
+| **Pessoas** | Buscar pelo nome ou CPF, consultar fichas, cadastrar, editar e excluir pessoas. Baixar a ficha do participante e o histórico de participação. |
+| **Cursos** | Buscar e filtrar cursos, editar dados e definir a quantidade máxima de participantes. Consultar a lista de inscritos, a lista de espera e a ficha de cada pessoa. |
+| **Inscrições** | Inscrever pessoas, filtrar por curso e situação, cancelar e reativar inscrições. Emitir comprovante, declaração de participação e certificado de conclusão. |
+| **Aulas** | Cadastrar aulas individuais ou em lote, consultar e editar a agenda e abrir a chamada. |
+| **Presenças** | Registrar presente, ausente ou falta justificada. Consultar a média de presença segundo os filtros da listagem de aulas. |
+| **Documentos do curso** | Baixar a relação de inscritos com contato opcional, o cronograma e o relatório de frequência. |
+| **Estatísticas** | Acessar os painéis do Superset dentro do aplicativo. |
+| **Configurações** | Editar e testar os endereços da API e do Superset antes de salvar. |
 
-### Indicador de presença
+Nas tabelas compatíveis, selecione uma célula e pressione **Ctrl+C** para copiar seu conteúdo.
 
-O cartão **Média de presença** considera os lançamentos das aulas que atendem aos filtros da listagem:
+### Presenças e aulas em lote
 
-- Sem filtros: reúne os lançamentos de todas as aulas retornadas pela consulta.
-- Com curso, data ou período: utiliza somente as aulas correspondentes.
-- Com vários filtros: aplica todos em conjunto.
+A **Média de presença** divide o número de marcações como presente pelo total de lançamentos das aulas que atendem aos filtros. Ausências e faltas justificadas entram no total. Pessoas sem lançamento ficam fora do cálculo.
 
-Para conjuntos com lançamentos, o percentual é calculado assim:
+O cadastro em lote cria aulas nos dias da semana selecionados dentro do intervalo informado, incluindo a data final. A API recebe cada aula em uma requisição individual. Se houver uma falha, as aulas que já foram aceitas continuam cadastradas.
 
-```text
-Percentual de presença = lançamentos PRESENT / total de lançamentos × 100
+## Como executar
+
+**Requisitos:** Windows, JDK 25, Maven, acesso à API Qualifica e uma conta cadastrada. O cliente usa a proteção de dados do Windows para armazenar a sessão.
+
+No IntelliJ IDEA, importe o `pom.xml`, selecione o **JDK 25** e execute `com.qualificamaisanaliticinterface.HelloApplication`. Pelo terminal, na raiz do projeto:
+
+```powershell
+mvn javafx:run
 ```
 
-Os estados `ABSENT` e `JUSTIFIED` entram no total, mas não contam como presença. Pessoas sem lançamento não são consideradas ausentes automaticamente. O cálculo reúne os registros antes da divisão; não é uma média simples dos percentuais de cada aula.
-
-### Cadastro de aulas em lote
-
-O formulário permite selecionar um curso, as datas inicial e final, os horários e vários dias da semana. O intervalo inclui a data final e gera aulas somente nas datas correspondentes aos dias marcados.
-
-Cada aula é enviada à API em uma requisição individual. O conjunto não constitui uma operação atômica: uma falha pode ocorrer depois de outras aulas já terem sido cadastradas.
-
-## Telas
-
-As capturas abaixo mostram a interface com registros de teste. Quantidades, nomes e percentuais são exemplos do momento da captura, não valores fixos do aplicativo.
-
-### Pessoas
-
-Pesquisa por nome ou CPF, total de cadastros e ações para consultar, excluir e editar.
-
-![Listagem de pessoas com pesquisa, total de cadastros e ações por linha](docs/images/pessoas.png)
-
-### Cursos
-
-Listagem com busca por nome, filtros de período, situação e datas, além das ações de consulta, alteração de situação e edição.
-
-![Listagem de cursos com busca e filtros de período, situação e datas](docs/images/cursos.png)
-
-### Inscrições
-
-Consulta de inscrições com pesquisa por nome ou CPF e filtros de curso e situação.
-
-![Listagem de inscrições com pesquisa e filtros de curso e situação](docs/images/inscricoes.png)
-
-### Aulas
-
-Listagem das aulas com filtros de curso, data e período, ações por linha e indicador de presença.
-
-![Listagem de aulas com filtros e cartão de média de presença](docs/images/aulas.png)
+Na tela de login, abra **Configurações de conexão**. Informe o endereço-base da API sem o sufixo `/api` e, se usar os painéis, informe o endereço do Superset. O botão **Salvar** testa os endereços preenchidos. Reabra o aplicativo para aplicar as alterações.
 
 ## Tecnologias
 
-- **Java 25** e **Maven**.
-- **JavaFX 21.0.6** para a interface e carregamento dos FXMLs.
-- **ControlsFX 11.2.1** para controles como seletores pesquisáveis.
-- **Java HttpClient** e **CompletableFuture** para comunicação assíncrona com a API.
-- **Gson** para conversão de JSON.
-- **Ikonli / Font Awesome 5** para ícones.
-- **JNA** e proteção de dados do Windows para persistência local da sessão.
+- **Java 25**, **JavaFX 21.0.6**, FXML e CSS na interface desktop.
+- **Maven** para dependências e execução.
+- **ControlsFX** para componentes de interface e **Ikonli / Font Awesome 5** para ícones.
+- **Java HttpClient**, **CompletableFuture** e **Gson** na integração com a API.
+- **JNA** para a proteção local da sessão no Windows.
 
-## Executar no IntelliJ IDEA
+## Estrutura do projeto
 
-### Requisitos
-
-- **Windows**: a implementação atual de armazenamento da sessão depende desse sistema.
-- **JDK 25**.
-- IntelliJ IDEA com o projeto importado pelo `pom.xml`.
-- API Qualifica acessível e credenciais de um usuário cadastrado.
-
-### Configuração e inicialização
-
-1. Abra a pasta do projeto no IntelliJ e importe o `pom.xml` como projeto Maven.
-2. Configure o SDK do projeto e o JDK utilizado para execução como **JDK 25**.
-3. Configure a propriedade `api.base-url` em `src/main/resources/application.properties`, usando a origem da API, sem acrescentar `/api`:
-
-   ```properties
-   api.base-url=https://api.exemplo.invalid
-   ```
-
-   Substitua o endereço ilustrativo pelo endereço do seu ambiente. Para HTTPS, a JVM precisa confiar no certificado apresentado pela API.
-
-4. Recarregue o projeto Maven após mudanças nas dependências.
-5. Execute `com.qualificamaisanaliticinterface.HelloApplication`.
-6. O aplicativo tenta restaurar a sessão salva; quando necessário, apresenta a tela de login para autenticação.
-
-A sessão persistida é protegida pelo Windows e armazenada em `%LOCALAPPDATA%/QualificaMais/session.dat`. Não inclua esse arquivo, tokens ou credenciais no repositório.
-
-## Estrutura
-
-```text
-src/main/
-├── java/com/qualificamaisanaliticinterface/
-│   ├── HelloApplication.java   # Inicialização e abertura da interface
-│   ├── api/                    # Cliente HTTP e tratamento de erros da API
-│   ├── config/                 # Leitura da configuração do aplicativo
-│   ├── features/               # Controllers, serviços, DTOs e células por funcionalidade
-│   ├── navigation/             # Navegação e abertura de formulários
-│   ├── session/                # Sessão em memória, restauração e armazenamento no Windows
-│   └── utils/                  # Utilitários compartilhados, incluindo cópia das tabelas
-└── resources/
-    ├── application.properties  # Configuração da URL da API
-    ├── views/                  # Layouts FXML
-    ├── css/                    # Estilos da interface
-    └── images/                 # Imagens e ícones do aplicativo
-
-docs/images/                    # Capturas de tela usadas neste README
-```
+| Caminho | Conteúdo |
+| --- | --- |
+| `src/main/java/com/qualificamaisanaliticinterface` | Inicialização, controllers, serviços, sessão e navegação. |
+| `src/main/resources/views` | Telas e diálogos em FXML. |
+| `src/main/resources/css` | Estilos da interface. |
+| `src/test/java` | Testes. |
+| `docs/images` | Capturas da interface usadas no README. |
