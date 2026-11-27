@@ -8,7 +8,7 @@
             onMousePressed="#onDragPressed" onMouseDragged="#onDragMoved">
     <content>
         <VBox styleClass="content" spacing="20">
-            <Label text="Detalhes da inscrição" styleClass="title"/>
+            <Label text="Detalhes do curso" styleClass="title"/>
             <GridPane styleClass="box" hgap="12" vgap="12">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="65"/>
@@ -40,6 +40,58 @@
                            minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
                 </VBox>
             </GridPane>
+            <VBox fx:id="documentsBox" spacing="12" styleClass="box, documents-box" disable="true">
+                <Label text="Documentos" styleClass="box-lower-sub-title, icon-heading">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-folder-open"/>
+                    </graphic>
+                </Label>
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="includeContact" text="Incluir telefone e e-mail" selected="true"
+                              minWidth="-Infinity" styleClass="checkBox"/>
+                    <Button text="Relação de inscritos" onAction="#onEnrollmentListClick"
+                            styleClass="document-button, icon-button" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-clipboard-list"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+                <VBox spacing="8" styleClass="declaration-group">
+                    <Label text="Período do cronograma e da frequência (opcional)" styleClass="declaration-heading"/>
+                    <GridPane hgap="12" vgap="8">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+                        <VBox spacing="6" minWidth="0" GridPane.columnIndex="0">
+                            <Label text="Data inicial" labelFor="${reportStart}" styleClass="document-date-label"/>
+                            <DatePicker fx:id="reportStart" promptText="dd/mm/aaaa" styleClass="register-date"
+                                        maxWidth="Infinity" minWidth="0" prefWidth="0"/>
+                        </VBox>
+                        <VBox spacing="6" minWidth="0" GridPane.columnIndex="1">
+                            <Label text="Data final" labelFor="${reportFinish}" styleClass="document-date-label"/>
+                            <DatePicker fx:id="reportFinish" promptText="dd/mm/aaaa" styleClass="register-date"
+                                        maxWidth="Infinity" minWidth="0" prefWidth="0"/>
+                        </VBox>
+                        <Button text="Cronograma do curso" onAction="#onScheduleClick"
+                                maxWidth="Infinity" minWidth="0" wrapText="true"
+                                styleClass="document-button, icon-button" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-calendar-alt"/>
+                            </graphic>
+                        </Button>
+                        <Button text="Relatório de frequência" onAction="#onAttendanceClick"
+                                maxWidth="Infinity" minWidth="0" wrapText="true"
+                                styleClass="document-button, icon-button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-chart-bar"/>
+                            </graphic>
+                        </Button>
+                    </GridPane>
+                    <Label fx:id="reportPeriodError" styleClass="register-message" wrapText="true"
+                           maxWidth="Infinity" visible="false" managed="false"/>
+                </VBox>
+            </VBox>
             <HBox alignment="CENTER" spacing="12">
                 <Button fx:id="close" text="Voltar" onAction="#onClickCancel" styleClass="icon-button">
                     <graphic>
