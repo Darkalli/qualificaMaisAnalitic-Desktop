@@ -1,16 +1,18 @@
 package com.qualificamaisanaliticinterface.features.people;
 
-import com.qualificamaisanaliticinterface.features.enuns.Disabilities;
-import com.qualificamaisanaliticinterface.features.enuns.Education;
-import com.qualificamaisanaliticinterface.features.enuns.Gender;
-import com.qualificamaisanaliticinterface.features.enuns.WorkState;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
+import com.qualificamaisanaliticinterface.features.registers.RegisterService;
+import com.qualificamaisanaliticinterface.utils.TextUtils;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Window;
-import org.controlsfx.control.CheckComboBox;
-import org.controlsfx.control.SearchableComboBox;
+import javafx.util.Duration;
+import org.controlsfx.control.PopOver;
 
 public class PersonInfoController {
 
@@ -48,13 +50,31 @@ public class PersonInfoController {
     public Label neighborhoodField;
     @FXML
     public Label infoName;
+    @FXML
+    private Hyperlink documents;
+    @FXML
+    private VBox documentOptions;
+
+    private PopOver documentsPopover;
+    private PersonDto person;
     private double dragOffsetX;
     private double dragOffsetY;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
+        documentsPopover = new PopOver(documentOptions);
+        documentsPopover.setDetachable(false);
+        documentsPopover.setConsumeAutoHidingEvents(false);
+        documentsPopover.setArrowSize(10);
+        documentsPopover.setCornerRadius(12);
+        documentsPopover.getStyleClass().add("person-documents-popover");
+        documentsPopover.getRoot().getStylesheets().add(
+                PersonInfoController.class.getResource("/css/application.css").toExternalForm());
     }
+
     public void getPersonInfo(PersonDto dto) {
+        person = dto;
+        documents.setDisable(dto.id() == null || dto.id() <= 0);
         infoName.setText(dto.fullName());
         nameField.setText(dto.fullName());
         socialNameField.setText(dto.socialName());
@@ -87,5 +107,39 @@ public class PersonInfoController {
         Window window = infoDialogPane.getScene().getWindow();
         window.setX(mouseEvent.getScreenX() - dragOffsetX);
         window.setY(mouseEvent.getScreenY() - dragOffsetY);
+    }
+
+    @FXML
+    private void onDocumentsClick() {
+        if (documentsPopover.isShowing()) {
+            documentsPopover.hide(Duration.ZERO);
+            return;
+        }
+
+        Bounds anchor = documents.localToScreen(documents.getBoundsInLocal());
+        Rectangle2D screen = Screen.getScreensForRectangle(anchor.getCenterX(), anchor.getCenterY(), 1, 1)
+                .stream().findFirst().orElseGet(Screen::getPrimary).getVisualBounds();
+        double rightSpace = screen.getMaxX() - anchor.getMaxX();
+        double leftSpace = anchor.getMinX() - screen.getMinX();
+        double popupWidth = documentOptions.prefWidth(-1) + 2 * documentsPopover.getArrowSize();
+        documentsPopover.setArrowLocation(rightSpace < popupWidth && leftSpace > rightSpace
+                ? PopOver.ArrowLocation.RIGHT_TOP : PopOver.ArrowLocation.LEFT_TOP);
+        documentsPopover.show(documents, 0);
+    }
+
+    @FXML
+    private void onParticipantRecordClick() {
+        downloadDocument("record", "Ficha do participante");
+    }
+
+    @FXML
+    private void onParticipationHistoryClick() {
+        downloadDocument("history", "Histórico de participação");
+    }
+
+    private void downloadDocument(String report, String title) {
+        documentsPopover.hide(Duration.ZERO);
+        new RegisterService().downloadPdf("/api/reports/participants/" + person.id() + "/" + report,
+                TextUtils.pdfFilename(title, person.fullName()), infoDialogPane.getScene().getWindow());
     }
 }

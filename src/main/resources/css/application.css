@@ -207,6 +207,27 @@
     -fx-effect: none;
 }
 
+.person-documents-popover > .border {
+    -fx-fill: #253652;
+    -fx-stroke: #E67E22;
+}
+
+.person-documents-popover > .content {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.person-documents-options {
+    -fx-padding: 14px;
+}
+
+.person-documents-options .document-button {
+    -fx-alignment: center-left;
+    -fx-font-size: 13px;
+    -fx-background-radius: 9px;
+    -fx-padding: 10px 12px;
+}
+
 .content .box.documents-box {
     -fx-padding: 16px;
 }

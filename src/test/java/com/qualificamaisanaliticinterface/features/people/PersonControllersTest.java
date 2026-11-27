@@ -5,11 +5,20 @@ import com.qualificamaisanaliticinterface.features.enuns.Education;
 import com.qualificamaisanaliticinterface.features.enuns.Gender;
 import com.qualificamaisanaliticinterface.features.enuns.WorkState;
 import com.qualificamaisanaliticinterface.features.people.dto.PersonDto;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Path;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import org.controlsfx.control.PopOver;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.qualificamaisanaliticinterface.features.people.PersonTestSupport.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,6 +54,48 @@ class PersonControllersTest {
             assertEquals(Education.HIGH_SCHOOL_COMPLETE.toString(), controller.educationField.getText());
             assertEquals(WorkState.ONLY_STUDYING.toString(), controller.workstateField.getText());
             assertTrue(controller.disabilitiesInfoField.getText().contains(Disabilities.HEARING.toString()));
+            return null;
+        });
+    }
+
+    @Test
+    void personDocumentsOpenAndCloseWithTheirForm() throws Exception {
+        fx(() -> {
+            PersonInfoController controller = load("person-info.fxml");
+            controller.getPersonInfo(person());
+            Stage stage = new Stage();
+            stage.setScene(new Scene(controller.infoDialogPane));
+            stage.show();
+
+            try {
+                Hyperlink documents = (Hyperlink) controller.infoDialogPane.lookup("#documents");
+                documents.fire();
+                PopOver popover = Window.getWindows().stream()
+                        .filter(PopOver.class::isInstance)
+                        .map(PopOver.class::cast)
+                        .filter(window -> window.getOwnerNode() == documents)
+                        .findFirst().orElseThrow();
+
+                assertSame(stage, popover.getOwnerWindow());
+                assertTrue(popover.isShowing());
+                popover.getRoot().applyCss();
+                Path border = (Path) popover.getRoot().lookup(".border");
+                assertEquals(Color.web("#253652"), border.getFill());
+                assertEquals(Set.of("Ficha do participante", "Histórico de participação"),
+                        popover.getRoot().lookupAll(".document-button").stream()
+                                .map(node -> ((Button) node).getText())
+                                .collect(Collectors.toSet()));
+
+                documents.fire();
+                assertFalse(popover.isShowing());
+                documents.fire();
+                assertTrue(popover.isShowing());
+
+                stage.hide();
+                assertFalse(popover.isShowing());
+            } finally {
+                stage.hide();
+            }
             return null;
         });
     }

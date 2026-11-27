@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
 <DialogPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.qualificamaisanaliticinterface.features.people.PersonInfoController"
@@ -14,10 +15,37 @@
             fx:id="infoDialogPane"
             onMousePressed="#onDragPressed"
             onMouseDragged="#onDragMoved">
+    <fx:define>
+        <VBox fx:id="documentOptions" prefWidth="255" spacing="8" styleClass="person-documents-options">
+            <Button text="Ficha do participante" onAction="#onParticipantRecordClick"
+                    maxWidth="Infinity" styleClass="document-button, icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-file-pdf"/>
+                </graphic>
+            </Button>
+            <Button text="Histórico de participação" onAction="#onParticipationHistoryClick"
+                    maxWidth="Infinity" styleClass="document-button, icon-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-file-pdf"/>
+                </graphic>
+            </Button>
+        </VBox>
+    </fx:define>
     <content>
         <VBox spacing="20" styleClass="content">
-            <Label styleClass="title" fx:id="infoName" wrapText="true"
-                   minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+            <HBox>
+                <Label styleClass="title" fx:id="infoName" wrapText="true"
+                       minWidth="0" maxWidth="Infinity" minHeight="-Infinity"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox minWidth="-Infinity" styleClass="box">
+                    <Hyperlink text="Documentos" fx:id="documents" onAction="#onDocumentsClick" disable="true"
+                               styleClass="clear-filters, icon-link">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-folder-open"/>
+                        </graphic>
+                    </Hyperlink>
+                </VBox>
+            </HBox>
             <VBox>
                 <Label text="Identificação" styleClass="icon-heading">
                     <graphic>

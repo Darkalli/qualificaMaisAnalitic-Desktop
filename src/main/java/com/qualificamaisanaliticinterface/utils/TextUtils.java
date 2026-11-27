@@ -36,6 +36,14 @@ public class  TextUtils {
         }
     }
 
+    public static String pdfFilename(String title, String name) {
+        String safeName = name == null ? "" : name.replaceAll("[<>:\"/\\\\|?*\\p{Cntrl}]+", " ")
+                .replaceAll(" +", " ")
+                .strip()
+                .replaceAll("[. ]+$", "");
+        return safeName.isEmpty() ? title + ".pdf" : title + " - " + safeName + ".pdf";
+    }
+
     public static <T> void configureCopy(TableView<T> table){
         table.getSelectionModel().setCellSelectionEnabled(true);
         table.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
